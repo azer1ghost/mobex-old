@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400px" height="467px" viewBox="0 0 400 467" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>File</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="File">
+            <g id="google-docs-icon-2" fill-rule="nonzero">
+                <path d="M249.895547,0 L37.471138,0 C17.5041231,0 0,17.482133 0,37.4931281 L0,429.281473 C0,449.270478 17.482133,466.774601 37.4931281,466.774601 L362.352941,466.774601 C382.341946,466.774601 399.846069,449.292468 399.846069,429.281473 L399.846069,149.928532 L312.391424,87.4546454 L249.895547,0 Z" id="Path" fill="#00A95E"></path>
+                <path d="M249.895547,0 L249.895547,112.457394 C249.895547,132.446399 267.37768,149.928532 287.366685,149.928532 L399.824079,149.928532 L249.895547,0 Z" id="Path" fill="#77D3AE"></path>
+            </g>
+            <text id="file" fill="#FFFFFF" font-family="Inter-Medium, Inter" font-size="125" font-weight="400">
+                <tspan x="105.084695" y="311">file</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

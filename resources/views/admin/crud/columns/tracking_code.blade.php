@@ -1,0 +1,1 @@
+<a href="http://parcelsapp.com/en/tracking/{{ $entry }}" target="_blank">{{ $entry }}</a>

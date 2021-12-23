@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'title'                                   => 'Sign in',
+    'district'                                => 'District',
+    'phone'                                   => 'Phone',
+    'city'                                    => 'City',
+    'agree_rules1'                            => 'Terms and Conditions',
+    'agree_rules2'                            => 'I have read and agree.',
+    'agree_rules'                             => 'I have read and agree to the terms and conditions.',
+    'failed'                                  => 'These credentials do not match our records.',
+    'throttle'                                => 'Too many login attempts. Please try again in :seconds seconds.',
+    'login_to_your_account'                   => 'Login to your account',
+    'you_can_login_with_email_or_customer_id' => 'You can login with email or customer ID',
+    'remember'                                => 'Remember',
+    'dont_have_an_account'                    => 'Don\'t have an account yet? Sign Up.',
+    'forgot_password'                         => 'Forgot password',
+    'password'                                => 'Password',
+    'email'                                   => 'Email or customer ID',
+    'filial'                                  => 'Branch',
+    'gender'                                  => 'Gender',
+    'empty'                                   => '-',
+    'prefer_not_to_say'                       => 'Prefer not to say',
+    'male'                                    => 'Male',
+    'female'                                  => 'Female',
+];

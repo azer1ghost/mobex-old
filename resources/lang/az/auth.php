@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'title'                                   => 'Daxil ol',
+    'failed'                                  => 'Məlumatlar düzgün deyil.',
+    'throttle'                                => 'Çoxlu uğursuz cəhd. :seconds saniyə sonra yenidən zəhd edin.',
+    'login_to_your_account'                   => 'Hesabınıza daxil olun',
+    'you_can_login_with_email_or_customer_id' => 'Hesabınıza email və ya müştəri nömrəsi ilə daxil ola bilərsiz.',
+    'remember'                                => 'Yadda saxla',
+    'dont_have_an_account'                    => 'Hesabınız yoxdursa, qeydiyyatdan keçin.',
+    'forgot_password'                         => 'Şifrəmi unutmuşam',
+    'password'                                => 'Şifrə',
+    'district'                                => 'Rayon',
+    'phone'                                   => 'Telefon',
+    'city'                                    => 'Şəhər',
+    'email'                                   => 'Email və ya müştəri nömrəsi',
+    'agree_rules1'                            => 'Qaydalar',
+    'agree_rules2'                            => 'ilə tanış oldum və razıyam.',
+    'agree_rules'                             => 'Qaydalar ilə tanış oldum və razıyam.',
+    'filial'                                  => 'Filial',
+    'gender'                                  => 'Gender',
+    'empty'                                   => '-',
+    'prefer_not_to_say'                       => 'Demək istəmirəm',
+    'male'                                    => 'Kişi',
+    'female'                                  => 'Qadın',
+];
