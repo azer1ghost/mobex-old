@@ -1,10 +1,27 @@
 @extends(config('saysay.crud.layout'))
 
 @section('content')
+
     <div class="row">
         {!! Form::open(['route' => [$crud['route'] . '.update', $parcel->id], 'method' => 'put', 'id' => 'package_ids']) !!}
         <div class="col-lg-12 col-lg-offset-0 col-md-12 col-xs-12">
             <div class="panel panel-flat">
+
+                <div class="col-12 m-4">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td style="background-color: #3a78da">
+                                <p style="padding: 20px">Nizami</p>
+                            </td>
+                            <td style="background-color: #e0874e">
+                                <p style="padding: 20px">Həzi</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
                 <div class="panel-heading" style="margin-bottom: 30px;">
                     <div class="row">
                         <div class="col-lg-4">

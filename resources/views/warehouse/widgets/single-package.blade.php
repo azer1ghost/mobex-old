@@ -1,4 +1,11 @@
-<tr class="scanned_package" id="package_{{ $item->id }}" @if(! in_array($item->status, [0,1,6])) style="background-color: #f8bbd0" @endif>
+<tr title=" @if($citem->user->filial_id === 4) Nizami @else Hezi @endif" class="scanned_package" id="package_{{ $item->id }}"
+    @if( in_array($item->status, [0,1,6])) style="background-color: #f8bbd0" @else
+        @if($citem->user->filial_id === 4)
+            style="background-color: #3a78da"
+        @else
+            style="background-color: #e0874e"
+        @endif
+    @endif>
 
     <td scope="row">{{ $item->id }}</td>
 
