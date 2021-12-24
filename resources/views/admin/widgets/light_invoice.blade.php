@@ -65,9 +65,11 @@
 </div>
 <div class="tracking_section">
     @if ($item->tracking_code)
-        <img class="tracking"
-             src="http://barcode.tec-it.com/barcode.ashx?data={{ $item->custom_id }}&code=Code128&dpi=600&dataseparator="
-             alt="">
+        <img style="width: 900px; height: 250px" src="{{ $item->barcode }}">
+        <p style="font-size: 9rem">{{ $item->custom_id }}</p>
+{{--        <img class="tracking"--}}
+{{--             src="http://barcode.tec-it.com/barcode.ashx?data={{ $item->custom_id }}&code=Code128&dpi=600&dataseparator="--}}
+{{--             alt="">--}}
     @endif
     <div style="width: 20%; display: inline-block">
         @if($item->parcel->count())

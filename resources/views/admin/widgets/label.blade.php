@@ -100,6 +100,18 @@
             transform: rotate(-90deg);
         }
 
+        .tracking_code p {
+            height: 155px;
+            position: relative;
+            width: 0px;
+            top: -347px;
+            left: 646px;
+            font-size: 45px;
+            -ms-transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+
         .info, .tracking_code {
             display: inline-block;
         }
@@ -302,8 +314,9 @@
         </div>
         <div class="tracking_code">
             @if ($item->tracking_code)
-                <img src="http://barcode.tec-it.com/barcode.ashx?data={{ $item->custom_id }}&code=Code128&dpi=600&dataseparator="
-                     alt="">
+                <img src="{{ $item->barcode }}">
+                <p>{{ $item->custom_id }}</p>
+                {{--    <img src="https://barcode.tec-it.com/barcode.ashx?data={{ $item->custom_id }}&code=Code128&dpi=600&dataseparator=">--}}
             @endif
         </div>
     </div>

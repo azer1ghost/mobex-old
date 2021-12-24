@@ -35,9 +35,10 @@
     @endif
 </div>
 <div style="width: 100%; position: absolute; top: 82%">
-    @if ($item->tracking_code)
-        <img style="width: 80%; display: inline-block" src="http://barcode.tec-it.com/barcode.ashx?data={{ $item->custom_id }}&code=Code128&dpi=600&dataseparator="
-             alt="">
+    @if ($item->custom_id)
+        <img src="{{ $item->barcode }}">
+        <p>{{ $item->custom_id }}</p>
+        {{--    <img src="https://barcode.tec-it.com/barcode.ashx?data={{ $item->custom_id }}&code=Code128&dpi=600&dataseparator=">--}}
     @endif
     <div style="width: 20%; display: inline-block">
         @if($item->parcel->count())

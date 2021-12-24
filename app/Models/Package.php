@@ -6,6 +6,7 @@ use App\Traits\ModelEventLogger;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Milon\Barcode\DNS1D;
 
 /**
  * App\Models\Package
@@ -1023,5 +1024,12 @@ class Package extends Model
             'sayi_net'      => sayiyiYaziyaCevir(round($this->shipping_amount, 2)),
             'product_name'  => ($this->warehouse_comment ?: $type) . " " . randomProduct(),
         ];
+    }
+
+    public function getBarcodeAttribute()
+    {
+        $base64Barcode = (new DNS1D())->getBarcodePNG($this->getAttribute('custom_id'), 'C128',6,100, array(1, 1, 1));
+
+        return 'data:image/png;base64,' . $base64Barcode;
     }
 }
