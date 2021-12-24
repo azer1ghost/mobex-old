@@ -1,6 +1,6 @@
 <?php
 Route::group([
-    'domain' => env('PARTNER_SUB') . '.' . env('DOMAIN_NAME'),
+    'domain' => env('PARTNER_SUB', 'wh') . '.' . env('DOMAIN_NAME', 'mobex.az'),
     'namespace' => 'Warehouse',
 ], function () {
 

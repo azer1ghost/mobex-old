@@ -1,6 +1,6 @@
 <?php
 Route::group([
-    'domain'    => env('ADMIN_SUB') . '.' . env('DOMAIN_NAME'),
+    'domain'    => env('ADMIN_SUB', 'panel') . '.' . env('DOMAIN_NAME', 'mobex.az'),
     'namespace' => 'Admin',
 ], function () {
 
