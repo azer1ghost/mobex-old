@@ -49,9 +49,24 @@ class PackageController extends Controller
             [
                 'name'              => 'q',
                 'type'              => 'text',
-                'attributes'        => ['placeholder' => 'Search...'],
+                'attributes'        => ['placeholder' => 'Search anything'],
                 'wrapperAttributes' => [
                     'class' => 'col-lg-3',
+                ],
+            ],
+            [
+                'type'              => 'select2',
+                'name'              => 'user_id',
+                'wrapperAttributes' => [
+                    'class' => 'col-lg-3',
+                ],
+                'validation'        => 'required|integer',
+                'allowNull'         => true,
+                'attributes'        => [
+                    'data-placeholder' => 'Search user',
+                    'data-validation'  => 'required',
+                    'class'            => 'select2-ajax',
+                    'data-url'         => '/search-users',
                 ],
             ],
             [
@@ -147,7 +162,6 @@ class PackageController extends Controller
                 ],
                 'allowNull'         => 'All Promos',
             ],
-
         ],
     ];
 
@@ -649,6 +663,7 @@ class PackageController extends Controller
     {
         $validator = \Validator::make(\Request::all(), [
             'q'             => 'string',
+            'user_id'       => 'integer',
             'status'        => 'integer',
             'warehouse_id ' => 'integer',
             'start_date'    => 'date',
@@ -671,7 +686,7 @@ class PackageController extends Controller
             $items = $items->orderBy('created_at', 'desc')->orderBy('id', 'desc');
         }
 
-        if (\Request::get('dec') != 3) {
+        if (\request()->get('dec') != 3) {
             $items = $items->where('status', '!=', 3);
         }
 
@@ -693,20 +708,38 @@ class PackageController extends Controller
             }
         }
 
-        if (\Request::get('q') != null) {
+        if (\request()->get('q') != null) {
             $q = str_replace('"', '', \Request::get('q'));
             $q = str_replace('\\', '', $q);
             $items->where(function ($query) use ($q) {
-                $query->orWhere("tracking_code", "LIKE", "%" . $q . "%")->orWhereRaw(\DB::raw('concat("E", (6005710000 + id)) = "' . $q . '"'))->orWhere("website_name", "LIKE", "%" . $q . "%")->orWhere("custom_id", "LIKE", "%" . $q . "%")->orWhereHas('user', function (
-                    $query
-                ) use ($q) {
-                    $query->where('customer_id', 'LIKE', '%' . $q . '%')->orWhere('passport', 'LIKE', '%' . $q . '%')->orWhere('fin', 'LIKE', '%' . $q . '%')->orWhere('phone', 'LIKE', '%' . $q . '%')->orWhere('email', 'LIKE', '%' . $q . '%')->orWhere(DB::raw('concat(trim(name)," ",trim(surname))'), 'LIKE', "%" . $q . "%")->orWhereHas('dealer', function (
+                $query
+                    ->orWhere("tracking_code", "LIKE", "%" . $q . "%")
+                    ->orWhereRaw(\DB::raw('concat("E", (6005710000 + id)) = "' . $q . '"'))
+                    ->orWhere("website_name", "LIKE", "%" . $q . "%")
+                    ->orWhere("custom_id", "LIKE", "%" . $q . "%")
+                    ->orWhereHas('user', function ($query) use ($q) {
                         $query
-                    ) use ($q) {
-                        $query->where('customer_id', 'LIKE', '%' . $q . '%')->orWhere('passport', 'LIKE', '%' . $q . '%')->orWhere('fin', 'LIKE', '%' . $q . '%')->orWhere('phone', 'LIKE', '%' . $q . '%')->orWhere('email', 'LIKE', '%' . $q . '%')->orWhere(DB::raw('concat(trim(name)," ",trim(surname))'), 'LIKE', "%" . $q . "%");
+                            ->where('customer_id', 'LIKE', '%' . $q . '%')
+                            ->orWhere('passport', 'LIKE', '%' . $q . '%')
+                            ->orWhere('fin', 'LIKE', '%' . $q . '%')
+                            ->orWhere('phone', 'LIKE', '%' . $q . '%')
+                            ->orWhere('email', 'LIKE', '%' . $q . '%')
+                            ->orWhere(DB::raw('concat(trim(name)," ",trim(surname))'), 'LIKE', "%" . $q . "%")
+                            ->orWhereHas('dealer', function ($query) use ($q) {
+                                $query
+                                    ->where('customer_id', 'LIKE', '%' . $q . '%')
+                                    ->orWhere('passport', 'LIKE', '%' . $q . '%')
+                                    ->orWhere('fin', 'LIKE', '%' . $q . '%')
+                                    ->orWhere('phone', 'LIKE', '%' . $q . '%')
+                                    ->orWhere('email', 'LIKE', '%' . $q . '%')
+                                    ->orWhere(DB::raw('concat(trim(name)," ",trim(surname))'), 'LIKE', "%" . $q . "%");
+                            });
                     });
-                });
             });
+        }
+
+        if (\request()->get('user_id') != null) {
+            $items->where('user_id', request()->get('user_id'));
         }
 
         if (\Request::get('promo_id') != null) {
