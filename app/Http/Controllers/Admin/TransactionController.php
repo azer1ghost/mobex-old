@@ -173,13 +173,16 @@ class TransactionController extends Controller
             'label'             => 'User',
             'type'              => 'select2',
             'name'              => 'user_id',
-            'attribute'         => 'full_name,customer_id',
-            'model'             => 'App\Models\User',
             'wrapperAttributes' => [
                 'class' => 'col-md-2',
             ],
-            'validation'        => 'nullable|integer',
+            'validation'        => 'required|integer',
             'allowNull'         => true,
+            'attributes'        => [
+                'data-validation' => 'required',
+                'class'           => 'select2-ajax',
+                'data-url'        => '/search-users',
+            ],
         ],
         [
             'name'              => 'amount',
@@ -287,7 +290,9 @@ class TransactionController extends Controller
                     });
                 });
             } else {
-                $items->where('done_at', '>=', Carbon::now()->subDays(30));
+                if (! request()->all() || (count(request()->all()) == 1 && request()->has('page'))) {
+                    $items->where('done_at', '>=', Carbon::now()->subDays(30));
+                }
             }
 
             if (\Request::get('promo_id') != null) {

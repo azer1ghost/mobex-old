@@ -140,23 +140,41 @@ class ParcellingController extends Controller
             ],
             'validation'        => 'nullable|string|min:9|unique:packages,tracking_code',
         ],
+
         [
             'label'             => 'User',
-            'type'              => 'select_from_array',
+            'type'              => 'select2',
             'name'              => 'user_id',
             'wrapperAttributes' => [
-                'class' => 'col-md-3 hidden_for_user',
-                'id'    => 'user_id',
+                'class' => 'col-md-3',
             ],
-            'validation'        => 'nullable|integer',
+            'validation'        => 'required|integer',
             'allowNull'         => true,
-            'short'             => true,
             'attributes'        => [
                 'data-validation' => 'required',
                 'class'           => 'select2-ajax',
                 'data-url'        => '/users',
             ],
         ],
+
+//        [
+//            'label'             => 'User',
+//            'type'              => 'select_from_array',
+//            'name'              => 'user_id',
+//            'wrapperAttributes' => [
+//                'class' => 'col-md-3 hidden_for_user',
+//                'id'    => 'user_id',
+//            ],
+//            'validation'        => 'nullable|integer',
+//            'allowNull'         => true,
+//            'short'             => true,
+//            'attributes'        => [
+//                'data-validation' => 'required',
+//                'class'           => 'select2-ajax',
+//                'data-url'        => '/users',
+//            ],
+//        ],
+
         [
             'name'              => 'website_name',
             'label'             => 'WebSite name',

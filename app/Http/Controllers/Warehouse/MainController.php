@@ -1279,7 +1279,6 @@ class MainController extends Controller
 
     public function users()
     {
-
         $q = request()->get('q') != null ? request()->get('q') : request()->get('term');
 
         $users = User::where(function ($query) use ($q) {
@@ -1291,6 +1290,7 @@ class MainController extends Controller
             $data[] = [
                 "id"   => $user->id,
                 "text" => $user->full_name . " (" . $user->customer_id . ") [" . $user->spending . "]",
+                "filial" => $user->filial_id,
             ];
         }
 

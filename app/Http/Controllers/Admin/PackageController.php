@@ -356,8 +356,6 @@ class PackageController extends Controller
             'label'             => 'User',
             'type'              => 'select2',
             'name'              => 'user_id',
-            'attribute'         => 'full_name,customer_id',
-            'model'             => 'App\Models\User',
             'wrapperAttributes' => [
                 'class' => 'col-md-3',
             ],
@@ -365,7 +363,7 @@ class PackageController extends Controller
             'allowNull'         => true,
             'attributes'        => [
                 'data-validation' => 'required',
-                //'class'           => 'select2-ajax',
+                'class'           => 'select2-ajax',
                 'data-url'        => '/search-users',
             ],
         ],

@@ -138,6 +138,9 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
+                    <h3 style="line-height: 50px; font-size: 20px;height: 50px; background-color: #c3eee4" class="text-center text-white" id="filial-indicator">
+                        Filial
+                    </h3>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -192,6 +195,38 @@
 @push('js')
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
     <script>
+
+
+        // cesidleme kodlari
+        $('#manual_add_package').submit(function (){
+            $('#filial-indicator').css("background-color", "#c3eee4").text('Filial')
+        })
+
+        $('.icon-plus2').click(function (){
+            $('#filial-indicator').css("background-color", "#c3eee4").text('Filial')
+        })
+
+        $('select').on('select2:select', function (e) {
+            var data = e.params.data;
+            $("select option[value=" + data.id + "]").data('filial', data.filial);
+            $("select").trigger('change');
+
+            var indicator = $('#filial-indicator')
+
+            switch (data.filial) {
+                case 4:
+                    indicator.css("background-color", "#5e95e8").text('Nizami Filiali')
+                    break;
+                case 6:
+                    indicator.css("background-color", "#e0874e").text('Hezi Filiali')
+                    break;
+                default:
+                    indicator.css("background-color", "#c3eee4").text('Filial')
+            }
+        });
+        // cesidleme kodlari burda bitdi
+
+
         $.validate();
         $(document).ready(function () {
             $("input[name='name'], input[name='awb']").on("keyup", function () {
