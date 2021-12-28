@@ -63,9 +63,9 @@
                                         <li><i class="fas fa-phone"></i>
                                             <a href="tel:{{ $setting->phone }}">{{ $setting->phone }}</a>
                                         </li>
-                                        <li><i class="fab fa-whatsapp"></i><a
-                                                    href="https://api.whatsapp.com/send?phone=+994{{ App\Models\Extra\SMS::clearNumber($setting->whatsapp) }}&text=Salam Mobex komandası">{{ $setting->whatsapp }}</a>
-                                        </li>
+{{--                                        <li><i class="fab fa-whatsapp"></i><a--}}
+{{--                                                    href="https://api.whatsapp.com/send?phone=+994{{ App\Models\Extra\SMS::clearNumber($setting->whatsapp) }}&text=Salam Mobex komandası">{{ $setting->whatsapp }}</a>--}}
+{{--                                        </li>--}}
                                         <li><i class="fas fa-envelope"></i>
                                             <a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a>
                                         </li>

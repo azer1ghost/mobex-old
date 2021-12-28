@@ -115,7 +115,7 @@
                                                                     <input type="checkbox"
                                                                            class="material-control-input" checked="">
                                                                     <span class="material-control-indicator"></span>
-                                                                    <span class="description"> {{ __('front.user_orders.create_order_form.agree') }}</span>
+                                                                    <a href="{{ route('pages.show','terms') }}" class="description"> {{ __('front.user_orders.create_order_form.agree') }}</a>
                                                                 </label>
                                                             </li>
                                                         </ul>

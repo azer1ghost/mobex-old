@@ -8,6 +8,7 @@
                 <div class="panel-heading" style="margin-bottom: 30px;">
                     <div class="row">
 
+                        @if(auth('worker')->user()->getAttribute('warehouse_id') == 1)
                         <div class="col-12 m-5 p-5 text-white">
                             <table>
                                 <tbody>
@@ -22,6 +23,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        @endif
 
                         <div class="col-lg-4">
                             <div>
@@ -196,36 +198,49 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
     <script>
 
+        function getRandomIntInclusive(min = 8, max = 55) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
 
-        // cesidleme kodlari
-        $('#manual_add_package').submit(function (){
-            $('#filial-indicator').css("background-color", "#c3eee4").text('Filial')
-        })
+        // Fake qiymet kodu yalniz amerika ucun
+        @if(auth('worker')->user()->getAttribute('warehouse_id') == 6)
+            $('#new_package').on('shown.bs.modal', function () {
+                $('input[name=shipping_amount]').val(getRandomIntInclusive());
+            })
+        @endif
 
-        $('.icon-plus2').click(function (){
-            $('#filial-indicator').css("background-color", "#c3eee4").text('Filial')
-        })
+        @if(auth('worker')->user()->getAttribute('warehouse_id') == 1)
+            // cesidleme kodlari - yalniz UMT
+            $('#manual_add_package').submit(function (){
+                $('#filial-indicator').css("background-color", "#c3eee4").text('Filial')
+            })
 
-        $('select').on('select2:select', function (e) {
-            var data = e.params.data;
-            $("select option[value=" + data.id + "]").data('filial', data.filial);
-            $("select").trigger('change');
+            $('.icon-plus2').click(function (){
+                $('#filial-indicator').css("background-color", "#c3eee4").text('Filial')
+            })
 
-            var indicator = $('#filial-indicator')
+            $('select').on('select2:select', function (e) {
+                var data = e.params.data;
+                $("select option[value=" + data.id + "]").data('filial', data.filial);
+                $("select").trigger('change');
 
-            switch (data.filial) {
-                case 4:
-                    indicator.css("background-color", "#5e95e8").text('Nizami Filiali')
-                    break;
-                case 6:
-                    indicator.css("background-color", "#e0874e").text('Hezi Filiali')
-                    break;
-                default:
-                    indicator.css("background-color", "#c3eee4").text('Filial')
-            }
-        });
-        // cesidleme kodlari burda bitdi
+                var indicator = $('#filial-indicator')
 
+                switch (data.filial) {
+                    case 4:
+                        indicator.css("background-color", "#5e95e8").text('Nizami Filiali')
+                        break;
+                    case 6:
+                        indicator.css("background-color", "#e0874e").text('Hezi Filiali')
+                        break;
+                    default:
+                        indicator.css("background-color", "#c3eee4").text('Filial')
+                }
+            });
+            // cesidleme kodlari burda bitdi
+        @endif
 
         $.validate();
         $(document).ready(function () {
