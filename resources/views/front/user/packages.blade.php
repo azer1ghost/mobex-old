@@ -98,8 +98,8 @@
                                                          role="alert">{{ __('front.declaration_updated') }}</div>
                                                 @else
                                                     @if($packages->count() and 0 == $id)
-{{--                                                        <div class="alert alert-info"--}}
-{{--                                                             role="alert">{{ __('front.user_packages_info') }}</div>--}}
+                                                        <div class="alert alert-info"
+                                                             role="alert">{{ __('front.user_packages_info') }}</div>
                                                     @endif
                                                 @endif
 
@@ -142,30 +142,31 @@
                                                                                 <strong>{{ __('front.number_items') }}</strong>
                                                                                 {{ $package->number_items or '-' }}
                                                                             </li>
-                                                                            <li class="list__item">
-                                                                                <strong>{{ __('additional.package_page.weight') }}</strong>
-                                                                                {{ $package->weight }} {{ $package->weight_unit }}
-                                                                            </li>
-                                                                            @if($package->shipping_amount)
+                                                                            @if($id != 6)
+                                                                                <li class="list__item">
+                                                                                    <strong>{{ __('additional.package_page.weight') }}</strong>
+                                                                                    {{ $package->weight }} {{ $package->weight_unit }}
+                                                                                </li>
+                                                                                @if($package->shipping_amount)
+                                                                                    <li class="list__item">
+                                                                                        <strong>
+                                                                                            {{ __('front.user_packages.price') }}
+                                                                                        </strong>
+                                                                                        {{ $package->shipping_org_price }}
+                                                                                    </li>
+                                                                                @endif
                                                                                 <li class="list__item">
                                                                                     <strong>
-                                                                                        {{ __('front.user_packages.price') }}
+                                                                                        {{ __('front.delivery_price') }}
                                                                                     </strong>
-                                                                                    {{ $package->shipping_org_price }}
+                                                                                    {{ $package->delivery_price ? $package->delivery_price_with_label: '-' }}
                                                                                 </li>
                                                                             @endif
-                                                                            <li class="list__item">
-                                                                                <strong>
-                                                                                    {{ __('front.delivery_price') }}
+                                                                           {{-- <li class="list__item"><strong>
+                                                                                    {{ __('front.user_packages.status') }}
                                                                                 </strong>
-                                                                                {{ $package->delivery_price ? $package->delivery_price_with_label: '-' }}
-                                                                            </li>
-
-{{--                                                                            <li class="list__item"><strong>--}}
-{{--                                                                                    {{ __('front.user_packages.status') }}--}}
-{{--                                                                                </strong>--}}
-{{--                                                                                {{ $package->getStatusWithLabelAttribute() }}--}}
-{{--                                                                            </li>--}}
+                                                                                {{ $package->getStatusWithLabelAttribute() }}
+                                                                            </li>--}}
 
                                                                             <li class="list__item">
                                                                                 <strong>
@@ -186,13 +187,6 @@
                                                                                         {{ __('front.note') }}
                                                                                     </strong>
                                                                                     {{ $package->user_comment }}
-                                                                                </li>
-                                                                            @endif
-                                                                            @if($package->status === 6)
-                                                                                <li class="list__item">
-                                                                                    <a href="{{route('declaration.delete', $package->id)}}">
-                                                                                        <button class="btn btn-danger">{{ __('front.delete') }}</button>
-                                                                                    </a>
                                                                                 </li>
                                                                             @endif
                                                                         </ul>
@@ -252,7 +246,7 @@
                                                                         @endforeach
                                                                         <div class="full accordion_inbutton_cont">
 
-                                                                            @if($id == 6 && ($package->warehouse && $package->warehouse->country && $package->warehouse->country->allow_declaration))
+                                                                            @if($id == 6)
                                                                                 <div class="col-lg-3 col-md-4 col-sm-12 form-group message-btn accordion_inbutton">
                                                                                     <a href="{{ route('declaration.edit', $package->id) }}" class="theme-btn-one"> {{ $package->declaration ? __('front.edit') : __('front.declaration') }}<i
                                                                                                 class="icon-Arrow-Right"></i></a>
