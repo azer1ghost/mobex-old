@@ -17,9 +17,9 @@
                     <li>
                         <a href="tel:{{ $setting->phone }}">{{ $setting->phone }}</a>
                     </li>
-                    <li><i class="fab fa-whatsapp"></i><a
-                                href="https://api.whatsapp.com/send?phone=+994{{ App\Models\Extra\SMS::clearNumber($setting->whatsapp) }}&text=Salam Mobex komandası">&nbsp;{{ $setting->whatsapp }}</a>
-                    </li>
+{{--                    <li><i class="fab fa-whatsapp"></i><a--}}
+{{--                                href="https://api.whatsapp.com/send?phone=+994{{ App\Models\Extra\SMS::clearNumber($setting->whatsapp) }}&text=Salam Mobex komandası">&nbsp;{{ $setting->whatsapp }}</a>--}}
+{{--                    </li>--}}
                     <li><a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a></li>
                 </ul>
             </div>

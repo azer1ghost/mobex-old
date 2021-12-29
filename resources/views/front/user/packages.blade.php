@@ -98,8 +98,8 @@
                                                          role="alert">{{ __('front.declaration_updated') }}</div>
                                                 @else
                                                     @if($packages->count() and 0 == $id)
-                                                        <div class="alert alert-info"
-                                                             role="alert">{{ __('front.user_packages_info') }}</div>
+{{--                                                        <div class="alert alert-info"--}}
+{{--                                                             role="alert">{{ __('front.user_packages_info') }}</div>--}}
                                                     @endif
                                                 @endif
 
@@ -160,11 +160,12 @@
                                                                                 </strong>
                                                                                 {{ $package->delivery_price ? $package->delivery_price_with_label: '-' }}
                                                                             </li>
-                                                                           {{-- <li class="list__item"><strong>
-                                                                                    {{ __('front.user_packages.status') }}
-                                                                                </strong>
-                                                                                {{ $package->getStatusWithLabelAttribute() }}
-                                                                            </li>--}}
+
+{{--                                                                            <li class="list__item"><strong>--}}
+{{--                                                                                    {{ __('front.user_packages.status') }}--}}
+{{--                                                                                </strong>--}}
+{{--                                                                                {{ $package->getStatusWithLabelAttribute() }}--}}
+{{--                                                                            </li>--}}
 
                                                                             <li class="list__item">
                                                                                 <strong>
@@ -185,6 +186,13 @@
                                                                                         {{ __('front.note') }}
                                                                                     </strong>
                                                                                     {{ $package->user_comment }}
+                                                                                </li>
+                                                                            @endif
+                                                                            @if($package->status === 6)
+                                                                                <li class="list__item">
+                                                                                    <a href="{{route('declaration.delete', $package->id)}}">
+                                                                                        <button class="btn btn-danger">{{ __('front.delete') }}</button>
+                                                                                    </a>
                                                                                 </li>
                                                                             @endif
                                                                         </ul>
