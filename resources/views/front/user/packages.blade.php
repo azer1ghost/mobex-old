@@ -126,8 +126,12 @@
                                                                                 </strong> {{ $package->created_at->format('d.m.y') }}
                                                                             </li>
                                                                             <li class="list__item">
-                                                                                <strong>{{  __('front.tracking_code') }}</strong>
-                                                                                {{  str_limit($package->custom_id, 20)  }}
+                                                                                <strong>{{  __('front.tracking_code') }}:</strong>
+                                                                                {{  $package->custom_id  }}
+                                                                            </li>
+                                                                            <li class="list__item">
+                                                                                <strong>{{  __('front.tracking_code_or_order') }}:</strong>
+                                                                                {{ $package->tracking_code  }}
                                                                             </li>
                                                                             <li class="list__item"><strong>
                                                                                     {{ __('front.user_packages.store') }}
