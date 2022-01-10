@@ -596,30 +596,29 @@ class UserController extends MainController
     public function declarationUpdate($id)
     {
         $package = Package::whereUserId(\Auth::user()->id)->whereId($id)->first();
-        if (! $package) {
+        if (!$package) {
             return back();
         }
-        $invoice = $package->invoice ? '' : 'required|';
 
         $validator = \Validator::make(\Request::all(), [
-            'shipping_amount'     => 'required|numeric|min:1|max:999999',
+            'shipping_amount' => 'required|numeric|min:1|max:999999',
             'shipping_amount_cur' => 'required|integer',
-            'type_id'             => 'required|integer|not_in:0',
-            'number_items'        => 'required|integer',
-            'website_name'        => 'required|string',
-            'invoice'             => $invoice . 'mimes:jpeg,png,pdf,doc,docx,jpg,xls|max:4000',
+            'type_id' => 'required|integer|not_in:0',
+            'number_items' => 'required|integer',
+            'website_name' => 'required|string',
+            'invoice' => 'nullable|mimes:jpeg,png,pdf,doc,docx,jpg,xls|max:4000',
         ]);
 
         if ($validator->fails()) {
             return redirect()->route('declaration.edit', [
-                'id'   => $id,
+                'id' => $id,
                 'page' => 'page',
             ])->withErrors($validator)->withInput();
         }
 
         $package = Package::whereUserId(\Auth::user()->id)->whereId($id)->first();
 
-        if (! $package) {
+        if (!$package) {
             return abort(404);
         }
 
@@ -653,6 +652,9 @@ class UserController extends MainController
 
         $package->save();
 
+        if ($package->custom_status < 2){
+            auth()->user()->update(['refresh_customs' => true]);
+        }
         return redirect()->route('my-packages', $package->status)->with(['success' => true]);
     }
 

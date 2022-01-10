@@ -203,6 +203,7 @@ class User extends Authenticatable implements CanVerifyEmailContract
         'filial_id',
         'gender',
         'verified',
+        'refresh_customs'
     ];
 
     /**

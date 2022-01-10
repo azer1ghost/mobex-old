@@ -180,7 +180,13 @@ class CustomSystem extends Command
             foreach ($packages as $key => $package) {
                 if ($package->notified < 3) {
                     $this->line($key . ") " . $package->custom_id . " :: " . $package->reg_number);
-                    Notification::sendPackage($package->id, 'alert');
+
+                    if ($package->shipping_amount > 0) {
+                        Notification::sendPackage($package->id, 'alert');
+                    } else {
+                        Notification::sendPackage($package->id, 'no_declaration');
+                    }
+
                     $package->notified = $package->notified + 1;
                     $package->save();
                     $total++;
@@ -293,7 +299,7 @@ class CustomSystem extends Command
             if ($cwb != null) {
                 $packages = Package::where('custom_id', $cwb)->get();
             } else {
-                $packages = Package::where('status', 0)->whereNull('custom_status')->take(25)->latest()->get();
+                $packages = Package::where('status', 0)->where('shipping_amount', '>', 0)->whereNull('custom_status')->take(25)->latest()->get();
             }
 
             /*foreach ($packages as $package) {

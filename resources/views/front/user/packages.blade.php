@@ -86,22 +86,24 @@
                                         <div class="inner-box">
                                             <div class="accordion-box">
                                                 @if ( request()->has('success'))
-                                                    <div class="alert alert-success"
-                                                         role="alert">{{ __('front.was_paid') }}</div>
+                                                    <div class="alert alert-success" role="alert">{{ __('front.was_paid') }}</div>
                                                 @endif
                                                 @if ( request()->has('error'))
-                                                    <div class="alert alert-danger"
-                                                         role="alert">{{ request()->get('error') }}</div>
+                                                    <div class="alert alert-danger" role="alert">{{ request()->get('error') }}</div>
                                                 @endif
                                                 @if (session('success'))
-                                                    <div class="alert alert-success"
-                                                         role="alert">{{ __('front.declaration_updated') }}</div>
+                                                    <div class="alert alert-success" role="alert">{{ __('front.declaration_updated') }}</div>
                                                 @else
                                                     @if($packages->count() and 0 == $id)
-                                                        <div class="alert alert-info"
-                                                             role="alert">{{ __('front.user_packages_info') }}</div>
+                                                        <div class="alert alert-info" role="alert">{{ __('front.user_packages_info') }}</div>
+                                                        @if(auth()->user()->refresh_customs)
+                                                            <div class="alert" role="alert">
+                                                                Bağlamalarınız bir neçə dəqiqə ərzində Smart Customs sistemində yenilənəcək.
+                                                            </div>
+                                                        @endif
                                                     @endif
                                                 @endif
+
 
                                                 @if($packages->count())
                                                     <div class="title-box">
@@ -112,15 +114,24 @@
                                                             <li class="accordion block">
                                                                 <div class="acc-btn">
                                                                     <div class="icon-outer"></div>
-                                                                    <h6>@if($package->custom_status !== null)
+                                                                    <h6>
+                                                                        @if($package->custom_status !== null)
                                                                             {!! str_repeat('✅ ', $package->custom_status + 1) !!}
-                                                                        @endif  {{ $package->website_name  }} @if($package->country)({{ $package->country->translateOrDefault($_lang)->name }})@endif -  № {{  $package->custom_id  }}</h6>
+                                                                        @endif
+                                                                        {{ $package->website_name  }}
+                                                                        @if($package->country)
+                                                                                ({{ $package->country->translateOrDefault($_lang)->name }})
+                                                                        @endif
+                                                                        -  № {{  $package->custom_id  }}
+                                                                        @if($package->shipping_amount <= 0)
+                                                                            (Bağlamanın çatışmayan məlumatları var)
+                                                                        @endif
+                                                                    </h6>
                                                                 </div>
                                                                 <div class="acc-content">
                                                                     <div class="accordion__text-block"
                                                                          style="display: block;">
                                                                         <ul class="list list--check list--reset">
-
                                                                             <li class="list__item"><strong>
                                                                                     {{ __('front.user_packages.order_date') }}
                                                                                 </strong> {{ $package->created_at->format('d.m.y') }}
@@ -190,12 +201,23 @@
                                                                                 </li>
                                                                             @endif
                                                                         </ul>
+
+                                                                        @if($package->custom_status === null && $package->shipping_amount > 0)
+                                                                           <p class="text-danger m-2">
+                                                                               Bağlama bir neçə dəqiqə sonra customs-a görünəcək.
+                                                                           </p>
+                                                                        @endif
+                                                                        @if($package->custom_status == 1)
+                                                                            <p class="text-danger m-2">
+                                                                                Bağlama customs-da bəyan olunmayıb
+                                                                            </p>
+                                                                        @endif
                                                                         <hr/>
                                                                         @foreach($package->links() as $key => $product)
                                                                             <div class="my_orders_orderbox">
                                                                                 <div class="full-size">
-                                                                                    <h6 class="count-item__title"><span
-                                                                                                class="count-item__count">{{ sprintf("%02d", $key + 1) }}</span>
+                                                                                    <h6 class="count-item__title">
+                                                                                        <span class="count-item__count">{{ sprintf("%02d", $key + 1) }}</span>
                                                                                         <span>{{ __('additional.product') }}</span>
                                                                                     </h6>
                                                                                 </div>
@@ -246,15 +268,19 @@
                                                                         @endforeach
                                                                         <div class="full accordion_inbutton_cont">
 
-                                                                            @if($id == 6)
+                                                                            @if($package->custom_status < 2)
                                                                                 <div class="col-lg-3 col-md-4 col-sm-12 form-group message-btn accordion_inbutton">
-                                                                                    <a href="{{ route('declaration.edit', $package->id) }}" class="theme-btn-one"> {{ $package->declaration ? __('front.edit') : __('front.declaration') }}<i
-                                                                                                class="icon-Arrow-Right"></i></a>
+                                                                                    <a href="{{ route('declaration.edit', $package->id) }}" class="theme-btn-one">
+                                                                                        {{ __('front.edit') }}
+                                                                                        <i class="icon-Arrow-Right"></i>
+                                                                                    </a>
                                                                                 </div>
                                                                                 @if(! $package->paid && $id == 6)
                                                                                     <div class="col-lg-3 col-md-4 col-sm-12 form-group message-btn accordion_inbutton">
-                                                                                        <a href="{{ route('declaration.delete', $package->id) }}" class="theme-btn-one" style="background-color: #ff1c90"> {{ trans('front.delete') }}<i
-                                                                                                    class="icon-Arrow-down-4"></i></a>
+                                                                                        <a href="{{ route('declaration.delete', $package->id) }}" class="theme-btn-one" style="background-color: #ff1c90">
+                                                                                            {{ trans('front.delete') }}
+                                                                                            <i class="icon-Arrow-down-4"></i>
+                                                                                        </a>
                                                                                     </div>
                                                                                 @endif
                                                                             @endif

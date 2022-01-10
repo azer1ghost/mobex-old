@@ -30,8 +30,7 @@
                             <!-- dashboard link slider -->
                             <div class="inner-box">
                                 @if (session('error'))
-                                    <div class="alert alert-danger"
-                                         role="alert">
+                                    <div class="alert alert-danger" role="alert">
                                         Bu bağlamanı bizim sistemdə yenidən bəyan etməyə ehtiyac yoxdur. Əksinə <b>SmartCustoms tətbiqi</b> və ya web portalı olan (<a href="https://customs.gov.az">customs.gov.az</a>) vasitəsiylə gömrük sistemində bəyan etməyiniz tövsiyyə edilir. Əgər SmartCustoms sistemi xəta verərsə bunu görməzdən gələ bilərsiniz və bununla bağlı bizə müraciət etmək lazım deyil. Bağlamanız problemsiz sizə ən qısa zamanda çatdırılacaqdır.
                                     </div>
                                 @endif
@@ -70,9 +69,14 @@
                                                    placeholder="İnvoys yüklə"/>
                                         </div>
                                         @if ($errors->has('invoice'))
-                                            <span class="help-block">
-                                          <strong>{!! $errors->first('invoice') !!}</strong>
-                                     </span>
+                                        <span class="help-block">
+                                            <strong>{!! $errors->first('invoice') !!}</strong>
+                                        </span>
+                                        @endif
+                                        @if(isset($item))
+                                            @if($item->invoice)
+                                                <a target="_blank" href="{{ $item->invoice }}">Yüklü olan invoysa bax</a>
+                                            @endif
                                         @endif
                                     </div>
                                     <div class="form-group col-lg-6">
@@ -104,3 +108,14 @@
     </section>
 
 @endsection
+
+@if(isset($item))
+    @push('js')
+        @if($item->status == 0)
+            <script>
+                $("[name='country_id']").prop( "disabled", true );
+                $("[name='tracking_code']").prop( "disabled", true );
+            </script>
+        @endif
+    @endpush
+@endif

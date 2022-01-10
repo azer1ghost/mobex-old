@@ -1182,7 +1182,11 @@ class MainController extends Controller
                 ]);
             }
 
-            @Notification::sendPackage($item->id, '0');
+            if ($item->shipping_amount > 0) {
+                @Notification::sendPackage($item->id, '0');
+            } else {
+                @Notification::sendPackage($item->id, 'no_declaration');
+            }
 
             return response()->json([
                 'cwb'      => $item->custom_id,
