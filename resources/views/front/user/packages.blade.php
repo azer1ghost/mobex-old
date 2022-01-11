@@ -93,20 +93,13 @@
                                                 @endif
                                                 @if (session('success'))
                                                     <div class="alert alert-success" role="alert">{{ __('front.declaration_updated') }}</div>
-                                                @else
-                                                    @if($packages->count() and 0 === $id)
-{{--                                                        <div class="alert alert-info" role="alert">{{ __('front.user_packages_info') }}</div>--}}
-                                                        <div class="alert alert-info" role="alert">
-                                                            Smart Customs - da bəyan etdiyiniz bağlamalar bir neçə dəqiqə ərzində Sistem ilə eyniləşdirilir.
-                                                        </div>
-                                                        @if(auth()->user()->refresh_customs && $id != 6)
-                                                            <div class="alert" role="alert">
-                                                                Bağlamalarınız bir neçə dəqiqə ərzində Smart Customs sistemində yenilənəcək.
-                                                            </div>
-                                                        @endif
-                                                    @endif
                                                 @endif
-
+                                                @if($packages->count() and 0 === $id)
+                                                    {{--                                                        <div class="alert alert-info" role="alert">{{ __('front.user_packages_info') }}</div>--}}
+                                                    <div class="alert alert-info" role="alert">
+                                                        Bağlamalarınız bağlamalar bir neçə dəqiqə ərzində Smart Customs ilə eyniləşdirilir.
+                                                    </div>
+                                                @endif
 
                                                 @if($packages->count())
                                                     <div class="title-box">
@@ -114,6 +107,21 @@
                                                     </div>
                                                     <ul class="accordion-inner">
                                                         @foreach($packages as $package)
+
+                                                            @php
+                                                                $isEarlyDeclared = $package->status === 6;
+                                                                $isInWarehouse = $package->status === 0;
+                                                                $inCustoms = $package->custom_status === 0;
+                                                                // Beyanli
+                                                                $isDeclared = $package->custom_status >= 1;
+
+                                                                // Eskik melumat
+                                                                $missingInformation = $package->shipping_amount <= 0;
+
+                                                                // Yenileme Gozlemede
+                                                                $isWaiting = !$missingInformation && ( ($inCustoms && $package->updated_at->diff(now())->i < 7) || $package->custom_status === null);
+                                                            @endphp
+
                                                             <li class="accordion block">
                                                                 <div class="acc-btn">
                                                                     <div class="icon-outer"></div>
@@ -126,15 +134,23 @@
                                                                                 ({{ $package->country->translateOrDefault($_lang)->name }})
                                                                         @endif
                                                                         -  № {{  $package->custom_id  }}
-                                                                        @if($package->shipping_amount <= 0)
-                                                                            (Bağlamanın çatışmayan məlumatları var)
-                                                                        @else
-                                                                            @if($package->custom_status >= 1)
-                                                                                <span class="badge badge-success">Bəyanlı</span>
-                                                                            @elseif($package->custom_status == 0)
-                                                                                <span class="badge badge-danger">Bəyan olunmayıb</span>
+
+                                                                        @if($isInWarehouse)
+                                                                            @if($missingInformation)
+                                                                                (Bağlamanın çatışmayan məlumatları var)
+                                                                            @else
+                                                                                @if($isWaiting)
+                                                                                    <i class="fa fa-clock text-info float-right mr-2"></i>
+                                                                                @else
+                                                                                    @if($isDeclared)
+                                                                                        <span class="badge badge-success">Bəyanlı</span>
+                                                                                    @else
+                                                                                        <span class="badge badge-danger">Bəyan olunmayıb</span>
+                                                                                    @endif
+                                                                                @endif
                                                                             @endif
                                                                         @endif
+
                                                                     </h6>
                                                                 </div>
                                                                 <div class="acc-content">
@@ -210,17 +226,28 @@
                                                                                 </li>
                                                                             @endif
                                                                         </ul>
-                                                                        @if($package->custom_status != null && $package->shipping_amount > 0 && $id != 6)
-                                                                           <p class="text-danger m-2">
-                                                                               Bağlama bir neçə dəqiqə sonra customs-a görünəcək.
-                                                                           </p>
+
+                                                                        @if($isInWarehouse)
+                                                                            @if($missingInformation)
+                                                                                <p class="text-danger m-2">
+                                                                                    Bağlamanın çatışmayan məlumatları var
+                                                                                </p>
+                                                                            @else
+                                                                                @if($isWaiting)
+                                                                                    <p class="text-danger m-2">
+                                                                                        Bağlama bir neçə dəqiqə sonra customs-a yenilənəcək.
+                                                                                    </p>
+                                                                                @else
+                                                                                    @if(!$isDeclared)
+                                                                                        <p class="text-danger m-2">
+                                                                                            Bağlama customs-da bəyan olunmayıb
+                                                                                        </p>
+                                                                                    @endif
+                                                                                @endif
+                                                                            @endif
+                                                                            <hr/>
                                                                         @endif
-                                                                        @if($package->custom_status == 0 && $package->shipping_amount > 0 && $id != 6)
-                                                                            <p class="text-danger m-2">
-                                                                                Bağlama customs-da bəyan olunmayıb
-                                                                            </p>
-                                                                        @endif
-                                                                        <hr/>
+
                                                                         @foreach($package->links() as $key => $product)
                                                                             <div class="my_orders_orderbox">
                                                                                 <div class="full-size">
@@ -283,7 +310,7 @@
                                                                                         <i class="icon-Arrow-Right"></i>
                                                                                     </a>
                                                                                 </div>
-                                                                                @if(! $package->paid && $id == 6)
+                                                                                @if(! $package->paid && $isEarlyDeclared)
                                                                                     <div class="col-lg-3 col-md-4 col-sm-12 form-group message-btn accordion_inbutton">
                                                                                         <a href="{{ route('declaration.delete', $package->id) }}" class="theme-btn-one" style="background-color: #ff1c90">
                                                                                             {{ trans('front.delete') }}
