@@ -129,7 +129,7 @@
                                                                         @if($package->shipping_amount <= 0)
                                                                             (Bağlamanın çatışmayan məlumatları var)
                                                                         @else
-                                                                            @if($package->custom_status == 1)
+                                                                            @if($package->custom_status >= 1)
                                                                                 <span class="badge badge-success">Bəyanlı</span>
                                                                             @elseif($package->custom_status == 0)
                                                                                 <span class="badge badge-danger">Bəyan olunmayıb</span>
