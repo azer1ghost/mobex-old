@@ -94,8 +94,11 @@
                                                 @if (session('success'))
                                                     <div class="alert alert-success" role="alert">{{ __('front.declaration_updated') }}</div>
                                                 @else
-                                                    @if($packages->count() and 0 == $id)
-                                                        <div class="alert alert-info" role="alert">{{ __('front.user_packages_info') }}</div>
+                                                    @if($packages->count() and 0 === $id)
+{{--                                                        <div class="alert alert-info" role="alert">{{ __('front.user_packages_info') }}</div>--}}
+                                                        <div class="alert alert-info" role="alert">
+                                                            Smart Customs - da bəyan etdiyiniz bağlamalar bir neçə dəqiqə ərzində Sistem ilə eyniləşdirilir.
+                                                        </div>
                                                         @if(auth()->user()->refresh_customs && $id != 6)
                                                             <div class="alert" role="alert">
                                                                 Bağlamalarınız bir neçə dəqiqə ərzində Smart Customs sistemində yenilənəcək.
@@ -125,6 +128,12 @@
                                                                         -  № {{  $package->custom_id  }}
                                                                         @if($package->shipping_amount <= 0)
                                                                             (Bağlamanın çatışmayan məlumatları var)
+                                                                        @else
+                                                                            @if($package->custom_status == 1)
+                                                                                <span class="badge badge-success">Bəyanlı</span>
+                                                                            @elseif($package->custom_status == 0)
+                                                                                <span class="badge badge-danger">Bəyan olunmayıb</span>
+                                                                            @endif
                                                                         @endif
                                                                     </h6>
                                                                 </div>
