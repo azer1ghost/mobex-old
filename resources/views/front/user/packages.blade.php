@@ -96,7 +96,7 @@
                                                 @else
                                                     @if($packages->count() and 0 == $id)
                                                         <div class="alert alert-info" role="alert">{{ __('front.user_packages_info') }}</div>
-                                                        @if(auth()->user()->refresh_customs)
+                                                        @if(auth()->user()->refresh_customs && $id != 6)
                                                             <div class="alert" role="alert">
                                                                 Bağlamalarınız bir neçə dəqiqə ərzində Smart Customs sistemində yenilənəcək.
                                                             </div>
@@ -202,7 +202,7 @@
                                                                             @endif
                                                                         </ul>
 
-                                                                        @if($package->custom_status === null && $package->shipping_amount > 0)
+                                                                        @if($package->custom_status === null && $package->shipping_amount > 0 && $id != 6)
                                                                            <p class="text-danger m-2">
                                                                                Bağlama bir neçə dəqiqə sonra customs-a görünəcək.
                                                                            </p>
