@@ -210,13 +210,12 @@
                                                                                 </li>
                                                                             @endif
                                                                         </ul>
-
-                                                                        @if($package->custom_status === null && $package->shipping_amount > 0 && $id != 6)
+                                                                        @if($package->custom_status < 1 && $package->shipping_amount > 0 && $id != 6)
                                                                            <p class="text-danger m-2">
                                                                                Bağlama bir neçə dəqiqə sonra customs-a görünəcək.
                                                                            </p>
                                                                         @endif
-                                                                        @if($package->custom_status == 1)
+                                                                        @if($package->custom_status == 0 && $package->shipping_amount > 0 && $id != 6)
                                                                             <p class="text-danger m-2">
                                                                                 Bağlama customs-da bəyan olunmayıb
                                                                             </p>
@@ -277,7 +276,7 @@
                                                                         @endforeach
                                                                         <div class="full accordion_inbutton_cont">
 
-                                                                            @if($package->custom_status < 2)
+                                                                            @if($package->custom_status < 1)
                                                                                 <div class="col-lg-3 col-md-4 col-sm-12 form-group message-btn accordion_inbutton">
                                                                                     <a href="{{ route('declaration.edit', $package->id) }}" class="theme-btn-one">
                                                                                         {{ __('front.edit') }}
