@@ -97,7 +97,7 @@
                                                 @if($packages->count() and 0 === $id)
                                                     {{--                                                        <div class="alert alert-info" role="alert">{{ __('front.user_packages_info') }}</div>--}}
                                                     <div class="alert alert-info" role="alert">
-                                                        Bağlamalarınız bağlamalar bir neçə dəqiqə ərzində Smart Customs ilə eyniləşdirilir.
+                                                        Bağlamalar bir neçə dəqiqə ərzində Smart Customs ilə eyniləşdirilir.
                                                     </div>
                                                 @endif
 
