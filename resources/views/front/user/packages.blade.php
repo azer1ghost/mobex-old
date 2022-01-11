@@ -210,7 +210,7 @@
                                                                                 </li>
                                                                             @endif
                                                                         </ul>
-                                                                        @if($package->custom_status < 1 && $package->shipping_amount > 0 && $id != 6)
+                                                                        @if($package->custom_status != null && $package->shipping_amount > 0 && $id != 6)
                                                                            <p class="text-danger m-2">
                                                                                Bağlama bir neçə dəqiqə sonra customs-a görünəcək.
                                                                            </p>
