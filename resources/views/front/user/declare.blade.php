@@ -91,7 +91,7 @@
 {{--                                    </div>--}}
                                     <div class="form-group col-12 custom-check-box">
                                         <label class="custom-control material-checkbox  @if($errors->has('i_agree')) is-invalid @endif">
-                                            <input type="checkbox" name="i_agree"  class="material-control-input" value="1">
+                                            <input type="checkbox" name="i_agree"  checked class="material-control-input" value="1">
                                             <span class="material-control-indicator"></span>
                                             <span class="description">
                                                 <a href="{{ route('pages.show','terms') }}" class="description"> {{ __('front.user_orders.create_order_form.agree') }}</a>

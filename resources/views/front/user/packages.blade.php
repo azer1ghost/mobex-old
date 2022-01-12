@@ -122,7 +122,7 @@
                                                                 $missingInformation = $package->shipping_amount <= 0;
 
                                                                 // Son 7 deqiqe erzinde deyisdiirlib
-                                                                $recentlyUpdated = $package->updated_at->diff(now())->i < 7;
+                                                                $recentlyUpdated = $package->updated_at->diffInMinutes(now()) < 7;
 
                                                                 // Yenileme Gozlemede
                                                                 $isWaiting = !$missingInformation && ( ($inCustoms && $recentlyUpdated && $reloadUserPackages) || $notInCustoms);
