@@ -112,14 +112,20 @@
                                                                 $isEarlyDeclared = $package->status === 6;
                                                                 $isInWarehouse = $package->status === 0;
                                                                 $inCustoms = $package->custom_status === 0;
+                                                                $notInCustoms = $package->custom_status === null;
+                                                                $reloadUserPackages = auth()->user()->refresh_customs;
+
                                                                 // Beyanli
                                                                 $isDeclared = $package->custom_status >= 1;
 
                                                                 // Eskik melumat
                                                                 $missingInformation = $package->shipping_amount <= 0;
 
+                                                                // Son 7 deqiqe erzinde deyisdiirlib
+                                                                $recentlyUpdated = $package->updated_at->diff(now())->i < 7;
+
                                                                 // Yenileme Gozlemede
-                                                                $isWaiting = !$missingInformation && ( ($inCustoms && $package->updated_at->diff(now())->i < 7) || $package->custom_status === null);
+                                                                $isWaiting = !$missingInformation && ( ($inCustoms && $recentlyUpdated && $reloadUserPackages) || $notInCustoms);
                                                             @endphp
 
                                                             <li class="accordion block">
@@ -138,9 +144,10 @@
                                                                         @if($isInWarehouse)
                                                                             @if($missingInformation)
                                                                                 (Bağlamanın çatışmayan məlumatları var)
+                                                                                <i class="fa fa-exclamation-triangle text-danger float-right mr-2"></i>
                                                                             @else
                                                                                 @if($isWaiting)
-                                                                                    <i class="fa fa-clock text-info float-right mr-2"></i>
+                                                                                    <i class="fa fa-repeat text-info float-right mr-2"></i>
                                                                                 @else
                                                                                     @if($isDeclared)
                                                                                         <span class="badge badge-success">Bəyanlı</span>

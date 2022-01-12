@@ -82,12 +82,24 @@
                                     <div class="form-group col-lg-6">
                                         @include('front.form.group', ['key' => 'user_comment', 'label' => trans('front.note'), 'options' => ['rows' => 3, 'class' => 'form__field']])
                                     </div>
-                                    <div class="form-group col-lg-6 col-md-8 custom-check-box">
-                                        <label class="custom-control material-checkbox ">
-                                            <input type="checkbox" name="has_liquid" class="material-control-input">
+{{--                                    <div class="form-group col-lg-6 col-md-8 custom-check-box">--}}
+{{--                                        <label class="custom-control material-checkbox ">--}}
+{{--                                            <input type="checkbox" name="has_liquid" class="material-control-input">--}}
+{{--                                            <span class="material-control-indicator"></span>--}}
+{{--                                            <span class="description">{{ __('front.contains_liquid') }}</span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+                                    <div class="form-group col-12 custom-check-box">
+                                        <label class="custom-control material-checkbox  @if($errors->has('i_agree')) is-invalid @endif">
+                                            <input type="checkbox" name="i_agree"  class="material-control-input" value="1">
                                             <span class="material-control-indicator"></span>
-                                            <span class="description">{{ __('front.contains_liquid') }}</span>
+                                            <span class="description">
+                                                <a href="{{ route('pages.show','terms') }}" class="description"> {{ __('front.user_orders.create_order_form.agree') }}</a>
+                                            </span>
                                         </label>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>Bu xana mütləq seçilməlidir</strong>
+                                        </span>
                                     </div>
                                     <div class="form-group col-lg-12 col-md-4 text-lg-right">
                                         <div class="col-lg-12 col-md-12 col-lg-12 form-group message-btn middle_smallbtn">

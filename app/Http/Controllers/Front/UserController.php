@@ -606,6 +606,7 @@ class UserController extends MainController
             'type_id' => 'required|integer|not_in:0',
             'number_items' => 'required|integer',
             'website_name' => 'required|string',
+            'i_agree' => 'required|boolean',
             'invoice' => 'nullable|mimes:jpeg,png,pdf,doc,docx,jpg,xls|max:4000',
         ]);
 
