@@ -133,38 +133,40 @@ class CustomSystem extends Command
     {
         $userId = $this->option('user');
         if ($userId != null) {
-            $user = User::find($userId);
+            $users = User::where('id', $userId)->get();
         } else {
-            $user = User::where('refresh_customs', true)->orderBy('updated_at', 'asc')->first();
+            $users = User::where('refresh_customs', true)->orderBy('updated_at', 'asc')->get();
         }
 
-        $count = 0;
-        if ($user) {
-            $packages = Package::whereNotIn('custom_status', [1, 2])->where('user_id', $user->id)->get();
-            foreach ($packages as $package) {
-                $data = $this->custom->deletePackage($package->custom_id);
+        foreach ($users as $user){
+            $count = 0;
+            if ($user) {
+                $packages = Package::where('custom_status', 0)->where('user_id', $user->id)->get();
+                foreach ($packages as $package) {
+                    $data = $this->custom->deletePackage($package->custom_id);
 
-                if ($data && ($data['code'] == 200 || (isset($data['exception']['code']) && $data['exception']['code'] == '042'))) {
-                    $package->custom_status = null;
-                    $package->save();
-                    $count++;
-                    sendTGMessage("🆘 #SmartCustom  " . $package->custom_id . " gömrük sistemindən yenilənməsi üçün silindi!");
-                } else {
-                    if ($package->reg_number) {
-                        $package->custom_status = 1;
+                    if ($data && ($data['code'] == 200 || (isset($data['exception']['code']) && $data['exception']['code'] == '042'))) {
+                        $package->custom_status = null;
                         $package->save();
+                        $count++;
+                        sendTGMessage("🆘 #SmartCustom  " . $package->custom_id . " gömrük sistemindən yenilənməsi üçün silindi!");
+                    } else {
+                        if ($package->reg_number) {
+                            $package->custom_status = 1;
+                            $package->save();
+                        }
+
+                        sendTGMessage("🆘 #SmartCustom  " . $package->custom_id . " silmek olmur!");
                     }
-
-                    sendTGMessage("🆘 #SmartCustom  " . $package->custom_id . " silmek olmur!");
                 }
-            }
 
-            if ($count) {
-                sendTGMessage("🚨 #SmartCustom  " . $user->full_name . " adlı müştərimizin bağlamaları gömrükdən silindi!");
-                $this->inWarehouse();
+                if ($count) {
+                    sendTGMessage("🚨 #SmartCustom  " . $user->full_name . " adlı müştərimizin bağlamaları gömrükdən silindi!");
+                    $this->inWarehouse();
+                }
+                $user->refresh_customs = false;
+                $user->save();
             }
-            $user->refresh_customs = false;
-            $user->save();
         }
     }
 
