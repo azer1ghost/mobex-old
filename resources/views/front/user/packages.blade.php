@@ -242,12 +242,12 @@
                                                                             @else
                                                                                 @if($isWaiting)
                                                                                     <p class="text-danger m-2">
-                                                                                        Bağlama bir neçə dəqiqə sonra customs-a yenilənəcək.
+                                                                                        Bağlama bir neçə dəqiqə sonra Smart Customs-da yenilənəcək.
                                                                                     </p>
                                                                                 @else
                                                                                     @if(!$isDeclared)
                                                                                         <p class="text-danger m-2">
-                                                                                            Bağlama customs-da bəyan olunmayıb
+                                                                                            Bağlama Smart Customs-da bəyan olunmayıb
                                                                                         </p>
                                                                                     @endif
                                                                                 @endif

@@ -135,8 +135,10 @@ class CustomSystem extends Command
         if ($userId != null) {
             $user = User::find($userId);
         } else {
-            $user = User::where('refresh_customs', true)->orderBy('updated_at', 'asc')->first();
+            $user = User::whereNotIn('custom_status', [1, 2])->orderBy('updated_at', 'asc')->first();
         }
+
+        // where('custom_status', 0)-
 
         $count = 0;
         if ($user) {

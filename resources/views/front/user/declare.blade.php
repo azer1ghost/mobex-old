@@ -19,7 +19,6 @@
 
     </section>
     <!--page-title-two end-->
-
     <section class="doctors-dashboard bg-color-3">
         @include('front.user.sections.sidebar_menu')
         <div class="right-panel">
@@ -40,7 +39,7 @@
                                         @include('front.form.group', ['type' => 'select', 'key' => 'country_id', 'label' => trans('front.warehouse'), 'selects' => $countries, 'options' => ['class' => 'form__field']])
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        @include('front.form.group', ['key' => 'website_name', 'label' => trans('front.website_name'), 'options' => ['class' => 'form__field', 'placeholder' => trans('front.website_example'), 'data-validation' => 'required']])
+                                        @include('front.form.group', ['key' => 'website_name', 'label' => trans('front.create_order_enter_urls'), 'options' => ['class' => 'form__field', 'placeholder' => trans('front.website_example'), 'data-validation' => 'required']])
                                     </div>
                                     <div class="form-group col-lg-12">
                                         @include('front.form.group', ['key' => 'tracking_code', 'label' => trans('front.tracking_code'), 'options' => ['class' => 'form__field', 'data-validation' => 'required length custom', 'data-validation-length' => "min9", 'data-validation-regexp' => "^[A-Za-z0-9-]+$"]])
