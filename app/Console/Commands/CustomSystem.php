@@ -138,8 +138,6 @@ class CustomSystem extends Command
             $user = User::whereNotIn('custom_status', [1, 2])->orderBy('updated_at', 'asc')->first();
         }
 
-        // where('custom_status', 0)-
-
         $count = 0;
         if ($user) {
             $packages = Package::where('custom_status', 0)->where('user_id', $user->id)->get();
