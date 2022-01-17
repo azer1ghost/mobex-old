@@ -135,12 +135,12 @@ class CustomSystem extends Command
         if ($userId != null) {
             $user = User::find($userId);
         } else {
-            $user = User::whereNotIn('custom_status', [1, 2])->orderBy('updated_at', 'asc')->first();
+            $user = User::where('refresh_customs', true)->orderBy('updated_at', 'asc')->first();
         }
 
         $count = 0;
         if ($user) {
-            $packages = Package::where('custom_status', 0)->where('user_id', $user->id)->get();
+            $packages = Package::whereNotIn('custom_status', [1, 2])->where('user_id', $user->id)->get();
             foreach ($packages as $package) {
                 $data = $this->custom->deletePackage($package->custom_id);
 
