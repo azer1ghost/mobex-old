@@ -67,13 +67,16 @@
                                                    data-validation-max-size="3M"
                                                    placeholder="İnvoys yüklə"/>
                                         </div>
+                                        <span class="help-block">
+                                            Məhsulu sifariş etdiyiniz saytın müvafiq bölümündəki məhsul və qiymət düşən <b>hissənin ekran şəklini</b> bu xanaya yükləyin!
+                                        </span>
                                         @if ($errors->has('invoice'))
                                         <span class="help-block">
                                             <strong>{!! $errors->first('invoice') !!}</strong>
                                         </span>
                                         @endif
                                         @if(isset($item))
-                                            @if($item->invoice)
+                                            @if($item->getOriginal('invoice'))
                                                 <a target="_blank" href="{{ $item->invoice }}">Yüklü olan invoysa bax</a>
                                             @endif
                                         @endif

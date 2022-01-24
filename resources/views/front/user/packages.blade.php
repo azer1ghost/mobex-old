@@ -309,15 +309,14 @@
                                                                             </div>
                                                                         @endforeach
                                                                         <div class="full accordion_inbutton_cont">
-
-                                                                            @if($package->custom_status < 1)
+                                                                            @if($package->custom_status < 1 && is_null($package->links))
                                                                                 <div class="col-lg-3 col-md-4 col-sm-12 form-group message-btn accordion_inbutton">
                                                                                     <a href="{{ route('declaration.edit', $package->id) }}" class="theme-btn-one">
                                                                                         {{ __('front.edit') }}
                                                                                         <i class="icon-Arrow-Right"></i>
                                                                                     </a>
                                                                                 </div>
-                                                                                @if(! $package->paid && $isEarlyDeclared)
+                                                                                @if( !$package->paid && $isEarlyDeclared)
                                                                                     <div class="col-lg-3 col-md-4 col-sm-12 form-group message-btn accordion_inbutton">
                                                                                         <a href="{{ route('declaration.delete', $package->id) }}" class="theme-btn-one" style="background-color: #ff1c90">
                                                                                             {{ trans('front.delete') }}
