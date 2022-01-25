@@ -1295,6 +1295,10 @@ class MainController extends Controller
                 "id"   => $user->id,
                 "text" => $user->full_name . " (" . $user->customer_id . ") [" . $user->spending . "]",
                 "filial" => $user->filial_id,
+                "has_last_orders" =>
+                    $user->orders()->whereDate('created_at', '>',  now()->subDays(10))->where('status', 1)->exists() &&
+                    $user->packages()->whereDate('created_at', '>',  now()->subDays(10))->where('status', 6)->exists()
+                ,
             ];
         }
 

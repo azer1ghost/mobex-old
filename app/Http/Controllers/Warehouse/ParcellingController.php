@@ -190,35 +190,51 @@ class ParcellingController extends Controller
                 'data-validation' => 'required',
             ],
         ],
+
+//        [
+//            'name'              => 'shipping_amount',
+//            'label'             => 'Invoiced price',
+//            'type'              => 'text',
+//            'prefix'            => '<i class="icon-coin-dollar"></i>',
+//            'wrapperAttributes' => [
+//                'class' => 'col-md-2 hidden_for_user',
+//            ],
+//            'attributes'        => [
+//                'data-validation'          => 'required number',
+//                'data-validation-allowing' => "float",
+//            ],
+//            'validation'        => 'nullable|numeric',
+//        ],
+
         [
-            'name'              => 'shipping_amount',
-            'label'             => 'Invoiced price',
-            'type'              => 'text',
-            'prefix'            => '<i class="icon-coin-dollar"></i>',
-            'wrapperAttributes' => [
-                'class' => 'col-md-2 hidden_for_user',
-            ],
-            'attributes'        => [
-                'data-validation'          => 'required number',
-                'data-validation-allowing' => "float",
-            ],
-            'validation'        => 'nullable|numeric',
+            'name'    => 'shipping_amount',
+            'type'    => 'hidden',
+            'default' => 0,
+            'short'   => true,
         ],
+
         [
-            'name'                => 'shipping_amount_cur',
-            'label'               => '&nbsp',
-            'type'                => 'select_from_array',
-            'optionsFromConfig'   => 'ase.attributes.currencies',
-            'default_by_relation' => 'country.currency',
-            'wrapperAttributes'   => [
-                'class' => 'col-md-1 hidden_for_user',
-            ],
-            'validation'          => 'nullable|integer',
-            'attributes'          => [
-                'tabindex' => '-1',
-                'touch'    => 'no',
-            ],
+            'name'    => 'shipping_amount_cur',
+            'type'    => 'hidden',
+            'default' => 0,
+            'short'   => true,
         ],
+
+//        [
+//            'name'                => 'shipping_amount_cur',
+//            'label'               => '&nbsp',
+//            'type'                => 'select_from_array',
+//            'optionsFromConfig'   => 'ase.attributes.currencies',
+//            'default_by_relation' => 'country.currency',
+//            'wrapperAttributes'   => [
+//                'class' => 'col-md-1 hidden_for_user',
+//            ],
+//            'validation'          => 'nullable|integer',
+//            'attributes'          => [
+//                'tabindex' => '-1',
+//                'touch'    => 'no',
+//            ],
+//        ],
         [
             'type' => 'html',
             'html' => '<div class="form-group mt-10 col-lg-12"><h3 class="text-center">Weight</h3></div>',
@@ -256,31 +272,45 @@ class ParcellingController extends Controller
         ],
 
         [
-            'name'              => 'has_liquid',
-            'label'             => 'Has liquid',
-            'type'              => 'checkbox',
-            'short'             => true,
-            'wrapperAttributes' => [
-                'class' => 'col-md-1 mt-15',
-            ],
-            'validation'        => 'nullable|integer',
-            'attributes'        => [
-                'tabindex' => '-1',
-            ],
+            'name'    => 'has_liquid',
+            'type'    => 'hidden',
+            'default' => 0,
+            'short'   => true,
         ],
+
         [
-            'name'              => 'has_battery',
-            'label'             => 'Has Battery',
-            'type'              => 'checkbox',
-            'short'             => true,
-            'wrapperAttributes' => [
-                'class' => 'col-md-1 mt-15',
-            ],
-            'validation'        => 'nullable|integer',
-            'attributes'        => [
-                'tabindex' => '-1',
-            ],
+            'name'    => 'has_battery',
+            'type'    => 'hidden',
+            'default' => 0,
+            'short'   => true,
         ],
+
+//        [
+//            'name'              => 'has_liquid',
+//            'label'             => 'Has liquid',
+//            'type'              => 'checkbox',
+//            'short'             => true,
+//            'wrapperAttributes' => [
+//                'class' => 'col-md-1 mt-15',
+//            ],
+//            'validation'        => 'nullable|integer',
+//            'attributes'        => [
+//                'tabindex' => '-1',
+//            ],
+//        ],
+//        [
+//            'name'              => 'has_battery',
+//            'label'             => 'Has Battery',
+//            'type'              => 'checkbox',
+//            'short'             => true,
+//            'wrapperAttributes' => [
+//                'class' => 'col-md-1 mt-15',
+//            ],
+//            'validation'        => 'nullable|integer',
+//            'attributes'        => [
+//                'tabindex' => '-1',
+//            ],
+//        ],
         [
             'name'              => 'width',
             'label'             => 'Width',
@@ -413,17 +443,17 @@ class ParcellingController extends Controller
             'html' => '</div></div><div class="col-lg-1 hidden_for_user"> <span id="add_type" class="btn btn-primary btn-icon" style="margin-top: 20px"><i
                                         class="icon-plus2"></i></span></div><div class="col-lg-3">',
         ],
-        [
-            'name'              => 'print_invoice',
-            'label'             => 'Print Invoice',
-            'type'              => 'checkbox',
-            'default'           => true,
-            'short'             => true,
-            'wrapperAttributes' => [
-                'class' => 'col-md-12',
-            ],
-            'validation'        => 'nullable|integer',
-        ],
+//        [
+//            'name'              => 'print_invoice',
+//            'label'             => 'Print Invoice',
+//            'type'              => 'checkbox',
+//            'default'           => true,
+//            'short'             => true,
+//            'wrapperAttributes' => [
+//                'class' => 'col-md-12',
+//            ],
+//            'validation'        => 'nullable|integer',
+//        ],
         [
             'name'              => 'check_limit',
             'label'             => 'Check Limit',

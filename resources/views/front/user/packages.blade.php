@@ -110,6 +110,7 @@
 
                                                             @php
                                                                 $isEarlyDeclared = $package->status === 6;
+                                                                $isCreatedByOperator = !is_null($package->links);
                                                                 $isInWarehouse = $package->status === 0;
                                                                 $inCustoms = $package->custom_status === 0;
                                                                 $notInCustoms = $package->custom_status === null;
@@ -158,6 +159,9 @@
                                                                             @endif
                                                                         @endif
 
+                                                                        @if($isCreatedByOperator && $isEarlyDeclared)
+                                                                            <span class="badge badge-success">Sifariş</span>
+                                                                        @endif
                                                                     </h6>
                                                                 </div>
                                                                 <div class="acc-content">
@@ -253,6 +257,14 @@
                                                                                 @endif
                                                                             @endif
                                                                             <hr/>
+                                                                        @endif
+
+                                                                        @if($isCreatedByOperator && $isEarlyDeclared)
+                                                                            <p class="text-success m-2">
+                                                                                @if($package->links()->count() > 1) Məhsullar @else Məhsul @endif
+                                                                                sifariş verilib. Bağlama xarici anbara çatdıqda sizə bildiriş göndəriləcək.
+                                                                                (adətən 1-5 iş günü ərzində bağlamanız xarici anbara çatır)
+                                                                            </p>
                                                                         @endif
 
                                                                         @foreach($package->links() as $key => $product)

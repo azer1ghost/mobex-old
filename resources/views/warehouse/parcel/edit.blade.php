@@ -143,6 +143,9 @@
                     <h3 style="line-height: 50px; font-size: 20px;height: 50px; background-color: #c3eee4" class="text-center text-white" id="filial-indicator">
                         Filial
                     </h3>
+                    <h3 style="line-height: 20px; font-size: 18px;height: 20px; background-color: #ec4f53;display: none" class="text-center text-white" id="order-indicator">
+                        Diqqət! Bağlamanın erkən bəyanı ola bilər.
+                    </h3>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -198,33 +201,43 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
     <script>
 
-        function getRandomIntInclusive(min = 8, max = 55) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min + 1) + min);
-        }
+        // function getRandomIntInclusive(min = 8, max = 55) {
+        //     min = Math.ceil(min);
+        //     max = Math.floor(max);
+        //     return Math.floor(Math.random() * (max - min + 1) + min);
+        // }
 
         // Fake qiymet kodu yalniz amerika ucun
-        @if(auth('worker')->user()->getAttribute('warehouse_id') == 6)
-            $('#new_package').on('shown.bs.modal', function () {
-                $('input[name=shipping_amount]').val(getRandomIntInclusive());
-            })
-        @endif
+{{--        @if(auth('worker')->user()->getAttribute('warehouse_id') == 6)--}}
+{{--            $('#new_package').on('shown.bs.modal', function () {--}}
+{{--                $('input[name=shipping_amount]').val(getRandomIntInclusive());--}}
+{{--            })--}}
+{{--        @endif--}}
 
         @if(auth('worker')->user()->getAttribute('warehouse_id') == 1)
             // cesidleme kodlari - yalniz UMT
             $('#manual_add_package').submit(function (){
                 $('#filial-indicator').css("background-color", "#c3eee4").text('Filial')
+                $("#order-indicator").hide()
             })
 
             $('.icon-plus2').click(function (){
                 $('#filial-indicator').css("background-color", "#c3eee4").text('Filial')
+                $("#order-indicator").hide()
             })
 
             $('select').on('select2:select', function (e) {
                 var data = e.params.data;
                 $("select option[value=" + data.id + "]").data('filial', data.filial);
                 $("select").trigger('change');
+
+
+                if(data.has_last_orders){
+                    $("#order-indicator").show()
+                } else {
+                    $("#order-indicator").hide()
+                }
+
 
                 var indicator = $('#filial-indicator')
 

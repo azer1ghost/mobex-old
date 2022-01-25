@@ -649,4 +649,9 @@ class User extends Authenticatable implements CanVerifyEmailContract
     {
         return $this->hasOne(Referral::class);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
