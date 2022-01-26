@@ -443,6 +443,12 @@ class ParcellingController extends Controller
             'html' => '</div></div><div class="col-lg-1 hidden_for_user"> <span id="add_type" class="btn btn-primary btn-icon" style="margin-top: 20px"><i
                                         class="icon-plus2"></i></span></div><div class="col-lg-3">',
         ],
+        [
+            'name'    => 'print_invoice',
+            'type'    => 'hidden',
+            'default' => true,
+            'short'   => true,
+        ],
 //        [
 //            'name'              => 'print_invoice',
 //            'label'             => 'Print Invoice',
