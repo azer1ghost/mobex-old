@@ -261,7 +261,7 @@ QEYD: Gətirdiyiniz bağlamanın tərəflərinin cəmi 100sm olmasa da həcimsə
     'size_up'                       => 'W H L > 100cm',
     'surname'                       => 'Soyadı (ingilis hərfləri ilə)*',
     'state'                         => 'Ştat',
-    'shipping_amount'               => 'Faktura qiyməti',
+    'shipping_amount'               => 'Faktura (qiyməti)',
     'shipping_amount_cur'           => 'Valyuta',
     'save'                          => 'Yadda saxla',
     'region'                        => 'İlçe',
