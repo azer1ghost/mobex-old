@@ -27,7 +27,7 @@ class SMS extends Model
     public static function getData($number, $text, $type = null)
     {
         // Ignore limit for campaign
-        $limit = $type == 'CAMPAIGN' ? 10000 : 265;
+        $limit = $type == 'CAMPAIGN' ? 10000 : 350;
 
         $client = new \GuzzleHttp\Client();
 
