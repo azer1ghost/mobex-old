@@ -39,7 +39,7 @@
                                         <label for="country_id">@lang('front.warehouse')</label>
                                         <select name="country_id"  class="form-control form__field" id="country_id">
                                             @foreach($countries as $id => $country)
-                                                <option @if($item->warehouse->country_id === $id) selected @endif value="{{$id}}">{{$country}}</option>
+                                                <option @if(isset($item) && $item->warehouse->country_id === $id) selected @endif value="{{$id}}">{{$country}}</option>
                                             @endforeach
                                         </select>
 {{--                                    @include('front.form.group', ['type' => 'select', 'key' => 'country_id', 'label' => trans('front.warehouse'), 'selects' => $countries, 'options' => ['class' => 'form__field']])--}}
