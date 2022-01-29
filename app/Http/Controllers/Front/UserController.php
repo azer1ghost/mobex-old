@@ -564,15 +564,16 @@ class UserController extends MainController
         if (! $item) {
             return abort(404);
         }
-        $categoriesObj = PackageType::where('id', '!=', env('OTHER_ID', 10))->whereNotNull('custom_id')->get();
-        $other = PackageType::withTrashed()->whereId(env('OTHER_ID', 10))->first();
+        $categoriesObj = PackageType::with('children')->whereNull('parent_id')->whereNotNull('custom_id')->get();
+
         $categories = [];
         foreach ($categoriesObj as $category) {
             $categories[$category->id] = $category->translateOrDefault(\App::getLocale())->name;
-        }
-        asort($categories);
-        if ($other) {
-            $categories[$other->id] = $other->translateOrDefault(\App::getLocale())->name;
+            if ($category->children) {
+                foreach ($category->children as $sub_category) {
+                    $categories[$sub_category->id] = " - " . $sub_category->translateOrDefault(\App::getLocale())->name;
+                }
+            }
         }
 
         $countriesObj = Country::whereHas('warehouses')->orderBy('allow_declaration', 'desc')->orderBy('id', 'asc')->get();
