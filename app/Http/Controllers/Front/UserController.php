@@ -451,8 +451,12 @@ class UserController extends MainController
         }
 
         $price = round($price, 2);
-        $fee = round($price * 0.05, 2);
-        $total = round($price * 1.05, 2);
+//        $fee = round($price * 0.05, 2);
+//        $total = round($price * 1.05, 2);
+
+        // 1-14 fevral 0 faiz kompaniyasi
+        $fee = 0;
+        $total = round($price, 2);
 
         $order = new Order();
         $order->user_id = \Auth::user()->id;
