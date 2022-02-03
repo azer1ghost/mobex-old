@@ -16,6 +16,8 @@ class CreateFilialesTable extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->increments('id');
             $table->text("location")->nullable();
+            $table->text("phone")->nullable();
+            $table->text("working_hours")->nullable();
             $table->enum('status', ['ACTIVE', 'PASSIVE'])->default('ACTIVE');
             $table->softDeletes();
             $table->timestamps();

@@ -66,14 +66,6 @@ class BranchController extends Controller
 //            'type' => 'html',
 //            'html' => '<div class="form-group col-lg-12 mt-10">Cell structure as json format</div>',
 //        ],
-        [
-            'name'       => 'cells',
-            'label'      => 'Cells',
-            'type'       => 'textarea',
-            'validation' => 'nullable|string|min:5',
-            'attributes' => [
-                'rows' => 6,
-            ],
-        ],
+
     ];
 }
