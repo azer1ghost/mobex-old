@@ -43,6 +43,7 @@ Route::group([
             'product',
             'coupon',
             'filial',
+            'branch',
             'card',
             'order'     => [
                 ['name' => 'logs', 'method' => 'get'],
@@ -163,6 +164,7 @@ Route::group([
             'as'   => 'system.logs',
             'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index',
         ]);
+
     });
 
     require 'auth.php';

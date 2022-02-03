@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-class FilialController extends Controller
+class BranchController extends Controller
 {
     protected $view = [
-        'sub_title'   => 'Filials',
+        'sub_title'   => 'Branches',
         'formColumns' => 8,
         'listColumns' => 6,
     ];
@@ -15,7 +15,6 @@ class FilialController extends Controller
     ];
 
     protected $fields = [
-
         [
             'label'      => 'Name',
             'name'       => 'name',
@@ -63,10 +62,10 @@ class FilialController extends Controller
             ],
         ],
 
-        [
-            'type' => 'html',
-            'html' => '<div class="form-group col-lg-12 mt-10">Cell structure as json format</div>',
-        ],
+//        [
+//            'type' => 'html',
+//            'html' => '<div class="form-group col-lg-12 mt-10">Cell structure as json format</div>',
+//        ],
         [
             'name'       => 'cells',
             'label'      => 'Cells',
