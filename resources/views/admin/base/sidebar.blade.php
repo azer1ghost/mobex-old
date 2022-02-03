@@ -218,6 +218,8 @@
     <li><a target="_blank" href="{{ route('system.logs') }}"><i class="icon-bug2"></i> <span>Logs</span></a></li>
     @endpermission
 
-
+    @permission('read-branches')
+    <li><a href="{{ route('branches.index') }}"><i class="icon-office"></i> <span>Branches</span></a></li>
+    @endpermission
 
 </ul>

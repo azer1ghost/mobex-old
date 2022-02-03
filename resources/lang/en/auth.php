@@ -17,7 +17,7 @@ return [
     'forgot_password'                         => 'Forgot password',
     'password'                                => 'Password',
     'email'                                   => 'Email or customer ID',
-    'filial'                                  => 'Branch',
+    'filial'                                  => 'Filial',
     'gender'                                  => 'Gender',
     'empty'                                   => '-',
     'prefer_not_to_say'                       => 'Prefer not to say',
