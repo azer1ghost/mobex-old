@@ -11,8 +11,6 @@ use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Lunaweb\EmailVerification\EmailVerification;
-use Lunaweb\EmailVerification\Traits\VerifiesEmail;
 use Validator;
 
 /**
@@ -33,7 +31,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers, VerifiesEmail;
+    use RegistersUsers;
 
     /**
      * Where to redirect users after login / registration.
@@ -52,15 +50,8 @@ class RegisterController extends Controller
         $this->middleware('guest', [
             'except' => [
                 'verify',
-                'showResendVerificationEmailForm',
-                'resendVerificationEmail',
             ],
         ]);
-        $this->middleware('auth', ['only' => ['showResendVerificationEmailForm', 'resendVerificationEmail']]);
-
-        if (! env('EMAIL_VERIFY')) {
-            $this->redirectTo = '/register/verify/resend';
-        }
     }
 
     /**

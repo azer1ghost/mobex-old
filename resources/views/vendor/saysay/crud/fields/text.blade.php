@@ -10,7 +10,7 @@
             @if(isset($field['prefix']))
                 <div class="input-group-addon">{!! $field['prefix'] !!}</div> @endif
             <input
-                    type="{{ $type or 'text' }}"
+                    type="{{ $type ?? 'text' }}"
                     name="{{ $field['name'] }}"
                     @if(! isset($hideValue))
                     value="{{ Request::has($field['name']) ? Request::get($field['name']) : (old($field['name']) ? old($field['name']) : (isset($item->{$field['name']}) ? $item->{$field['name']} : (isset($field['default']) ? $field['default'] : '' ))) }}"

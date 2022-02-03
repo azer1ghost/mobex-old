@@ -477,7 +477,7 @@
                     {!! Form::open(['method' => 'get','route' =>'cells.find']) !!}
                     <div class="row">
                         <div class="col-md-10">
-                            <label>Type package tracking code or cwb number</label>
+                            <label>Type package tracking code ?? cwb number</label>
                             <input placeholder="{{ env('MEMBER_PREFIX_CODE') }}0000000" type="text" name="cwb" value="" class="form-control">
 
                         </div>

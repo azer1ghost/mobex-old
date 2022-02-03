@@ -14,8 +14,8 @@
                 <?php $imageUrl = isset($field['asset']) ? asset($field['asset'] . $item->{$field['name']}) : $item->{$field['name']}; ?>
                 @if($item->{$field['name']})
                     <a target="_blank" href="{{ $imageUrl }}">
-                        <img src="{{ $imageUrl }}" id="{{ $field['id'] or null }}"
-                             width="{{ $field['width'] or '200' }}">
+                        <img src="{{ $imageUrl }}" id="{{ $field['id'] ?? null }}"
+                             width="{{ $field['width'] ?? '200' }}">
                     </a>
                 @endif
             </div>

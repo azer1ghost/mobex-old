@@ -30,7 +30,7 @@
             <td> {{ $item->fee }}₼</td>
             <td>{{ $item->full_name }}</td>
             <td>{{ $item->cleared_phone }}</td>
-            <td>{{ $item->filial->name or '-' }}</td>
+            <td>{{ $item->filial->name ?? '-' }}</td>
             <td>{{ $item->full_address }}</td>
             <td>{{ $item->packages->sum('weight') }} kg</td>
             <td>{{ $item->created_at->diffForHumans() }}</td>

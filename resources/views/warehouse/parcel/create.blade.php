@@ -45,7 +45,7 @@
                             <tbody id="scanned">
                             <tr id="empty_package">
                                 <td colspan="{{ count($_list) + 2 }}">
-                                    <div class="alert alert-danger">Please scan or add a package(s)</div>
+                                    <div class="alert alert-danger">Please scan ?? add a package(s)</div>
                                 </td>
                             </tr>
                             </tbody>
@@ -58,7 +58,7 @@
 
                         {!! Form::open(['id' => 'manual_add_package', 'class' => 'no_loading']) !!}
                         <div class="col-md-6">
-                            <label>Tracking Number or CWB</label>
+                            <label>Tracking Number ?? CWB</label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="icon-truck"></i></div>
                                 <input required id="manual_add" type="text" name="manual_add" value=""

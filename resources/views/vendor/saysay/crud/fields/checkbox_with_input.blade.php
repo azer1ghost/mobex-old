@@ -25,15 +25,15 @@
                     {{ $attribute }}="{{ $value }}"
                 @endforeach
             @endif
-            > {!! $field['label_pre'] or null !!}
+            > {!! $field['label_pre'] ?? null !!}
             <input
-                    type="{{ $field['input']['name'] or 'text' }}"
+                    type="{{ $field['input']['name'] ?? 'text' }}"
                     name="{{ $field['input']['name'] }}"
                     value="{{ Request::has($field['input']['name']) ? Request::get($field['input']['name']) : (old($field['input']['name']) ? old($field['input']['name']) : (isset($item->{$field['input']['name']}) ? $item->{$field['input']['name']} : (isset($field['input']['default']) ? $field['input']['default'] : '' ))) }}"
 
                     @include('crud::inc.field_attributes', ['field' => $field['input']])
             >
-            {!! $field['label_post'] or null !!}
+            {!! $field['label_post'] ?? null !!}
         </label>
 
         {{-- HINT --}}

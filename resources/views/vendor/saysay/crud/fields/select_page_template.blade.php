@@ -51,7 +51,7 @@
             }
 
             function strip_last_template_parameter(url) {
-                // if it's a create or edit link with a template parameter
+                // if it's a create ?? edit link with a template parameter
                 if (url.indexOf("/create/") > -1 || url.indexOf("/edit/") > -1) {
                     // remove the last parameter of the url
                     var url_array = url.split('/');

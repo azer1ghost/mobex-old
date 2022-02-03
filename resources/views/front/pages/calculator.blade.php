@@ -90,7 +90,7 @@
                             <div class="col-lg-6 text-center">
                                 <h2 class="mb40">{{ __('front.calculator.approximate_price') }}</h2>
                                 <div class="loan-eligibility-info">
-                                    {{ $result or null }}
+                                    {{ $result ?? null }}
                                 </div>
                                 {{--@if ($price)
                                     <div class="row mt60">

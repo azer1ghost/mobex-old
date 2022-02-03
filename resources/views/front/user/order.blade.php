@@ -13,7 +13,7 @@
                                 <div class="col-lg-12 col-sm-12 text-center">
                                     <h1 class="mb10">{{ __('front.single_order_page_title', ['country' => ucfirst(strtolower($order->country->translateOrDefault($_lang)->name))]) }}</h1>
                                     <h3 class="mb20">#{{ $order->custom_id }} | {{ __('front.status') . ': ' . __($order->status_info['text']) }}</h3>
-                                    <p>{{ $order->note or __('front.single_order_page_description') }}</p>
+                                    <p>{{ $order->note ?? __('front.single_order_page_description') }}</p>
                                 </div>
                             </div>
 
@@ -40,7 +40,7 @@
                                                             <a href="{{ $link->url }}"
                                                                target="_blank">{{ str_limit($link->url, 45) }}</a>
                                                         </div>
-                                                        <div class="col-lg-5">{{ $link->note or trans('front.not') }}</div>
+                                                        <div class="col-lg-5">{{ $link->note ?? trans('front.not') }}</div>
 
                                                         <div class="col-lg-1">
 
@@ -77,7 +77,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>{{ __('front.order_price.price') }}</td>
-                                                <td>{{ $order->price or '-' }}</td>
+                                                <td>{{ $order->price ?? '-' }}</td>
                                             </tr>
                                             <tr>
                                                 <td>{{ __('front.coupon_sale') }}</td>
@@ -85,11 +85,11 @@
                                             </tr>
                                             <tr>
                                                 <td>{{ __('front.service_fee') }}</td>
-                                                <td>{{ $order->service_fee or '-' }}</td>
+                                                <td>{{ $order->service_fee ?? '-' }}</td>
                                             </tr>
                                             <tr>
                                                 <td>{{ __('front.total_price') }}</td>
-                                                <td>{{ $order->total_price or '-' }}</td>
+                                                <td>{{ $order->total_price ?? '-' }}</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">

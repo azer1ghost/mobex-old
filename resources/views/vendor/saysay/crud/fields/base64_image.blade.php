@@ -5,7 +5,7 @@
         @if (isset($field['label']))        <label>{!! $field['label'] !!}</label>    @endif
         @include('crud::inc.field_translatable_icon')
     </div>
-    <!-- Wrap the image or canvas element with a block element (container) -->
+    <!-- Wrap the image ?? canvas element with a block element (container) -->
     <div class="row">
         <div class="col-sm-6" style="margin-bottom: 20px;">
             <img id="mainImage"
@@ -132,7 +132,7 @@
                     var $zoomOut = $(this).find("#zoomOut")
                     var $reset = $(this).find("#reset")
                     var $remove = $(this).find("#remove")
-                    // Options either global for all image type fields, or use 'data-*' elements for options passed in via the CRUD controller
+                    // Options either global for all image type fields, ?? use 'data-*' elements for options passed in via the CRUD controller
                     var options = {
                         viewMode: 2,
                         checkOrientation: false,

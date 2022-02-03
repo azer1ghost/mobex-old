@@ -7,7 +7,7 @@
                 <div class="panel-heading">
                     <h6>
                         {{ isset($_view['name']) ? str_plural($_view['name']) : null }}
-                        <small class="display-block">{{ $_view['sub_title'] or null }}</small>
+                        <small class="display-block">{{ $_view['sub_title'] ?? null }}</small>
                     </h6>
                     <div class="heading-elements">
                         @if(isset($currentLang))

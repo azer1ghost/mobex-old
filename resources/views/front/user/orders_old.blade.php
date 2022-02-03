@@ -51,13 +51,13 @@
                                             </div>
                                             <div class="col-md-2 col-sm-6 col-xs-12">
                                                 <div class="text-center">
-                                                    <h3 class="repayment">{{ $order->service_fee or '-' }}</h3>
+                                                    <h3 class="repayment">{{ $order->service_fee ?? '-' }}</h3>
                                                     <small>{{ __('front.service_fee') }}</small>
                                                 </div>
                                             </div>
                                             <div class="col-md-2 col-sm-6 col-xs-12">
                                                 <div class="text-center">
-                                                    <h3 class="compare-rate">{{ $order->total_price or '-' }}</h3>
+                                                    <h3 class="compare-rate">{{ $order->total_price ?? '-' }}</h3>
                                                     <small>{{ __('front.total_price') }}</small>
                                                 </div>
                                             </div>

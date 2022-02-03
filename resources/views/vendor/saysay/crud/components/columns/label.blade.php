@@ -1,1 +1,1 @@
-<span class="label label-{{ $head['options'][$entry]['label'] or '' }} {{$head['options'][$entry]['class'] or ''  }}">{{ str_limit(strip_tags($head['options'][$entry]['value']), 80) }}</span>
+<span class="label label-{{ $head['options'][$entry]['label'] ?? '' }} {{$head['options'][$entry]['class'] ?? ''  }}">{{ str_limit(strip_tags($head['options'][$entry]['value']), 80) }}</span>

@@ -42,7 +42,7 @@
             background-color: #f6f6f6;
             width: 100%; }
 
-        /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+        /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone ?? something */
         .container {
             display: block;
             Margin: 0 auto !important;

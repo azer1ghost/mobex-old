@@ -205,7 +205,7 @@
                     <div class="item">
                         <div class="key">Items</div>
                         <div class="dot">:</div>
-                        <div class="value">{{ $item->number_items or '-' }}</div>
+                        <div class="value">{{ $item->number_items ?? '-' }}</div>
                     </div>
                     <div class="item">
                         <div class="key">Weight</div>

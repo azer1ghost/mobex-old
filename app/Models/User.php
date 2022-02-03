@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-use Lunaweb\EmailVerification\Traits\CanVerifyEmail;
-use Lunaweb\EmailVerification\Contracts\CanVerifyEmail as CanVerifyEmailContract;
 
 /**
  * App\Models\User
@@ -152,12 +150,11 @@ use Lunaweb\EmailVerification\Contracts\CanVerifyEmail as CanVerifyEmailContract
  * @method static \Illuminate\Database\Eloquent\Builder|User whereOtherDeviceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereWebDeviceId($value)
  */
-class User extends Authenticatable implements CanVerifyEmailContract
+class User extends Authenticatable
 {
     use Notifiable;
     use SoftDeletes;
     use Password;
-    use CanVerifyEmail;
     use ModelEventLogger;
 
     /**

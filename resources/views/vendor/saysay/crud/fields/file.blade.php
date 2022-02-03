@@ -5,7 +5,7 @@
         @if (isset($field['label']))        <label>{!! $field['label'] !!}</label>    @endif
         @include('crud::inc.field_translatable_icon')
         <input name="{{ $field['name'] }}" type="file" class="file-input" data-show-caption="false"
-               data-show-upload="false" accept="{{ $field['accept'] or '*' }}">
+               data-show-upload="false" accept="{{ $field['accept'] ?? '*' }}">
     </div>
 
     @if(isset($item) && $item->{$field['name']})
@@ -18,12 +18,12 @@
                     <br/>
                     <a target="_blank" href="{{ $item->{$field['name']} }}">
                         @if (in_array($pathInfo['extension'], ['png', 'jpeg', 'jpg', 'gif', 'svg']))
-                            <img src="{{ $item->{$field['name']} }}" class="{{ $head['class'] or null }}"
-                                 id="{{ $head['id'] or null }}"
-                                 width="{{ $head['width'] or '150' }}">
+                            <img src="{{ $item->{$field['name']} }}" class="{{ $head['class'] ?? null }}"
+                                 id="{{ $head['id'] ?? null }}"
+                                 width="{{ $head['width'] ?? '150' }}">
                         @else
-                            <embed src="{{ $item->{$field['name']} }}" class="{{ $head['class'] or null }}"
-                                   width="{{ $head['width'] or '150' }}" height="{{ $head['height'] or '200' }}"
+                            <embed src="{{ $item->{$field['name']} }}" class="{{ $head['class'] ?? null }}"
+                                   width="{{ $head['width'] ?? '150' }}" height="{{ $head['height'] ?? '200' }}"
                                    type='application/{{ $pathInfo['extension'] }}'>
                             </embed>
 

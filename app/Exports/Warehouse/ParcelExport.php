@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exports;
+namespace App\Exports\Warehouse;
 
 use App\Models\Package;
 use Illuminate\Contracts\View\View;

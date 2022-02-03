@@ -5,7 +5,7 @@ $target = "update-" . explode(".", $head['editable']['route'])[0];
 ?>
 @checking($target)
 <a data-value="{{ $entry }}" data-source='{{ $head['editable']['source'] }}'
-   data-type="{{ $head['editable']['type'] or 'text' }}" href="#" data-pk="{{ $item->id }}"
+   data-type="{{ $head['editable']['type'] ?? 'text' }}" href="#" data-pk="{{ $item->id }}"
    data-url="{{ route($head['editable']['route'], $item->id) }}" data-name="{{ $key }}" data-plugin="{{ $head['editable']['type'] == 'select2' ? 'c-' : null }}editable"
    id="edit_{{ $rand }}"
    data-title="Edit {{ clearKey($key) }}">{{ str_limit(strip_tags($item->{$key . '_with_label'}), 80) }}</a>

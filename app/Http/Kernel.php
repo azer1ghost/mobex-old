@@ -65,7 +65,7 @@ class Kernel extends HttpKernel
         'permission'     => \Laratrust\Middleware\LaratrustPermission::class,
         'ability'        => \Laratrust\Middleware\LaratrustAbility::class,
         'compress'       => \App\Http\Middleware\Compress::class,
-//        'isEmailVerified' => \Lunaweb\EmailVerification\Middleware\IsEmailVerified::class,
+//        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'auth.api' => \App\Http\Middleware\ApiAuthentication::class,
 
     ];

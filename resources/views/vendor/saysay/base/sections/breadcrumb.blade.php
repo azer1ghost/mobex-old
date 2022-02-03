@@ -4,7 +4,7 @@
             <h5>
                 <i class="icon-arrow-left52 position-left"></i>
                 <span class="text-semibold">{{ isset($_view['name']) ? str_plural($_view['name']) : null }}</span>
-                <small class="display-block">{{ $_view['sub_title'] or null }}</small>
+                <small class="display-block">{{ $_view['sub_title'] ?? null }}</small>
             </h5>
         </div>
     </div>

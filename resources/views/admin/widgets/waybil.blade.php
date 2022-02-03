@@ -184,19 +184,19 @@
                     <div class="row">
                         <div class="col-12">
                             @if($shipper)
-                                <p><b>SHIPPER:</b> {{ $shipper->address->phone or '-' }}</p>
+                                <p><b>SHIPPER:</b> {{ $shipper->address->phone ?? '-' }}</p>
                                 <p class="ml-2">{{ $item->website_name }} <br>
                                     @if ($shipper)
                                         @if($item->fake_address)
                                             {{ $item->fake_address }}<br>
                                         @else
-                                            {{ $shipper->company_name or '-' }} <br>
-                                            {{ $shipper->address->address_line_1 or '-' }} <br>
+                                            {{ $shipper->company_name ?? '-' }} <br>
+                                            {{ $shipper->address->address_line_1 ?? '-' }} <br>
                                         @endif
-                                        {{ $shipper->address->city or null }}
-                                        , {{ $shipper->address->state or null }} {{ $shipper->address->zip_code or null }}
+                                        {{ $shipper->address->city ?? null }}
+                                        , {{ $shipper->address->state ?? null }} {{ $shipper->address->zip_code ?? null }}
                                         <br>
-                                        {{ $shipper->country->translateOrDefault('en')->name or '-' }}
+                                        {{ $shipper->country->translateOrDefault('en')->name ?? '-' }}
                                     @endif
                                 </p>
                             @endif
@@ -228,8 +228,8 @@
                 <div id="table-right-header">
                     <div class="row">
                         <div class="col-7">
-                            <div><b>Ship Date:</b> <i>{{ $item->updated_at or '-' }}</i> <br>
-                                <b>Actl Wght: </b> <i>{{ $item->weight_with_type or '-' }}</i> <br>
+                            <div><b>Ship Date:</b> <i>{{ $item->updated_at ?? '-' }}</i> <br>
+                                <b>Actl Wght: </b> <i>{{ $item->weight_with_type ?? '-' }}</i> <br>
                                 <b>Acc #:</b> <i>{{ $item->user ? $item->user->customer_id : '-' }}</i> <br>
                             </div>
                         </div>

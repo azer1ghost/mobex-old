@@ -9,7 +9,7 @@
                     <h6>
                         {{ isset($_view['name']) ? str_plural($_view['name']) : null }}
                         <small class="display-block"> Showing {{ $items->firstItem() }} to {{ $items->lastItem() }}
-                            of {{ number_format($items->total()) }} {{ $_view['sub_title'] or lcfirst(str_plural($_view['name'])) }}</small>
+                            of {{ number_format($items->total()) }} {{ $_view['sub_title'] ?? lcfirst(str_plural($_view['name'])) }}</small>
                     </h6>
                 </div>
 
@@ -76,7 +76,7 @@
                                     <td><a target="_blank" href="tel:{{ $item->cleared_phone }}">{{ $item->full_name }}
                                             (Tel:{{
                                             $item->cleared_phone }})</a></td>
-                                    <td>{{ $item->filial->name or '-' }}</td>
+                                    <td>{{ $item->filial->name ?? '-' }}</td>
                                     <td>{{ $item->full_address }}</td>
                                     <td>{{ $item->packages->sum('weight') }} kg</td>
                                     <td>{{ $item->created_at->diffForHumans() }}</td>

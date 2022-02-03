@@ -17,9 +17,9 @@
     <?php $total = 0; ?>
     @foreach($orders as $order)
         <tr>
-            <td>{{ $order->admin->name or '-' }}</td>
-            <td>{{ $order->card->hidden_number or 'Unknown' }}</td>
-            <td>{{ $order->user->full_name or '-' }}</td>
+            <td>{{ $order->admin->name ?? '-' }}</td>
+            <td>{{ $order->card->hidden_number ?? 'Unknown' }}</td>
+            <td>{{ $order->user->full_name ?? '-' }}</td>
             <td>#{{ $order->id }}</td>
             <td>{{ $order->response }}</td>
             <td>{{ $order->updated_at }}</td>

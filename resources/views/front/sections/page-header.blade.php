@@ -5,7 +5,7 @@
                 <div class="page-breadcrumb">
                     <ol class="breadcrumb">
                         <li><a href="{{ route('home') }}">{{ __('front.menu.home') }}</a></li>
-                        <li class="active">{{ $breadTitle or '404' }}</li>
+                        <li class="active">{{ $breadTitle ?? '404' }}</li>
                     </ol>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                                 <h1 class="page-title">{{ Auth::user()->full_name }}</h1>
                                 <div class="sub-page-title">{{ Auth::user()->customer_id }}</div>
                             @else
-                                <h1 class="page-title">{{ $title or __('front.page_not_found') }}</h1>
+                                <h1 class="page-title">{{ $title ?? __('front.page_not_found') }}</h1>
                             @endif
                         </div>
                         @if(Auth::check())

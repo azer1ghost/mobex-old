@@ -12,14 +12,14 @@
         <td colspan="2">International Courier System</td>
         <td></td>
         <td><b>AIRWAYBILL</b></td>
-        <td>{{ $parcel->awb or '-' }}</td>
+        <td>{{ $parcel->awb ?? '-' }}</td>
         <td></td>
         <td><b>RECEIVER NAME</b></td>
         <td>MOBEX EXPRESS</td>
     </tr>
     <tr>
         <td><b>ADDRESS</b></td>
-        <td colspan="2">{{ $warehouse->address->address_line_1 or 'Pleas add Address' }}</td>
+        <td colspan="2">{{ $warehouse->address->address_line_1 ?? 'Pleas add Address' }}</td>
         <td></td>
         <td><b>TOTAL WEIGHT</b></td>
         <td>{{ $parcel->packages->sum('weight') }}</td>
@@ -70,7 +70,7 @@
             <td>${{ $package->shipping_converted_price }}</td>
             <td>{{ $package->weight }}</td>
             <td>{{ ($package->type_id && $package->type ? ($package->type->translate('en') ? ($package->type->translate('en')->name . ($package->other_type ? "(" . $package->other_type .")" : null)) : "-") : ($package->detailed_type ?: '-')) }}</td>
-            <td>{{ $parcel->custom_id or '-' }}</td>
+            <td>{{ $parcel->custom_id ?? '-' }}</td>
             <td>{{ $package->number_items }}</td>
             <td>{{ $package->website_name ? getOnlyDomain($package->website_name) : '-' }}</td>
             <td>{{ $package->user ? $package->user->full_name : '-' }}</td>

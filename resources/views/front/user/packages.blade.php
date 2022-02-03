@@ -35,7 +35,7 @@
                                             <a href="{{ route('my-packages', ['id' => 6]) }}">
                                                 {{ ucfirst(strtolower(__('front.early_declaration'))) }}
                                                 @if(isset($counts[6]))
-                                                    <b class="c-label">{{ $counts[6] or null }}</b>
+                                                    <b class="c-label">{{ $counts[6] ?? null }}</b>
                                                 @endif
                                             </a>
                                         </li>
@@ -43,7 +43,7 @@
                                             <a href="{{ route('my-packages') }}">
                                                 {{ ucfirst(strtolower(__('front.in_store'))) }}
                                                 @if(isset($counts[0]))
-                                                    <b class="c-label">{{ $counts[0] or null }}</b>
+                                                    <b class="c-label">{{ $counts[0] ?? null }}</b>
                                                 @endif
                                             </a>
                                         </li>
@@ -51,7 +51,7 @@
                                             <a href="{{ route('my-packages', ['id' => 1]) }}">
                                                 {{ ucfirst(strtolower(__('front.was_sent'))) }}
                                                 @if(isset($counts[1]))
-                                                    <b class="c-label">{{ $counts[1] or null }}</b>
+                                                    <b class="c-label">{{ $counts[1] ?? null }}</b>
                                                 @endif
                                             </a>
                                         </li>
@@ -59,7 +59,7 @@
                                             <a href="{{ route('my-packages', ['id' => 2]) }}">
                                                 {{ ucfirst(strtolower(__('front.in_baku'))) }}
                                                 @if(isset($counts[2]))
-                                                    <b class="c-label">{{ $counts[2] or null }}</b>
+                                                    <b class="c-label">{{ $counts[2] ?? null }}</b>
                                                 @endif
                                             </a>
                                         </li>
@@ -67,7 +67,7 @@
                                             <a href="{{ route('my-packages', ['id' => 7]) }}">
                                                 {{ ucfirst(strtolower(__('front.courier_packages'))) }}
                                                 @if(isset($counts[7]))
-                                                    <b class="c-label">{{ $counts[7] or null }}</b>
+                                                    <b class="c-label">{{ $counts[7] ?? null }}</b>
                                                 @endif
                                             </a>
                                         </li>
@@ -75,7 +75,7 @@
                                             <a href="{{ route('my-packages', ['id' => 3]) }}">
                                                 {{ ucfirst(strtolower(__('front.done_packages'))) }}
                                                 @if(isset($counts[3]))
-                                                    <b class="c-label">{{ $counts[3] or null }}</b>
+                                                    <b class="c-label">{{ $counts[3] ?? null }}</b>
                                                 @endif
                                             </a>
                                         </li>
@@ -187,7 +187,7 @@
                                                                             </li>
                                                                             <li class="list__item">
                                                                                 <strong>{{ __('front.number_items') }}</strong>
-                                                                                {{ $package->number_items or '-' }}
+                                                                                {{ $package->number_items ?? '-' }}
                                                                             </li>
                                                                             @if($id != 6)
                                                                                 <li class="list__item">

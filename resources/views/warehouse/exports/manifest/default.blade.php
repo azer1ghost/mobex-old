@@ -22,7 +22,7 @@
     </tr>
     <tr>
         <td style="color: #fff">-</td>
-        <td colspan="{{ $span - 6 }}">{{ $warehouse->address->address_line_1 or 'Pleas add Address' }}</td>
+        <td colspan="{{ $span - 6 }}">{{ $warehouse->address->address_line_1 ?? 'Pleas add Address' }}</td>
         <td style="color: #fff">-</td>
         <td colspan="4">JAFAR JABBARLI STR 27.</td>
     </tr>
@@ -76,7 +76,7 @@
             <td>{{ $package->user ? str_replace(env('MEMBER_PREFIX_CODE'), "", $package->user->customer_id) : '-' }} <span>         </span>
             </td>
             <td><span>         </span> {{ $package->user ? $package->user->address : '-' }}</td>
-            <td>{{ $package->custom_id or '-' }} <span>         </span></td>
+            <td>{{ $package->custom_id ?? '-' }} <span>         </span></td>
             <td> <span>         </span>{{ ($package->type_id && $package->type ? ($package->type->translate('en') ? ($package->type->translate('en')->name . ($package->other_type ? "(" . $package->other_type .")" : null)) : "-") : ($package->detailed_type ?: '-')) }}</td>
             <td>{{ $package->number_items }}</td>
             <td>{{ specialPrice($package->shipping_amount) }}</td>

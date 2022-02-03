@@ -30,7 +30,7 @@
                 </tr>
               {{--  <tr>
                     <td><b>Weight:</b></td>
-                    <td>{{ $item->weight_with_type or '-' }}</td>
+                    <td>{{ $item->weight_with_type ?? '-' }}</td>
                 </tr>
                 <tr>
                     <td><b>Qty:</b></td>
@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                     <td><b>Ship date:</b></td>
-                    <td>{{ $item->created_at or '-' }}</td>
+                    <td>{{ $item->created_at ?? '-' }}</td>
                 </tr>--}}
                 </tbody>
             </table>

@@ -5,7 +5,7 @@
         @if (isset($field['label']))        <label>{!! $field['label'] !!}</label>    @endif
         @include('crud::inc.field_translatable_icon')
     </div>
-    <!-- Wrap the image or canvas element with a block element (container) -->
+    <!-- Wrap the image ?? canvas element with a block element (container) -->
     <div class="row">
         <div class="col-sm-6" style="margin-bottom: 20px;">
             <img id="mainImage"

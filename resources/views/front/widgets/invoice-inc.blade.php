@@ -15,10 +15,10 @@
 {{--<img id="logo" style="position: absolute; top: 25px; left: 33px; max-width: 130px; max-height: 40px"
      src="https://bon.az/uploads/home/shops/pierrecardin.png">--}}
 <div id="depo_id" style="position: absolute; top: 21.66em; left: 24.4em; font-weight: 600">{{ rand(140, 160) }}</div>
-<div id="customid" style="position: absolute; top: 27.209em; left: 7.6em;">{{ $item->user->customer_id or 'Istanbul' }}</div>
-<div id="name" style="position: absolute; top: 25.7em; left: 8em;">{{ $item->user->full_name or 'Belirsiz' }}</div>
+<div id="customid" style="position: absolute; top: 27.209em; left: 7.6em;">{{ $item->user->customer_id ?? 'Istanbul' }}</div>
+<div id="name" style="position: absolute; top: 25.7em; left: 8em;">{{ $item->user->full_name ?? 'Belirsiz' }}</div>
 
-<div id="email" style="position: absolute; top: 33.68em; left: 8.5em; ">{{ $item->user->email or (uniqid() . '@trendyol.com') }}</div>
+<div id="email" style="position: absolute; top: 33.68em; left: 8.5em; ">{{ $item->user->email ?? (uniqid() . '@trendyol.com') }}</div>
 
 <div id="track" style="position: absolute; top: 2em; left: 29.7em; font-size: 1.7em; font-weight: 700 ">{{ $item->invoice_numbers['track'] }}</div>
 <div id="track" style="position: absolute; top: 16.7em; left: 28.2em; font-size: 1.7em; font-weight: 700 ">{{ $item->invoice_numbers['tys'] }}</div>

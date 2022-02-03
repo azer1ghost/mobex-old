@@ -9,7 +9,7 @@
     </div>
     <div class="col-md-6 adress_info_col">
         <span>Full name: </span>
-        <p>{{ $addresses->contact_name or auth()->user()->full_name }}</p>
+        <p>{{ $addresses->contact_name ?? auth()->user()->full_name }}</p>
         <span class="copy_text"><i class="far fa-clone"></i></span>
     </div>
     @if($addresses->state)

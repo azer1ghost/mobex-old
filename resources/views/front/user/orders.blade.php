@@ -35,7 +35,7 @@
                                             <a href="{{ route('my-orders', ['id' => 0]) }}">
                                                 {{ __('front.user_orders.new_order') }}
                                                 @if(isset($counts[0]))
-                                                    <b class="text-white pl-3">[{{ $counts[0] or null }}]</b>
+                                                    <b class="text-white pl-3">[{{ $counts[0] ?? null }}]</b>
                                                 @endif
                                             </a>
                                         </li>
@@ -43,7 +43,7 @@
                                             <a href="{{ route('my-orders', ['id' => 1]) }}">
                                                 {{ __('front.user_orders.paid_order') }}
                                                 @if(isset($counts[1]))
-                                                    <b class="text-white pl-3">[{{ $counts[1] or null }}]</b>
+                                                    <b class="text-white pl-3">[{{ $counts[1] ?? null }}]</b>
                                                 @endif
                                             </a>
                                         </li>
@@ -51,7 +51,7 @@
                                             <a href="{{ route('my-orders', ['id' => 2]) }}">
                                                 {{ __('front.user_orders.ordered') }}
                                                 @if(isset($counts[2]))
-                                                    <b class="text-white pl-3">[{{ $counts[2] or null }}]</b>
+                                                    <b class="text-white pl-3">[{{ $counts[2] ?? null }}]</b>
                                                 @endif
                                             </a>
                                         </li>
@@ -59,7 +59,7 @@
                                             <a href="{{ route('my-orders', ['id' => 3]) }}">
                                                 {{ __('front.user_orders.removed') }}
                                                 @if(isset($counts[3]))
-                                                    <b class="text-white pl-3">[{{ $counts[3] or null }}]</b>
+                                                    <b class="text-white pl-3">[{{ $counts[3] ?? null }}]</b>
                                                 @endif
                                             </a>
                                         </li>

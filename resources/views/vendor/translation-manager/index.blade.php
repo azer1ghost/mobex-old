@@ -7,7 +7,7 @@
                 <div class="panel-heading">
                     <h6>
                         Translation Manager
-                        <small class="display-block">Warning, translations are not visible until they are exported back to the app/lang file, using 'php artisan translation:export' command or publish button.</small>
+                        <small class="display-block">Warning, translations are not visible until they are exported back to the app/lang file, using 'php artisan translation:export' command ?? publish button.</small>
                     </h6>
                     <div class="heading-elements">
                         @if(isset($currentLang))

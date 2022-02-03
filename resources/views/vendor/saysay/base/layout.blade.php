@@ -3,7 +3,7 @@
 
 @include('vendor.saysay.base.sections.head')
 
-<body class="{{ $bodyClass or ((auth()->guard('admin')->check() && ! auth()->guard('admin')->user()->show_menu) ? 'sidebar-xs' : '') }}">
+<body class="{{ $bodyClass ?? ((auth()->guard('admin')->check() && ! auth()->guard('admin')->user()->show_menu) ? 'sidebar-xs' : '') }}">
 
 @if(! isset($hideNavBar))
     @include('vendor.saysay.base.sections.navbar')

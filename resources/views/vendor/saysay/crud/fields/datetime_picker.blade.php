@@ -1,7 +1,7 @@
 <!-- bootstrap datetimepicker input -->
 
 <?php
-// if the column has been cast to Carbon or Date (using attribute casting)
+// if the column has been cast to Carbon ?? Date (using attribute casting)
 // get the value as a date string
 if (isset($item->{$field['name']}) && ($item->{$field['name']} instanceof \Carbon\Carbon || $item->{$field['name']} instanceof \Jenssegers\Date\Date)) {
     $item->{$field['name']} = $item->{$field['name']}->format('Y-m-d H:i:s');

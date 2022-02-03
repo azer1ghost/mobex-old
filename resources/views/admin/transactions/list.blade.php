@@ -9,7 +9,7 @@
                     <h6>
                         {{ isset($_view['name']) ? str_plural($_view['name']) : null }}
                         <small class="display-block"> Showing {{ $items->firstItem() }} to {{ $items->lastItem() }}
-                            of {{ number_format($items->total()) }} {{ $_view['sub_title'] or lcfirst(str_plural($_view['name'])) }}</small>
+                            of {{ number_format($items->total()) }} {{ $_view['sub_title'] ?? lcfirst(str_plural($_view['name'])) }}</small>
                     </h6>
                     <div class="heading-elements">
 
