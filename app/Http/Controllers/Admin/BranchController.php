@@ -2,16 +2,30 @@
 
 namespace App\Http\Controllers\Admin;
 
+use View;
+
 class BranchController extends Controller
 {
     protected $view = [
         'sub_title'   => 'Branches',
-        'formColumns' => 8,
-        'listColumns' => 6,
+        'listColumns' => 12,
     ];
 
     protected $list = [
         'name',
+        'address',
+        'phone',
+        'status'
+    ];
+
+    protected $extraActions = [
+        [
+            'key'    => 'invoice',
+            'label'  => 'Invoice',
+            'icon'   => 'file-pdf',
+            'color'  => 'info',
+            'target' => '_blank',
+        ],
     ];
 
     protected $fields = [
@@ -62,10 +76,12 @@ class BranchController extends Controller
             ],
         ],
 
-//        [
-//            'type' => 'html',
-//            'html' => '<div class="form-group col-lg-12 mt-10">Cell structure as json format</div>',
-//        ],
-
     ];
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        \View::share('extraAction', $this->extraActions);
+    }
 }
