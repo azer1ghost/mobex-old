@@ -24,14 +24,19 @@ class TrendyolCodesController extends Controller
 
     public function save(Request $request)
     {
-       logger($request->all());
+        if ($request->has('message') && $request->isMethod('POST'))
+        {
+            $message = $request->get('message');
 
-//        $message = $request->get('key');
-//
-//        $code = preg_match('/(?<!\d)\d{5,6}(?!\d)/', $message, $match) ? $match[0] : null;
-//
-//        TrendyolCode::create([
-//            'code' => $code
-//        ]);
+            $code = preg_match('/(?<!\d)\d{5,6}(?!\d)/', $message, $match) ? $match[0] : null;
+
+            TrendyolCode::create([
+                'code' => $code
+            ]);
+
+            return 'ok';
+        }
+
+        abort(404);
     }
 }
