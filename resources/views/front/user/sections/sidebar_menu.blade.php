@@ -13,11 +13,11 @@
                     <a {!! classActiveRoute('panel', 'current') !!}
                        href="{{ route('panel') }}"><i class="fas fa-columns"></i>{{ __('front.user_side_menu.unvan') }}</a>
                 </li>
-{{--                <li>--}}
-{{--                    <a {!! classActiveRoute('my-trendyol', 'current') !!}--}}
-{{--                       href="{{ route('my-trendyol') }}"><i class="fas fa-check"></i>Trendyol doğrulama kodu--}}
-{{--                        <span class="badge badge-pill">Yeni</span> </a>--}}
-{{--                </li>--}}
+                <li>
+                    <a {!! classActiveRoute('my-trendyol', 'current') !!}
+                       href="{{ route('my-trendyol') }}"><i class="fas fa-check"></i>Trendyol doğrulama kodu
+                        <span class="badge badge-pill">Yeni</span> </a>
+                </li>
                 <li>
                     <a {!! classActiveRoute('filials', 'current') !!}
                        href="{{ route('filials') }}"><i class="fas fa-map"></i>{{ __('front.menu.filials') }}</a>
