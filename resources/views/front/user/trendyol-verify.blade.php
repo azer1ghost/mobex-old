@@ -14,7 +14,7 @@
                                 </div>
                                 <ul class="list-group" id="codeList" x-data="trendyolVerifyApi" @click="getCodes">
                                     <li class="py-4">
-                                        Aşağıda bir neçə kod görünə bilər. Hər birini yoxlayır
+                                        Aşağıda bir neçə kod görünə bilər. Hər birini yoxlayın
                                     </li>
                                     <template x-for="code in codes" :key="code">
                                         <li class="list-group-item" x-text="code"></li>
