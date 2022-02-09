@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Mail\OrderRequest;
 use App\Models\Activity;
+use App\Models\Branch;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Delivery;
@@ -868,10 +869,16 @@ class UserController extends MainController
         $filials = [];
 
         foreach (Filial::orderBy('id', 'asc')->get() as $filial) {
-            $filials[$filial->id] = $filial->translateOrDefault(app()->getLocale())->name . " :: " . $filial->translateOrDefault(app()->getLocale())->address;
+            $filials[$filial->id] = $filial->translateOrDefault(app()->getLocale())->name . " -- " . $filial->translateOrDefault(app()->getLocale())->address;
         }
 
-        return view('front.user.edit', compact('item', 'breadTitle', 'cities', 'districts', 'nulled', 'filials', 'hasInBaku'));
+        $branches = [];
+
+        foreach (Branch::orderBy('id', 'asc')->get() as $branch) {
+            $branches[$branch->id] = $branch->translateOrDefault(app()->getLocale())->name . " -- " . $branch->translateOrDefault(app()->getLocale())->address;
+        }
+
+        return view('front.user.edit', compact('item', 'breadTitle', 'cities', 'districts', 'nulled', 'filials', 'hasInBaku', 'branches'));
     }
 
     /**

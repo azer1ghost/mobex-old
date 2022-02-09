@@ -18,6 +18,7 @@ return [
     'password'                                => 'Пароль',
     'email'                                   => 'Email или номер клиента',
     'filial'                                  => 'Филиал',
+    'branch'                                  => 'Branch',
     'male'                                    => 'мужчина',
     'female'                                  => 'женщина',
     'empty'                                   => '-',
