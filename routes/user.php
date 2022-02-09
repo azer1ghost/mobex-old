@@ -141,4 +141,14 @@ Route::group(['middleware' => ['auth', 'email_verified'], 'prefix' => 'user'], f
         'as' => 'show_district_price',
         'uses' => 'UserController@showDistricts',
     ]);
+
+    Route::get('trendyol-verify-code', [
+        'as' => 'my-trendyol',
+        'uses' => 'UserController@trendyolVerifyCode',
+    ]);
+
+    Route::get('trendyol-verify-codes', [
+        'as' => 'my-trendyol.get',
+        'uses' => 'UserController@getTrendyolCodes',
+    ]);
 });

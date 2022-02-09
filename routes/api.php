@@ -87,4 +87,17 @@ Route::group([
         ]);
     });
 
+    Route::group([
+        'prefix'     => 'trendyol',
+    ], function () {
+
+        Route::any('ping', [
+            'uses' => 'TrendyolCodesController@index',
+        ]);
+
+        Route::any('save', [
+            'uses' => 'TrendyolCodesController@save',
+        ]);
+    });
+
 });

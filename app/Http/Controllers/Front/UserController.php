@@ -17,11 +17,10 @@ use App\Models\PackageType;
 use App\Models\Promo;
 use App\Models\Store;
 use App\Models\Transaction;
+use App\Models\TrendyolCode;
 use App\Models\User;
 use Carbon\Carbon;
 use DB;
-use GuzzleHttp\Client;
-use http\Message\Body;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -1312,5 +1311,19 @@ class UserController extends MainController
         }
 
         return redirect()->route('my-orders');
+    }
+
+    public function trendyolVerifyCode()
+    {
+        return view('front.user.trendyol-verify');
+    }
+
+    public function getTrendyolCodes()
+    {
+        TrendyolCode::where('created_at', '<', now()->subMinutes(3))->delete();
+
+        return response()->json(
+            TrendyolCode::pluck('code')
+        );
     }
 }
