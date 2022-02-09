@@ -10,7 +10,7 @@
                         <div class="row single-box">
                             <div class="inner-box">
                                 <div class="alert alert--attention alert--filled">
-                                    <p class="alert__text">Tredyol doğrulama kodu</p>
+                                    <p class="alert__text">Tredyol təsdiq kodu</p>
                                 </div>
                                 <ul class="list-group" id="codeList" x-data="trendyolVerifyApi" @click="getCodes">
                                     <li class="py-4">

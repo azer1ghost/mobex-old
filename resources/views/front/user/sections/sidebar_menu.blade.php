@@ -15,7 +15,7 @@
                 </li>
                 <li>
                     <a {!! classActiveRoute('my-trendyol', 'current') !!}
-                       href="{{ route('my-trendyol') }}"><i class="fas fa-check"></i>Trendyol doğrulama kodu
+                       href="{{ route('my-trendyol') }}"><i class="fas fa-check"></i>Trendyol təsdiq kodu
                         <span class="badge badge-pill">Yeni</span> </a>
                 </li>
                 <li>
