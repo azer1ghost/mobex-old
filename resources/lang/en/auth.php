@@ -18,6 +18,7 @@ return [
     'password'                                => 'Password',
     'email'                                   => 'Email or customer ID',
     'filial'                                  => 'Filial',
+    'branch'                                  => 'Branch',
     'gender'                                  => 'Gender',
     'empty'                                   => '-',
     'prefer_not_to_say'                       => 'Prefer not to say',

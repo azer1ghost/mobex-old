@@ -102,11 +102,38 @@
                                     <div class="col-sm-6 form-group">
                                         @include('front.form.group', ['type' => 'select', 'key' => 'district_id', 'label' => trans('front.district'), 'selects' => $districts, 'options' => ['id' => 'district', 'class' => 'form__field']])
                                     </div>
-                                    @if(! $hasInBaku)
-                                        <div class="col-sm-12 form-group">
-                                            @include('front.form.group', ['type' => 'select', 'key' => 'filial_id', 'label' => trans('auth.filial'), 'selects' => $filials, 'options' => ['id' => 'filial', 'class' => 'form__field']])
+
+                                    <div class="col-12">
+                                        <ul class="nav nav-tabs" id="branch-selector" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <a class="nav-link active" id="filial-tab" data-toggle="tab" href="#filial" role="tab" aria-controls="filial" aria-selected="true">Filial</a>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <a class="nav-link" id="branch-tab" data-toggle="tab" href="#branch" role="tab" aria-controls="branch" aria-selected="false">Məntəqə</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="filial" role="tabpanel" aria-labelledby="filial-tab">
+                                                <div class="col-sm-6 form-group">
+                                                    @include('front.form.group', ['type' => 'select', 'key' => 'filial_id', 'label' => trans('auth.filial'), 'selects' => $filials, 'options' => ['id' => 'filial', 'class' => 'form__field']])
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="branch" role="tabpanel" aria-labelledby="branch-tab">
+                                                <div class="col-sm-6 form-group">
+                                                    @include('front.form.group', ['type' => 'select', 'key' => 'branch_id', 'label' => trans('auth.branch'), 'selects' => $branches, 'options' => ['id' => 'branch', 'class' => 'form__field']])
+                                                </div>
                                         </div>
-                                    @endif
+                                    </div>
+
+{{--                                    <div class="col-sm-6 form-group">--}}
+{{--                                        @if(! $hasInBaku)--}}
+{{--                                        @else--}}
+{{--                                            <span class="form_span">@lang('auth.filial')</span>--}}
+{{--                                            <input class="form-control" type="text" readonly value="Hörmətli istifadəçi yolda bağlamanız olduqda filial dəyişikliyi mümkün deyil">--}}
+{{--                                        @endif--}}
+{{--                                    </div>--}}
+
+
                                     <div class="col-lg-12  form-group">
                                         @include('front.form.group', ['type' => 'textarea', 'key' => 'address', 'label' => trans('front.address'), 'options' => ['class' => 'form__field', 'rows' => 4]])
                                     </div>
