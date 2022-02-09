@@ -872,7 +872,9 @@ class UserController extends MainController
             $filials[$filial->id] = $filial->translateOrDefault(app()->getLocale())->name . " -- " . $filial->translateOrDefault(app()->getLocale())->address;
         }
 
-        $branches = [];
+        $branches = [
+            'Seçilməyib'
+        ];
 
         foreach (Branch::orderBy('id', 'asc')->get() as $branch) {
             $branches[$branch->id] = $branch->translateOrDefault(app()->getLocale())->name . " -- " . $branch->translateOrDefault(app()->getLocale())->address;

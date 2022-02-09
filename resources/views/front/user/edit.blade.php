@@ -103,25 +103,29 @@
                                         @include('front.form.group', ['type' => 'select', 'key' => 'district_id', 'label' => trans('front.district'), 'selects' => $districts, 'options' => ['id' => 'district', 'class' => 'form__field']])
                                     </div>
 
-                                    <div class="col-12">
+                                    <div class="col-12 mb-5">
                                         <ul class="nav nav-tabs" id="branch-selector" role="tablist">
                                             <li class="nav-item" role="presentation">
-                                                <a class="nav-link active" id="filial-tab" data-toggle="tab" href="#filial" role="tab" aria-controls="filial" aria-selected="true">Filial</a>
+                                                <a class="nav-link active" id="filial-tab" data-toggle="tab" href="#filial" role="tab" aria-controls="filial" aria-selected="true">@lang('auth.filial')</a>
                                             </li>
                                             <li class="nav-item" role="presentation">
-                                                <a class="nav-link" id="branch-tab" data-toggle="tab" href="#branch" role="tab" aria-controls="branch" aria-selected="false">Məntəqə</a>
+                                                <a class="nav-link" id="branch-tab" data-toggle="tab" href="#branch" role="tab" aria-controls="branch" aria-selected="false">@lang('auth.branch')</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="filial" role="tabpanel" aria-labelledby="filial-tab">
-                                                <div class="col-sm-6 form-group">
-                                                    @include('front.form.group', ['type' => 'select', 'key' => 'filial_id', 'label' => trans('auth.filial'), 'selects' => $filials, 'options' => ['id' => 'filial', 'class' => 'form__field']])
+                                                <div class="col-sm-12 form-group p-0 mt-2">
+                                                    @include('front.form.group', ['type' => 'select', 'key' => 'filial_id', 'selects' => $filials, 'options' => ['id' => 'filial', 'class' => 'form__field']])
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="branch" role="tabpanel" aria-labelledby="branch-tab">
-                                                <div class="col-sm-6 form-group">
-                                                    @include('front.form.group', ['type' => 'select', 'key' => 'branch_id', 'label' => trans('auth.branch'), 'selects' => $branches, 'options' => ['id' => 'branch', 'class' => 'form__field']])
+                                                <div class="col-sm-12">
+                                                    <small class="text-danger ">Diqqət! - məntəqəyə göndərilən bağlamalara əlavə tarif tətbiq olunur</small>
                                                 </div>
+                                                <div class="col-sm-12 form-group p-0 mt-2">
+                                                    @include('front.form.group', ['type' => 'select', 'key' => 'branch_id', 'selects' => $branches, 'options' => ['id' => 'branch', 'class' => 'form__field']])
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
