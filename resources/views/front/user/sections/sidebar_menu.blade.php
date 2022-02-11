@@ -13,7 +13,11 @@
                     <a {!! classActiveRoute('panel', 'current') !!}
                        href="{{ route('panel') }}"><i class="fas fa-columns"></i>{{ __('front.user_side_menu.unvan') }}</a>
                 </li>
-
+                <li>
+                    <a {!! classActiveRoute('my-trendyol', 'current') !!}
+                       href="{{ route('my-trendyol') }}"><i class="fas fa-check"></i>Trendyol təsdiq kodu
+                        <span class="badge badge-pill">Yeni</span> </a>
+                </li>
                 <li>
                     <a {!! classActiveRoute('filials', 'current') !!}
                        href="{{ route('filials') }}"><i class="fas fa-map"></i>{{ __('front.menu.filials') }}</a>
@@ -52,6 +56,7 @@
                     <a {!! classActiveRoute('edit', 'current') !!}
                        href="{{ route('edit') }}"><i class="fas fa-unlock-alt"></i>{{ __('front.user_side_menu.hesab') }}</a>
                 </li>
+
                 <li>
                     <a href="{{ route('auth.logout') }}"><i class="fas fa-sign-out-alt"></i>{{ __('front.logout') }}</a>
                 </li>
