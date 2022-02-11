@@ -28,7 +28,7 @@
         @media print {
             @page {
                 size: auto;
-                margin: 0mm;
+                margin: 0;
                 height: 95%;
                 width: 95%;
                 page-break-after: avoid !important;
@@ -92,20 +92,21 @@
         .tracking_code img {
             height: 155px;
             position: relative;
-            width: 565px;
-            top: -371px;
-            left: 210px;
+            width: 560px;
+            top: 210px;
+            left: -50px;
             -ms-transform: rotate(-90deg);
             -webkit-transform: rotate(-90deg);
             transform: rotate(-90deg);
         }
 
         .tracking_code p {
+            text-align: center;
             height: 155px;
             position: relative;
             width: 0px;
-            top: -347px;
-            left: 646px;
+            top: 370px;
+            left: 150px;
             font-size: 45px;
             -ms-transform: rotate(-90deg);
             -webkit-transform: rotate(-90deg);
@@ -204,10 +205,10 @@
 
         .cell {
             position: absolute;
-            top: 190px;
+            top: 200px;
             left: 330px;
-            font-size: 50px;
-            font-weight: 600;
+            font-size: 30px;
+            font-weight: 700;
             padding: 0px 12px;
             border: 1px solid #000;
             border-radius: 7px;
@@ -220,14 +221,14 @@
 <body>
 
 <main>
-    <div class="label">
-        <div class="info">
+    <div class="row label">
+        <div class="col-6">
             <div class="sender">
                 <div class="sender_title">SENDER</div>
                 <div class="title">
                     {{ $item->website_name ?: 'Trendyol' }}
                     <div class="sub-title">{{ env('MEMBER_PREFIX_CODE') }}{{ sprintf("%06d", $item->id) }}</div>
-                    <div style="font-size: 15px;position: absolute;top: 62px;left: 227px;">
+                    <div style="font-size: 15px;position: absolute;top: 43px;left: 227px;width: 100%">
                         @if($item->reg_number)
                             RN: {{ $item->reg_number }}
                         @else
@@ -312,12 +313,18 @@
                 </div>
             </div>
         </div>
-        <div class="tracking_code">
-            @if ($item->tracking_code)
-                <img src="{{ $item->barcode }}">
+        <div class="col-5">
+            <div class="tracking_code">
+                @if ($item->tracking_code)
+                    <img src="{{ $item->barcode }}">
+                    {{--    <img src="https://barcode.tec-it.com/barcode.ashx?data={{ $item->custom_id }}&code=Code128&dpi=600&dataseparator=">--}}
+                @endif
+            </div>
+        </div>
+        <div class="col-1">
+            <div class="tracking_code">
                 <p>{{ $item->custom_id }}</p>
-                {{--    <img src="https://barcode.tec-it.com/barcode.ashx?data={{ $item->custom_id }}&code=Code128&dpi=600&dataseparator=">--}}
-            @endif
+            </div>
         </div>
     </div>
 </main>
