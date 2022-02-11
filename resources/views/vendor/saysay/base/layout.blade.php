@@ -147,7 +147,7 @@
     @endif
 
     <script src="{{ asset('admin/js/jquery.pos.js') }}"></script>
-    <script src="{{ asset('admin/js/scanner.js') }}?v=1.1.3.9"></script>
+    <script src="{{ asset('admin/js/scanner.js') }}?v=1.1.4.0-beta"></script>
 @endif
 
 

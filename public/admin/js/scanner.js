@@ -267,8 +267,6 @@ function clearAddPackage() {
     $("#user_packages").hide();
     $("#alert_weight").hide();
     $("#alert_price").hide();
-    $("#body_packages").html();
-    $("#user_packages").hide();
     $(".extra_type").remove();
 
     $('input[name="has_liquid"]').prop('checked',false);
@@ -377,59 +375,77 @@ function loadBarcodeData(barcode, qty) {
             }
 
             if (data.label) {
-                if (autoPrint == 'yes') {
-                    var printerName = "label_printer";
-                    if (data.waybill == "yes") {
-                        printerName = "invoice_printer";
-                    }
-                    var printerForLabel = Cookies.get(printerName); // will come from setting
-
-                    var cpj = new JSPM.ClientPrintJob();
-                    cpj.clientPrinter = new JSPM.InstalledPrinter(printerForLabel);
-                    var copies = 1;
-                    /* if (fakeInvoice == 'yes') {
-                         copies = 2;
-                     }*/
-                    var labelPDF = new JSPM.PrintFilePDF(data.label, JSPM.FileSourceType.URL, 'MyLabelFile.pdf', copies);
-                    cpj.files.push(labelPDF);
-
-                    if (fakeInvoice == 'yes') {
-                        var labelPDF2 = new JSPM.PrintFilePDF(data.label, JSPM.FileSourceType.URL, 'MyLabelFile2.pdf', 1);
-                        cpj.files.push(labelPDF2);
-                    }
-
-                    //console.log("Label");
-                    cpj.sendToClient();
-                } else {
-                    if (showLabel == 'yes') {
-                        window.open(data.label);
-                    }
-
+                if (showLabel === 'yes') {
+                    openPrintPopup(data.label)
                 }
-
             }
+
             if (data.invoice) {
-                if (autoPrint == 'yes') {
-                    var ext = (data.invoice.split('.').pop()).toLowerCase();
-                    var printerForLabel = Cookies.get('invoice_printer'); // will come from setting
-                    var cpj2 = new JSPM.ClientPrintJob();
-                    cpj2.clientPrinter = new JSPM.InstalledPrinter(printerForLabel);
-
-                    if (ext == 'pdf') {
-                        var invoiceFile = new JSPM.PrintFilePDF(data.invoice, JSPM.FileSourceType.URL, 'MyInvoice.pdf', 1);
-
-                    } else {
-                        var invoiceFile = new JSPM.PrintFile(data.invoice, JSPM.FileSourceType.URL, 'MyInvoice.' + ext, 1);
-
-                    }
-                    cpj2.files.push(invoiceFile);
-                    cpj2.sendToClient();
-                } else {
-                    if (showInvoice == 'yes') {
-                        window.open(data.invoice);
-                    }
+                if (showInvoice === 'yes') {
+                    openPrintPopup(data.invoice)
                 }
             }
+
+            function openPrintPopup(url){
+                var newWin = window.frames[0];
+                newWin.document.write('<body><iframe style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;" src="' + url + '"></body>');
+                newWin.document.close();
+            }
+
+            // if (data.label) {
+            //     if (autoPrint == 'yes') {
+            //         var printerName = "label_printer";
+            //         if (data.waybill == "yes") {
+            //             printerName = "invoice_printer";
+            //         }
+            //         var printerForLabel = Cookies.get(printerName); // will come from setting
+            //
+            //         var cpj = new JSPM.ClientPrintJob();
+            //         cpj.clientPrinter = new JSPM.InstalledPrinter(printerForLabel);
+            //         var copies = 1;
+            //         /* if (fakeInvoice == 'yes') {
+            //              copies = 2;
+            //          }*/
+            //         var labelPDF = new JSPM.PrintFilePDF(data.label, JSPM.FileSourceType.URL, 'MyLabelFile.pdf', copies);
+            //         cpj.files.push(labelPDF);
+            //
+            //         if (fakeInvoice == 'yes') {
+            //             var labelPDF2 = new JSPM.PrintFilePDF(data.label, JSPM.FileSourceType.URL, 'MyLabelFile2.pdf', 1);
+            //             cpj.files.push(labelPDF2);
+            //         }
+            //
+            //         //console.log("Label");
+            //         cpj.sendToClient();
+            //     } else {
+            //         if (showLabel === 'yes') {
+            //             window.open(data.label);
+            //         }
+            //
+            //     }
+            //
+            // }
+            // if (data.invoice) {
+            //     if (autoPrint == 'yes') {
+            //         var ext = (data.invoice.split('.').pop()).toLowerCase();
+            //         var printerForLabel = Cookies.get('invoice_printer'); // will come from setting
+            //         var cpj2 = new JSPM.ClientPrintJob();
+            //         cpj2.clientPrinter = new JSPM.InstalledPrinter(printerForLabel);
+            //
+            //         if (ext == 'pdf') {
+            //             var invoiceFile = new JSPM.PrintFilePDF(data.invoice, JSPM.FileSourceType.URL, 'MyInvoice.pdf', 1);
+            //
+            //         } else {
+            //             var invoiceFile = new JSPM.PrintFile(data.invoice, JSPM.FileSourceType.URL, 'MyInvoice.' + ext, 1);
+            //
+            //         }
+            //         cpj2.files.push(invoiceFile);
+            //         cpj2.sendToClient();
+            //     } else {
+            //         if (showInvoice === 'yes') {
+            //             window.open(data.invoice);
+            //         }
+            //     }
+            // }
 
 
             if (data.package) {

@@ -195,6 +195,7 @@
             </div>
         </div>
     </div>
+    <iframe id="ifrPaySlip"  name="ifrPaySlip" scrolling="yes" style="display:none"></iframe>
 @endsection
 
 @push('js')
