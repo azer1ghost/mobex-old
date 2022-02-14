@@ -19,6 +19,7 @@ use Lunaweb\EmailVerification\Contracts\CanVerifyEmail as CanVerifyEmailContract
  *
  * @property int $id
  * @property string $name
+ * @property string $branch_id
  * @property string $surname
  * @property string $email
  * @property string $password
@@ -135,6 +136,7 @@ use Lunaweb\EmailVerification\Contracts\CanVerifyEmail as CanVerifyEmailContract
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLogo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePromoId($value)
  * @property-read \App\Models\Filial|null $filial
+ * @property-read \App\Models\Branch|null $branch
  * @property-read mixed|string $filial_name
  * @property int $refresh_customs
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRefreshCustoms($value)
@@ -163,7 +165,7 @@ class User extends Authenticatable implements CanVerifyEmailContract
     /**
      * @var array
      */
-    protected $with = ['filial', 'dealer'];
+    protected $with = ['filial', 'dealer', 'branch'];
 
     /**
      * @var string[]
@@ -203,7 +205,8 @@ class User extends Authenticatable implements CanVerifyEmailContract
         'filial_id',
         'gender',
         'verified',
-        'refresh_customs'
+        'refresh_customs',
+        'branch_id'
     ];
 
     /**
@@ -653,5 +656,10 @@ class User extends Authenticatable implements CanVerifyEmailContract
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class)->withDefault();
     }
 }

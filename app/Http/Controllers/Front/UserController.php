@@ -912,13 +912,12 @@ class UserController extends MainController
             'auto_charge'            => 'nullable|integer',
         ]);
 
-        $user = User::find(\Auth::user()->id);
+        $user = auth()->user();
         $user->name = $request->get('name');
         $user->surname = $request->get('surname');
         //$user->email = $request->get('email');
 
         // Refresh Customs packages
-
         if (($request->get('fin') != null && $user->fin != $request->get('fin')) || ($request->get('phone') != null && $user->phone != $request->get('phone'))) {
             $user->refresh_customs = true;
         }
@@ -934,8 +933,14 @@ class UserController extends MainController
         $user->birthday = $request->has('birthday') ? $request->get('birthday') : null;
         $user->address = $request->has('address') ? $request->get('address') : null;
         $user->city_id = $request->has('city_id') ? $request->get('city_id') : null;
-        if ($request->has('filial_id') && $request->get('filial_id') != null) {
+
+        if ($request->has('filial_id') && $request->get('sent_to') === 'filial' && $request->get('filial_id') != null) {
             $user->filial_id = $request->get('filial_id');
+            $user->branch_id = null;
+        }
+        if ($request->get('sent_to') === 'branch'){
+            $user->filial_id = 4; // Nizami filiali (cesidleme noqtesi bura oldugu ucun)
+            $user->branch_id = $request->get('branch_id');
         }
 
         $user->district_id = $request->has('district_id') ? $request->get('district_id') : null;

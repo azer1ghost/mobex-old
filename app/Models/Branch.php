@@ -34,4 +34,10 @@ class Branch extends Model
 //
 //        return $url;
 //    }
+
+
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
 }

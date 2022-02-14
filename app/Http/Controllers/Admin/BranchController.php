@@ -7,12 +7,22 @@ class BranchController extends Controller
     protected $view = [
         'sub_title'   => 'Branches',
         'formColumns' => 8,
-        'listColumns' => 6,
+        'listColumns' => 12,
     ];
 
     protected $list = [
-        'name',
+        'name', 'address', 'phone', 'working_hours'
     ];
+
+//    protected $extraActions = [
+//        [
+//            'route' => 'addresses.index',
+//            'key'   => 'id',
+//            'label' => 'Addresses',
+//            'icon'  => 'map',
+//            'color' => 'success',
+//        ],
+//    ];
 
     protected $fields = [
         [

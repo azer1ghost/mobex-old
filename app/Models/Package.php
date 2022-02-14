@@ -1032,4 +1032,9 @@ class Package extends Model
 
         return 'data:image/png;base64,' . $base64Barcode;
     }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class)->withDefault();
+    }
 }
