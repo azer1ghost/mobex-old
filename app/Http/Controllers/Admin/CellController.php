@@ -279,7 +279,7 @@ class CellController extends Controller
         if ($request->get('name') == 'cell') {
             if (! $used->cell) {
 
-                Notification::sendPackage($used->id, '2', env('IN_BAKU_HOUR', 4));
+                Notification::sendPackage($used->id, '2', env('IN_BAKU_HOUR', 1));
 
                 // Auto Pay
                 if ($used->user && $used->user->auto_charge && $used->user->packageBalance() >= $used->delivery_manat_price) {
@@ -371,7 +371,7 @@ class CellController extends Controller
                 $package->scanned_at = Carbon::now();
                 $package->save();
             }
-            Notification::sendPackage($package->id, '2', env('IN_BAKU_HOUR', 4));
+            Notification::sendPackage($package->id, '2', env('IN_BAKU_HOUR', 1));
 
             // Auto Pay
             if ($package->user && $package->user->auto_charge && $package->user->packageBalance() >= $package->delivery_manat_price) {
