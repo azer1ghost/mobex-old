@@ -6,7 +6,6 @@ use Alert;
 use App\Exports\Warehouse\PackagesExport;
 use App\Exports\Warehouse\ManifestExport;
 use App\Http\Controllers\Admin\Controller;
-use App\Models\EmailTemplate;
 use App\Models\Extra\Notification;
 use App\Models\Package;
 use App\Models\PackageLog;
@@ -16,7 +15,6 @@ use App\Models\User;
 use App\Models\Worker;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Validator;
 

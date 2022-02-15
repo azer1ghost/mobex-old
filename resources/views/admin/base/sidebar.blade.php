@@ -31,6 +31,10 @@
             <li {!! classActiveRoute('filials.index') !!}><a href="{{ route('filials.index') }}"><i class="icon-map4"></i> <span>Filials</span></a></li>
             @endpermission
 
+            @permission('read-branches')
+            <li {!! classActiveRoute('branches.index') !!}><a href="{{ route('branches.index') }}"><i class="icon-office"></i> <span>Branches</span></a></li>
+            @endpermission
+
             @permission('read-countries')
             <li {!! classActiveRoute('countries.index') !!}><a href="{{ route('countries.index') }}"><i class="icon-location4"></i> <span>Countries</span></a></li>
             @endpermission
@@ -213,13 +217,8 @@
     <li {!! classActiveRoute('activities.index') !!}><a href="{{ route('activities.index') }}"><i class="icon-list"></i> <span>Activities</span></a></li>
     @endpermission
 
-
     @permission('read-logs')
     <li><a target="_blank" href="{{ route('system.logs') }}"><i class="icon-bug2"></i> <span>Logs</span></a></li>
-    @endpermission
-
-    @permission('read-branches')
-    <li><a href="{{ route('branches.index') }}"><i class="icon-office"></i> <span>Branches</span></a></li>
     @endpermission
 
 </ul>

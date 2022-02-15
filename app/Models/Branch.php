@@ -6,6 +6,9 @@ use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @method static find(\Illuminate\Routing\Route|object|string $branch)
+ */
 class Branch extends Model
 {
     use Translatable;

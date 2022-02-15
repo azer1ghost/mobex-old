@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Warehouse;
-use App\Models\Worker;
+use App\Models\Branch;
+use App\Models\Manager;
 
-class WorkerController extends Controller
+class ManagerController extends Controller
 {
     protected $notificationKey = 'id';
 
@@ -14,8 +14,8 @@ class WorkerController extends Controller
     ];
 
     protected $list = [
-        'warehouse.company_name' => [
-            'label' => 'Warehouse',
+        'branch.name' => [
+            'label' => 'Branch',
         ],
         'name',
         'email',
@@ -56,24 +56,25 @@ class WorkerController extends Controller
 
     public function __construct()
     {
-        $wId = request()->route('warehouse_id');
+        $branch_id = request()->route('branch_id');
 
-        $warehouse = Warehouse::find($wId);
+        $branch = Branch::find($branch_id);
 
-        if (! $warehouse) {
+        if (! $branch) {
             return back();
         }
 
         $this->routeParams = [
-            'warehouse_id' => $warehouse->id,
+            'branch_id' => $branch->id,
         ];
 
-        $this->view['name'] = 'Workers for ' . $warehouse->company_name;
+        $this->view['name'] = 'Managers for ' . $branch->name;
+
         parent::__construct();
     }
 
     public function indexObject()
     {
-        return Worker::where('warehouse_id', $this->routeParams['warehouse_id'])->paginate($this->limit);
+        return Manager::where('branch_id', $this->routeParams['branch_id'])->paginate($this->limit);
     }
 }

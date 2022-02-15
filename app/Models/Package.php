@@ -187,6 +187,7 @@ use Milon\Barcode\DNS1D;
  * @method static \Illuminate\Database\Eloquent\Builder|Package whereRegNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Package whereWarehouseCell($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Package whereWorkerId($value)
+ * @method static where(string $string, $me)
  */
 class Package extends Model
 {

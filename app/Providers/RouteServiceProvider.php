@@ -40,6 +40,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapAdminRoutes();
 
+        $this->mapBranchRoutes();
+
         $this->mapWarehouseRoutes();
 
         $this->mapFrontRoutes();
@@ -57,6 +59,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/warehouse.php'));
+    }
+
+    protected function mapBranchRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/branch.php'));
     }
 
     protected function mapFrontRoutes()

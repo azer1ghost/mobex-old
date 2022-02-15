@@ -130,6 +130,12 @@ Route::group([
             ],
         ]);
 
+        Route::resource('branches/{branch_id}/managers', 'ManagerController', [
+            'parameters' => [
+                'managers' => 'id',
+            ],
+        ]);
+
         Route::get('barcode/{code?}', [
             'as'   => 'admin.barcode.scan',
             'uses' => 'PackageController@barcodeScan',

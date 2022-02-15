@@ -14,15 +14,15 @@ class BranchController extends Controller
         'name', 'address', 'phone', 'working_hours'
     ];
 
-//    protected $extraActions = [
-//        [
-//            'route' => 'addresses.index',
-//            'key'   => 'id',
-//            'label' => 'Addresses',
-//            'icon'  => 'map',
-//            'color' => 'success',
-//        ],
-//    ];
+    protected $extraActions = [
+        [
+            'route' => 'managers.index',
+            'key'   => 'id',
+            'label' => 'Managers',
+            'icon'  => 'users',
+            'color' => 'success',
+        ],
+    ];
 
     protected $fields = [
         [

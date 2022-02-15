@@ -60,6 +60,11 @@ return [
             'driver'   => 'session',
             'provider' => 'workers',
         ],
+
+        'manager' => [
+            'driver'   => 'session',
+            'provider' => 'managers',
+        ],
     ],
 
     /*
@@ -99,6 +104,11 @@ return [
             'driver' => 'eloquent',
             'model'  => App\Models\Worker::class,
         ],
+
+        'managers' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\Manager::class,
+        ],
     ],
 
     /*
@@ -136,6 +146,12 @@ return [
 
         'workers' => [
             'provider' => 'workers',
+            'table'    => 'password_resets',
+            'expire'   => 10080, // 1 week
+        ],
+
+        'managers' => [
+            'provider' => 'managers',
             'table'    => 'password_resets',
             'expire'   => 10080, // 1 week
         ],
