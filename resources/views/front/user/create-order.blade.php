@@ -102,19 +102,18 @@
                                                             <li>{{ __('front.user_orders.create_order_form.total') }}
                                                                 <span id="calc_order_price">0.00 TL</span>
                                                             </li>
-                                                            <li>Komissiya: 0% (1-14 fevral)</li>
-{{--                                                            <li>{{ __('front.user_orders.create_order_form.service_fee') }}--}}
-{{--                                                                <span id="cargo_fee_value">0.00 TL</span>--}}
-{{--                                                            </li>--}}
-{{--                                                            <li>--}}
-{{--                                                                {{ __('front.user_orders.create_order_form.overall') }}--}}
-{{--                                                                <span id="overall_fee"><strong></strong>0.00 TL</span>--}}
-{{--                                                            </li>--}}
+{{--                                                            <li>Komissiya: 0% (1-14 fevral)</li>--}}
+                                                            <li>{{ __('front.user_orders.create_order_form.service_fee') }}
+                                                                <span id="cargo_fee_value">0.00 TL</span>
+                                                            </li>
+                                                            <li>
+                                                                {{ __('front.user_orders.create_order_form.overall') }}
+                                                                <span id="overall_fee"><strong></strong>0.00 TL</span>
+                                                            </li>
 
                                                             <li class="form-group custom-check-box mss mss_in_total mb-3">
                                                                 <label class="custom-control material-checkbox">
-                                                                    <input type="checkbox"
-                                                                           class="material-control-input" checked="">
+                                                                    <input type="checkbox" class="material-control-input" checked="">
                                                                     <span class="material-control-indicator"></span>
                                                                     <a href="{{ route('pages.show','terms') }}" class="description"> {{ __('front.user_orders.create_order_form.agree') }}</a>
                                                                 </label>
@@ -124,10 +123,10 @@
 
                                                 </div>
                                                 <div class="btn-box">
-                                                    <button type="submit"
-                                                            class="theme-btn-one"> {{ __('front.user_orders.create_order_form.pay_button') }}
-                                                        <i
-                                                                class="icon-Arrow-Right"></i></button>
+                                                    <button type="submit" class="theme-btn-one">
+                                                        {{ __('front.user_orders.create_order_form.pay_button') }}
+                                                        <i class="icon-Arrow-Right"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
