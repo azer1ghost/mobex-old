@@ -23,6 +23,10 @@ class CreateManagersTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        Schema::table('packages', function($table) {
+            $table->integer('branch_arrived_at')->timestamp()->nullable();
+        });
     }
 
     /**

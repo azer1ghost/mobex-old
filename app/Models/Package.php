@@ -212,7 +212,7 @@ class Package extends Model
     /**
      * @var array
      */
-    public $dates = ['deleted_at', 'scanned_at', 'sent_at', 'requested_at', 'arrived_at', 'done_at'];
+    public $dates = ['deleted_at', 'scanned_at', 'sent_at', 'requested_at', 'arrived_at', 'done_at', 'branch_arrived_at'];
 
     /* * * * * * * *
      *  Relations *

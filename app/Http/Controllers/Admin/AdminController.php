@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Alert;
-use App\Http\Requests;
 use App\Models\Admin;
-use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller

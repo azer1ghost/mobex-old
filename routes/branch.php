@@ -9,10 +9,14 @@ Route::group([
     Route::group(['middleware' => ['auth:manager', 'panel']], function () {
 
         Route::get('/', [
-            'as' => 'my.dashboard',
+            'as' => 'branch.dashboard',
             'uses' => 'MainController@index',
         ]);
 
+        Route::get('/logout', [
+            'as' => 'branch.logout',
+            'uses' => 'MainController@logout',
+        ]);
     });
 
     require 'auth.php';
