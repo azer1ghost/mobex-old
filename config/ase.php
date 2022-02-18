@@ -139,6 +139,20 @@ return [
                 4 => 'In customs',
                 5 => 'Refunded',
                 7 => 'In courier',
+                8 => 'On way',
+                9 => 'In Branch'
+            ],
+            'status_az'               => [
+                6 => 'Erkən Bəyan',
+                0 => 'Xarici anbarda',
+                1 => 'Göndərilib',
+                2 => 'Filialda',
+                3 => 'Təhvil verilib',
+                4 => 'Saxlancda',
+                5 => 'Geri qaytarılıb',
+                7 => 'Kuryerdə',
+                8 => 'Yolda',
+                9 => 'Məntəqədə'
             ],
             'status_for_warehouse' => [
                 0 => 'In Warehouse',

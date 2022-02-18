@@ -8,7 +8,7 @@
                 @include('branch.filters', $filters)
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table text-center" >
                     <thead>
                         <tr>
                             <th>#</th>
@@ -16,8 +16,11 @@
                             <th>Müştəri</th>
                             <th>Bağlama Kodu</th>
                             <th>Məbləği</th>
+                            <th >Ödəniş</th>
                             <th>Cəkisi</th>
+                            <th>Statusu</th>
                             <th>Çatıb</th>
+                            <th>Əməliyyat</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,13 +30,22 @@
                             <td style="width: 140px"><b>{{ $package->user->customer_id }}</b></td>
                             <td>{{ $package->user->full_name }} </td>
                             <td>{{ $package->custom_id }}</td>
-                            <td>{{$package->shippingOrgPrice}}</td>
+                            <td>{{ $package->shippingOrgPrice }}</td>
+                            <td><i class="fa {{ $package->paid ? 'text-success fa-check' : 'text-danger fa-times'}}"></i></td>
                             <td>{{ $package->weight }} kg</td>
+                            <td>{{ config('ase.attributes.package.status_az')[$package->status] }}</td>
                             <td>{{ optional($package->branch_arrived_at)->diffForHumans() }}</td>
+                            <td>
+                                @if($package->paid)
+                                    <a class="btn btn-sm btn-outline-success">
+                                        Təhvil ver
+                                    </a>
+                                @endif
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7">
+                            <td colspan="10">
                                 <div class="alert alert-warning text-center" role="alert">
                                    Hazırda heç bir bağlama mövcud deyil
                                 </div>
