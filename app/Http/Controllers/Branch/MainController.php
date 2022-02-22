@@ -97,7 +97,7 @@ class MainController extends Controller
         return view('branch.index', [
             'packages' => $packages,
             'filters'  => $this->filters(),
-            'widgets' => $widgets
+            'widgets'  => $widgets
         ]);
     }
 
