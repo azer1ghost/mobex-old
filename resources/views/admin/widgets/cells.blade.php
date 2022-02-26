@@ -20,6 +20,11 @@
     $cells = $cells->pluck('total', 'cell')->all();
 
     ?>
+    @if(request()->has('branch'))
+        <div class="mt-5 col-6 alert alert-success">
+            <h3>Bağlama {{request('branch')}} məntəqəsinə göndərilməlidir</h3>
+        </div>
+    @endif
     <div style="margin-top: 30px">
         <table style="margin: 0 auto;" class="chess-board">
             <tbody>

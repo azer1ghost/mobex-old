@@ -337,18 +337,21 @@ class CellController extends Controller
 
     public function find()
     {
+        if (request()->has('cwb')) {
 
-        $code = \request()->get('cwb');
-        if (! $code) {
-            return redirect()->back();
-        }
-        $package = Package::whereIn('status', [1, 2])->whereTrackingCode($code)->orWhere('custom_id', $code)->first();
+            $code = \request()->get('cwb');
 
-        if ($package) {
-            $status = $package->status;
+            $package = Package::whereIn('status', [1, 2])
+                ->whereTrackingCode($code)
+                ->orWhere('custom_id', $code)
+                ->firstOr(function (){
+                    redirect()->back();
+                });
 
+
+            // TODO anbard menteqe cesidlemesi
             /* Send Notification */
-            if ($status < 2) {
+            if ($package->status < 2) {
                 $package->status = 2;
                 if (! $package->scanned_at) {
                     $package->scanned_at = Carbon::now();
@@ -356,10 +359,16 @@ class CellController extends Controller
                 $package->save();
             }
 
-            return redirect()->route('cells.edit', $package->id);
-        } else {
-            return redirect()->back();
+            $branch = null;
+
+            if (is_numeric($package->user->branch_id)){
+                $branch = $package->user->branch->translateOrDefault('az')->name;
+            }
+
+            return redirect()->route('cells.edit', ['id' => $package->id, 'branch' => $branch]);
         }
+
+        return redirect()->back();
     }
 
     public function update(Request $request, $id)
@@ -371,7 +380,10 @@ class CellController extends Controller
                 $package->scanned_at = Carbon::now();
                 $package->save();
             }
-            Notification::sendPackage($package->id, '2', env('IN_BAKU_HOUR', 1));
+
+            if ($package->status == 2) {
+                Notification::sendPackage($package->id, '2', env('IN_BAKU_HOUR', 1));
+            }
 
             // Auto Pay
             if ($package->user && $package->user->auto_charge && $package->user->packageBalance() >= $package->delivery_manat_price) {

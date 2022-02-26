@@ -207,7 +207,7 @@ class Package extends Model
     /**
      * @var array
      */
-    public $with = ['type', 'warehouse', 'user', 'country', 'manager'];
+    public $with = ['type', 'warehouse', 'branch', 'user', 'country', 'manager'];
 
     /**
      * @var array
@@ -1037,5 +1037,10 @@ class Package extends Model
     public function branch()
     {
         return $this->belongsTo(Branch::class)->withDefault();
+    }
+
+    public function setWebsiteNameAttribute($value)
+    {
+        $this->attributes['website_name'] = mb_strtolower($value);
     }
 }

@@ -443,9 +443,17 @@ function detectCardType($card)
     return 'unknown';
 }
 
+function branchesAsCell(){
+    $branches = [];
+    \App\Models\Branch::get()->each(function ($branch) use (&$branches){
+        $branches[$branch->translateOrDefault(app()->getLocale())->name] = 1;
+    });
+    return $branches;
+}
+
 function cellStructure()
 {
-    $cells = config('ase.warehouse.cells');
+    $cells = config('ase.warehouse.cells') + branchesAsCell();
     if (auth()->guard('admin')->check() && auth()->guard('admin')->user()->filial() && auth()->guard('admin')->user()->filial()->cells) {
         $decoded = \GuzzleHttp\json_decode(auth()->guard('admin')->user()->filial()->cells, true);
         if (is_array($decoded)) {

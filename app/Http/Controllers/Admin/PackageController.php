@@ -154,6 +154,16 @@ class PackageController extends Controller
             ],
             [
                 'type'              => 'select2',
+                'name'              => 'branch_id',
+                'attribute'         => 'name',
+                'model'             => 'App\Models\Branch',
+                'wrapperAttributes' => [
+                    'class' => 'col-lg-2',
+                ],
+                'allowNull'         => 'All Branch',
+            ],
+            [
+                'type'              => 'select2',
                 'name'              => 'promo_id',
                 'attribute'         => 'title',
                 'model'             => 'App\Models\Promo',
@@ -706,6 +716,12 @@ class PackageController extends Controller
                     $query->where('filial_id', request()->get('filial_id'));
                 });
             }
+        }
+
+        if (request()->get('branch_id') != null) {
+            $items->whereHas('user', function ($query) {
+                $query->where('branch_id', request()->get('branch_id'));
+            });
         }
 
         if (\request()->get('q') != null) {
