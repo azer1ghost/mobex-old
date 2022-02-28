@@ -196,7 +196,7 @@ class RegisterController extends Controller
         $cityRel = City::whereHas('districts')->orderBy('id', 'asc');
         $cities = $cityRel->get();
         $districts = District::where('city_id', $cityRel->first()->id)->get();
-        $filials = Filial::orderBy('id', 'asc')->get();
+        $filials = Filial::orderBy('id', 'asc')->limit(1)->get();
 
         return view('front.auth.register', compact('title', 'hideSideBar', 'hideNavBar', 'bodyClass', 'cities', 'districts', 'filials'));
     }

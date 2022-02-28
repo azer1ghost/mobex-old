@@ -62,7 +62,7 @@ class UserController extends MainController
             $this->generalShare();
         }
 
-        $filials = Filial::orderBy('id', 'asc')->get();
+        $filials = Filial::orderBy('id', 'asc')->limit(1)->get();
         $breadTitle = $title = trans('front.menu.filials');
 
         return view('front.user.filials', compact('filials', 'title', 'breadTitle'));
@@ -867,7 +867,7 @@ class UserController extends MainController
 
         $filials = [];
 
-        foreach (Filial::orderBy('id', 'asc')->get() as $filial) {
+        foreach (Filial::orderBy('id', 'asc')->limit(1)->get() as $filial) {
             $filials[$filial->id] = $filial->translateOrDefault(app()->getLocale())->name . " :: " . $filial->translateOrDefault(app()->getLocale())->address;
         }
 
