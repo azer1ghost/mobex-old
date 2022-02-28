@@ -348,21 +348,27 @@ class CellController extends Controller
                     redirect()->back();
                 });
 
-
-            // TODO anbard menteqe cesidlemesi
-            /* Send Notification */
-            if ($package->status < 2) {
-                $package->status = 2;
-                if (! $package->scanned_at) {
-                    $package->scanned_at = Carbon::now();
-                }
-                $package->save();
-            }
-
             $branch = null;
 
             if (is_numeric($package->user->branch_id)){
                 $branch = $package->user->branch->translateOrDefault('az')->name;
+            }
+
+            if ($package->status < 2) {
+
+                if ($branch) {
+                    // eger branch varsa statusu ready for branch et ve pakete branch id ver
+                    $package->status = 10;
+                    $package->branch_id = $package->user->branch_id;
+                } else {
+                    // eger branch yoxdursa statusu in filial et
+                    $package->status = 2;
+                }
+
+                if (! $package->scanned_at) {
+                    $package->scanned_at = Carbon::now();
+                }
+                $package->save();
             }
 
             return redirect()->route('cells.edit', ['id' => $package->id, 'branch' => $branch]);
@@ -375,10 +381,10 @@ class CellController extends Controller
     {
         $package = Package::find($id);
 
+        /* Send Notification */
         if (! $package->cell) {
             if (! $package->scanned_at) {
                 $package->scanned_at = Carbon::now();
-                $package->save();
             }
 
             if ($package->status == 2) {
@@ -389,8 +395,9 @@ class CellController extends Controller
             if ($package->user && $package->user->auto_charge && $package->user->packageBalance() >= $package->delivery_manat_price) {
                 Transaction::addPackage($package->id, 'PACKAGE_BALANCE');
                 $package->paid = true;
-                $package->save();
             }
+
+            $package->save();
         }
 
         return parent::update($request, $id);
