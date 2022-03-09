@@ -102,7 +102,7 @@
                                                             <li>{{ __('front.user_orders.create_order_form.total') }}
                                                                 <span id="calc_order_price">0.00 TL</span>
                                                             </li>
-                                                            <li>Komissiya: 0% (6 - 10 mart)</li>
+{{--                                                            <li>Komissiya: 0% (6 - 10 mart)</li>--}}
                                                             <li>{{ __('front.user_orders.create_order_form.service_fee') }}
                                                                 <span id="cargo_fee_value">0.00 TL</span>
                                                             </li>
