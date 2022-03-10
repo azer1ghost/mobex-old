@@ -147,6 +147,7 @@ use Lunaweb\EmailVerification\Contracts\CanVerifyEmail as CanVerifyEmailContract
  * @property int $campaign_notifications
  * @property int $auto_charge
  * @property-read \App\Models\Promo|null $promo
+ * @property int|mixed $sent_by_post
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAndroidDeviceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAutoCharge($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCampaignNotifications($value)
@@ -165,7 +166,7 @@ class User extends Authenticatable implements CanVerifyEmailContract
     /**
      * @var array
      */
-    protected $with = ['filial', 'dealer', 'branch'];
+    protected $with = ['filial', 'dealer'];
 
     /**
      * @var string[]
@@ -190,6 +191,7 @@ class User extends Authenticatable implements CanVerifyEmailContract
         'passport',
         'fin',
         'company',
+        'zip_code',
         'email',
         'password',
         'customer_id',
@@ -658,8 +660,13 @@ class User extends Authenticatable implements CanVerifyEmailContract
         return $this->hasMany(Order::class);
     }
 
-    public function branch()
+//    public function branch()
+//    {
+//        return $this->belongsTo(Branch::class)->withDefault();
+//    }
+
+    public function azerpoctBranch()
     {
-        return $this->belongsTo(Branch::class)->withDefault();
+        return $this->belongsTo(AzerpoctBranch::class, 'zip_code')->withDefault();
     }
 }

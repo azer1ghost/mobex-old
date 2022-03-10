@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Mail\OrderRequest;
 use App\Models\Activity;
+use App\Models\AzerpoctBranch;
 use App\Models\Branch;
 use App\Models\City;
 use App\Models\Country;
@@ -872,15 +873,24 @@ class UserController extends MainController
             $filials[$filial->id] = $filial->translateOrDefault(app()->getLocale())->name . " -- " . $filial->translateOrDefault(app()->getLocale())->address;
         }
 
-        $branches = [
+//        $branches = [
+//            'Seçilməyib'
+//        ];
+
+//        foreach (Branch::orderBy('id', 'asc')->get() as $branch) {
+//            $branches[$branch->id] = $branch->translateOrDefault(app()->getLocale())->name . " -- " . $branch->translateOrDefault(app()->getLocale())->address;
+//        }
+
+
+        $azerpoct_branches = [
             'Seçilməyib'
         ];
 
-        foreach (Branch::orderBy('id', 'asc')->get() as $branch) {
-            $branches[$branch->id] = $branch->translateOrDefault(app()->getLocale())->name . " -- " . $branch->translateOrDefault(app()->getLocale())->address;
+        foreach (AzerpoctBranch::orderBy('id')->get() as $branch) {
+            $azerpoct_branches['zip_code'] = $branch->zip_code . " -- " . $branch->location;
         }
 
-        return view('front.user.edit', compact('item', 'breadTitle', 'cities', 'districts', 'nulled', 'filials', 'hasInBaku', 'branches'));
+        return view('front.user.edit', compact('item', 'breadTitle', 'cities', 'districts', 'nulled', 'filials', 'hasInBaku', 'azerpoct_branches'));
     }
 
     /**
@@ -910,6 +920,7 @@ class UserController extends MainController
             'zip_code'               => 'nullable|string|min:3',
             'campaign_notifications' => 'nullable|integer',
             'auto_charge'            => 'nullable|integer',
+            'sent_by_post'           => 'nullable|boolean',
         ]);
 
         $user = auth()->user();
@@ -947,6 +958,7 @@ class UserController extends MainController
         $user->zip_code = $request->has('zip_code') ? $request->get('zip_code') : null;
         $user->campaign_notifications = $request->has('campaign_notifications') ? 1 : 0;
         $user->auto_charge = $request->has('auto_charge') ? 1 : 0;
+        $user->sent_by_post = $request->has('sent_by_post') ? 1 : 0;
 
         if ($request->has('password') && $request->get('password') != null) {
             $user->password = $request->get('password');

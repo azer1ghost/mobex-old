@@ -453,7 +453,7 @@ function branchesAsCell(){
 
 function cellStructure()
 {
-    $cells = config('ase.warehouse.cells') + branchesAsCell();
+    $cells = config('ase.warehouse.cells');// + branchesAsCell();
     if (auth()->guard('admin')->check() && auth()->guard('admin')->user()->filial() && auth()->guard('admin')->user()->filial()->cells) {
         $decoded = \GuzzleHttp\json_decode(auth()->guard('admin')->user()->filial()->cells, true);
         if (is_array($decoded)) {

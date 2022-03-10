@@ -169,9 +169,7 @@ class ProcessedController extends Controller
             $items->where('sent_at', '<=', Carbon::createFromFormat("Y-m-d", \Request::get('end_date'))->addDay());
         }
 
-        $items = $items->latest()->paginate($this->limit);
-
-        return $items;
+        return $items->latest()->paginate($this->limit);
     }
 
     /**

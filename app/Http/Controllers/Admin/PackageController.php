@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\Admin\PackagesExport;
 use App\Exports\Warehouse\ManifestExport;
 use App\Models\Activity;
+use App\Models\AzerpoctBranch;
 use App\Models\Extra\Notification;
 use App\Models\Package;
 use App\Models\PackageLog;
@@ -152,15 +153,25 @@ class PackageController extends Controller
                 ],
                 'allowNull'         => 'All Filial',
             ],
+//            [
+//                'type'              => 'select2',
+//                'name'              => 'branch_id',
+//                'attribute'         => 'name',
+//                'model'             => 'App\Models\Branch',
+//                'wrapperAttributes' => [
+//                    'class' => 'col-lg-2',
+//                ],
+//                'allowNull'         => 'All Branch',
+//            ],
             [
                 'type'              => 'select2',
-                'name'              => 'branch_id',
-                'attribute'         => 'name',
-                'model'             => 'App\Models\Branch',
+                'name'              => 'zip_code',
+                'attribute'         => 'zip_code',
+                'model'             => 'App\Models\AzerpoctBranch',
                 'wrapperAttributes' => [
                     'class' => 'col-lg-2',
                 ],
-                'allowNull'         => 'All Branch',
+                'allowNull'         => 'All Azerpoct',
             ],
             [
                 'type'              => 'select2',
@@ -718,10 +729,17 @@ class PackageController extends Controller
             }
         }
 
-        if (request()->get('branch_id') != null) {
-            $items->whereHas('user', function ($query) {
-                $query->where('branch_id', request()->get('branch_id'));
-            });
+//        if (request()->get('branch_id') != null) {
+//            $items->whereHas('user', function ($query) {
+//                $query->where('branch_id', request()->get('branch_id'));
+//            });
+//        }
+
+        if (request()->get('zip_code') != null) {
+
+            $branch = AzerpoctBranch::find(request()->get('zip_code'));
+
+            $items->where('zip_code', $branch->zip_code);
         }
 
         if (\request()->get('q') != null) {

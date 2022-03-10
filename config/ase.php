@@ -44,6 +44,7 @@ return [
             'R' => 6,
 
             'LN' => 1,
+            'POCT' => 1,
         ],
 
         'main_cells' => [
