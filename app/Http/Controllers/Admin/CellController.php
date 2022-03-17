@@ -8,6 +8,7 @@ use App\Models\PackageLog;
 use App\Models\Parcel;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Services\AzerpoctService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,17 @@ class CellController extends Controller
     protected $modelName = 'Package';
 
     protected $user = null;
+
+    protected $extraButtons = [
+        [
+            'key'   => 'send',
+            'route' => 'cells.sent',
+            'label' => 'Send to AzerPoct',
+            'icon'  => 'car',
+            'color' => 'info',
+            'condition' => false,
+        ],
+    ];
 
     protected $view = [
         'checklist'   => [
@@ -48,6 +60,18 @@ class CellController extends Controller
                     'class' => 'col-lg-3',
                 ],
                 'allowNull'         => 'All warehouses',
+            ],
+            [
+                'name'              => 'cell',
+                'type'              => 'select_from_array',
+                'options'           => [
+                    'in_filial' => 'In Fillial',
+                    'in_post_box' => 'In Post Box'
+                ],
+                'wrapperAttributes' => [
+                    'class' => 'col-lg-2',
+                ],
+                'allowNull'         => 'Where',
             ],
             [
                 'name'              => 'requested',
@@ -149,6 +173,13 @@ class CellController extends Controller
         $this->list['cell']['editable']['source'] = generateCells();
         $this->fields[1]['options'] = generateCells(false);
 
+        if (\request()->get('cell') == 'in_post_box') {
+            $this->extraButtons[0]['condition'] = null;
+        } else {
+            $this->extraButtons[0]['condition'] = false;
+        }
+
+
         if (\request()->route() != null && \request()->route()->getName() == 'cells.edit') {
             $cellsView = null;
 
@@ -205,8 +236,11 @@ class CellController extends Controller
      */
     public function indexObject()
     {
+        $showSentToPostOfficeBtn = false;
+
         $validator = \Validator::make(\Request::all(), [
             'q'             => 'string',
+            'cell'          => 'string',
             'status'        => 'integer',
             'warehouse_id ' => 'integer',
             'start_date'    => 'date',
@@ -220,6 +254,15 @@ class CellController extends Controller
         }
 
         $items = Package::where('status', 2)->orderBy('requested_at', 'desc')->orderBy('cell', 'asc');
+
+        switch (request('cell')){
+            case 'in_post_box':
+                $items->where('cell', 'LIKE','%POCT%');
+                break;
+            case 'in_filial':
+                $items->where('cell', 'NOT LIKE','%POCT%');
+                break;
+        }
 
         /* Filter filials */
         $filials = auth()->guard('admin')->user()->filials->pluck('id')->all();
@@ -274,18 +317,25 @@ class CellController extends Controller
 
     public function ajax(Request $request, $id)
     {
-        $used = Package::find($id);
+        $package = Package::find($id);
 
         if ($request->get('name') == 'cell') {
-            if (! $used->cell) {
+            if (! $package->cell) {
 
-                Notification::sendPackage($used->id, '2', env('IN_BAKU_HOUR', 1));
+                if ($package->status == 2) {
+                    if ($package->user->sent_by_post == true) {
+
+                    }
+                    else {
+                        Notification::sendPackage($package->id, '2');
+                    }
+                }
 
                 // Auto Pay
-                if ($used->user && $used->user->auto_charge && $used->user->packageBalance() >= $used->delivery_manat_price) {
-                    Transaction::addPackage($used->id, 'PACKAGE_BALANCE');
-                    $used->paid = true;
-                    $used->save();
+                if ($package->user && $package->user->auto_charge && $package->user->packageBalance() >= $package->delivery_manat_price) {
+                    Transaction::addPackage($package->id, 'PACKAGE_BALANCE');
+                    $package->paid = true;
+                    $package->save();
                 }
             }
         }
@@ -348,22 +398,9 @@ class CellController extends Controller
                     redirect()->back();
                 });
 
-            $branch = null;
-
-            if (is_numeric($package->user->branch_id)){
-                $branch = $package->user->branch->translateOrDefault('az')->name;
-            }
-
             if ($package->status < 2) {
 
-                if ($branch) {
-                    // eger branch varsa statusu ready for branch et ve pakete branch id ver
-                    $package->status = 10;
-                    $package->branch_id = $package->user->branch_id;
-                } else {
-                    // eger branch yoxdursa statusu in filial et
-                    $package->status = 2;
-                }
+                $package->status = 2;
 
                 if (! $package->scanned_at) {
                     $package->scanned_at = Carbon::now();
@@ -371,7 +408,8 @@ class CellController extends Controller
                 $package->save();
             }
 
-            return redirect()->route('cells.edit', ['id' => $package->id, 'branch' => $branch]);
+//            return redirect()->route('cells.edit', ['id' => $package->id, 'branch' => $branch]);
+            return redirect()->route('cells.edit', ['id' => $package->id, 'sent_to_post' => $package->user->sent_by_post]);
         }
 
         return redirect()->back();
@@ -384,11 +422,15 @@ class CellController extends Controller
         /* Send Notification */
         if (! $package->cell) {
             if (! $package->scanned_at) {
-                $package->scanned_at = Carbon::now();
+                $package->scanned_at = now();
             }
-
             if ($package->status == 2) {
-                Notification::sendPackage($package->id, '2', env('IN_BAKU_HOUR', 1));
+                if ($package->user->sent_by_post == true) {
+
+                }
+                else {
+                    Notification::sendPackage($package->id, '2');
+                }
             }
 
             // Auto Pay
@@ -418,7 +460,6 @@ class CellController extends Controller
         if ($count) {
             $key = $request->get('key');
             foreach ($items as $item) {
-
                 $item->{$key} = $request->get('value');
                 $item->save();
             }
@@ -428,4 +469,49 @@ class CellController extends Controller
             return \Response::json(['message' => "There isn't any data to update!"], 400);
         }
     }
+
+    public function sentToAzerpoct()
+    {
+        $packages = Package::whereStatus(2)->where('cell', 'LIKE','%POCT%')->get();
+
+        foreach ($packages as $package){
+
+           $response = (new AzerpoctService($package))->create();
+
+           if ($response->getStatusCode() == 200) {
+               $package->setAttribute('status', 8);
+           } else {
+               $package->setAttribute('azerpoct_response_log', $response->getBody()->getContents());
+           }
+
+           $package->save();
+        }
+
+        \Alert::success('Baglamalar Azerpocta gonderildi');
+
+        return redirect()->back();
+    }
 }
+
+
+
+
+
+
+
+
+
+//            $branch = null;
+//
+//            if (is_numeric($package->user->branch_id)){
+//                $branch = $package->user->branch->translateOrDefault('az')->name;
+//            }
+
+//                if ($branch) {
+//                    // eger branch varsa statusu ready for branch et ve pakete branch id ver
+//                    $package->status = 10;
+//                    $package->branch_id = $package->user->branch_id;
+//                } else {
+//                    // eger branch yoxdursa statusu in filial et
+//                    $package->status = 2;
+//                }

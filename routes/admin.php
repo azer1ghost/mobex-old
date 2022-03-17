@@ -166,10 +166,16 @@ Route::group([
             'uses' => 'CellController@find',
         ]);
 
+        Route::get('cells/sent', [
+            'as'   => 'cells.sent',
+            'uses' => 'CellController@sentToAzerpoct',
+        ]);
+
         Route::get('logs', [
             'as'   => 'system.logs',
             'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index',
         ]);
+
 
     });
 

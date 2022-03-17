@@ -857,7 +857,7 @@ class UserController extends MainController
             $users[] = $sUser->id;
         }
 
-        $hasInBaku = Package::whereIn('user_id', $users)->whereIn('status', [2, 7])->count();
+//        $hasInBaku = Package::whereIn('user_id', $users)->whereIn('status', [2, 7])->count();
 
         foreach ($citiesObj as $city) {
             $cities[$city->id] = $city->translateOrDefault(app()->getLocale())->name;
@@ -867,11 +867,11 @@ class UserController extends MainController
             $districts[$district->id] = $district->translateOrDefault(app()->getLocale())->name;
         }
 
-        $filials = [];
-
-        foreach (Filial::orderBy('id', 'asc')->get() as $filial) {
-            $filials[$filial->id] = $filial->translateOrDefault(app()->getLocale())->name . " -- " . $filial->translateOrDefault(app()->getLocale())->address;
-        }
+//        $filials = [];
+//
+//        foreach (Filial::orderBy('id', 'asc')->get() as $filial) {
+//            $filials[$filial->id] = $filial->translateOrDefault(app()->getLocale())->name . " -- " . $filial->translateOrDefault(app()->getLocale())->address;
+//        }
 
 //        $branches = [
 //            'Seçilməyib'
@@ -881,16 +881,15 @@ class UserController extends MainController
 //            $branches[$branch->id] = $branch->translateOrDefault(app()->getLocale())->name . " -- " . $branch->translateOrDefault(app()->getLocale())->address;
 //        }
 
-
         $azerpoct_branches = [
             'Seçilməyib'
         ];
 
         foreach (AzerpoctBranch::orderBy('id')->get() as $branch) {
-            $azerpoct_branches['zip_code'] = $branch->zip_code . " -- " . $branch->location;
+            $azerpoct_branches[$branch->zip_code] = "$branch->postalDescription ($branch->home)";
         }
 
-        return view('front.user.edit', compact('item', 'breadTitle', 'cities', 'districts', 'nulled', 'filials', 'hasInBaku', 'azerpoct_branches'));
+        return view('front.user.edit', compact('item', 'breadTitle', 'cities', 'districts', 'nulled', 'azerpoct_branches'));
     }
 
     /**
@@ -915,6 +914,7 @@ class UserController extends MainController
             'birthday'               => 'nullable|date',
             'address'                => 'required|string|min:10',
             'city_id'                => 'nullable|integer',
+            'gender'                 => 'nullable|integer',
             'filial_id'              => 'nullable|integer',
             'district_id'            => 'nullable|integer',
             'zip_code'               => 'nullable|string|min:3',
@@ -939,20 +939,22 @@ class UserController extends MainController
         }
         $user->phone = $request->get('phone');
         $user->passport = $request->get('passport');
+        $user->gender = $request->get('gender', 1);
         $user->fin = $request->get('fin');
         $user->company = $request->has('company') ? $request->get('company') : null;
         $user->birthday = $request->has('birthday') ? $request->get('birthday') : null;
         $user->address = $request->has('address') ? $request->get('address') : null;
         $user->city_id = $request->has('city_id') ? $request->get('city_id') : null;
+        $user->filial_id = $request->get('filial_id');
 
-        if ($request->has('filial_id') && $request->get('sent_to') === 'filial' && $request->get('filial_id') != null) {
-            $user->filial_id = $request->get('filial_id');
-            $user->branch_id = null;
-        }
-        if ($request->get('sent_to') === 'branch'){
-            $user->filial_id = 4; // Nizami filiali (cesidleme noqtesi bura oldugu ucun)
-            $user->branch_id = $request->get('branch_id');
-        }
+//        if ($request->has('filial_id') && $request->get('sent_to') === 'filial' && $request->get('filial_id') != null) {
+//            $user->filial_id = $request->get('filial_id');
+//            $user->branch_id = null;
+//        }
+//        if ($request->get('sent_to') === 'branch'){
+//            $user->filial_id = 4; // Nizami filiali (cesidleme noqtesi bura oldugu ucun)
+//            $user->branch_id = $request->get('branch_id');
+//        }
 
         $user->district_id = $request->has('district_id') ? $request->get('district_id') : null;
         $user->zip_code = $request->has('zip_code') ? $request->get('zip_code') : null;

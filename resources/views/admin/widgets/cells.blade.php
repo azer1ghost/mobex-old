@@ -20,9 +20,9 @@
     $cells = $cells->pluck('total', 'cell')->all();
 
     ?>
-    @if(request()->has('branch'))
+    @if(request()->has('sent_to_post'))
         <div class="mt-5 col-6 alert alert-success">
-            <h3>Bağlama {{request('branch')}} məntəqəsinə göndərilməlidir</h3>
+            <h3>Diqqət!!! Bağlama Azerpocta göndərilməlidir</h3>
         </div>
     @endif
     <div style="margin-top: 30px">

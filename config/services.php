@@ -39,5 +39,10 @@ return [
         'service_id' => env('PORTMANAT_SERVICE_ID'),
         'key'        => env('PORTMANAT_KEY'),
     ],
+    'azerpost' => [
+        'vendor_id' => env('AZERPOST_VENDOR_ID'),
+        'api_key' => env('AZERPOST_API_KEY'),
+        'secret' => env('AZERPOST_SECRET'),
+    ],
 
 ];

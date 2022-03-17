@@ -19,7 +19,7 @@ return [
     'agree_rules'                             => 'Qaydalar ilə tanış oldum və razıyam.',
     'filial'                                  => 'Filial',
     'branch'                                  => 'Məntəqə',
-    'gender'                                  => 'Gender',
+    'gender'                                  => 'Cins',
     'empty'                                   => '-',
     'prefer_not_to_say'                       => 'Demək istəmirəm',
     'male'                                    => 'Kişi',

@@ -75,7 +75,7 @@
                                         @endif
                                     </div>
 
-                                    <div class="col-sm-6 form-group">
+                                    <div class="col-sm-3 col-6 form-group">
                                         <span class="form_span">FİN</span>
                                         <input class="form__field required"
                                                data-inputmask="'mask': '*******'"
@@ -90,6 +90,17 @@
                                                    for="fin">{{ $errors->first('fin') }}</label>
                                         @endif
                                     </div>
+                                    <div class="col-sm-3 col-6 form-group">
+                                        <span class="form_span">{{__('auth.gender')}}</span>
+                                        <select title="Gender prefix" name="gender" id="gender" class="form__select">
+                                            <option @if (old('gender', $item->gender) == 1) selected @endif value="1">
+                                                Kişi
+                                            </option>
+                                            <option @if (old('gender', $item->gender) == 2) selected @endif value="2">
+                                                Qadın
+                                            </option>
+                                        </select>
+                                    </div>
                                     <div class="col-sm-6 form-group">
                                         @include('front.form.group', ['key' => 'birthday', 'label' => trans('front.birthday'), 'options' => ['min' => "1950-01-01", 'max' => "2002-01-01", 'class' => 'form__field changeTypeToDate']])
                                     </div>
@@ -103,11 +114,11 @@
                                         @include('front.form.group', ['type' => 'select', 'key' => 'district_id', 'label' => trans('front.district'), 'selects' => $districts, 'options' => ['id' => 'district', 'class' => 'form__field']])
                                     </div>
 
-                                    <div class="col-12 p-0 mb-4">
-                                        @if(!$hasInBaku)
-                                            <div class="col-12 my-2">
-                                                @include('front.form.group', ['type' => 'select', 'key' => 'filial_id', 'label' => trans('auth.filial'), 'selects' => $filials, 'options' => ['id' => 'filial', 'class' => 'form__field']])
-                                            </div>
+{{--                                    <div class="col-12 p-0 mb-4">--}}
+{{--                                        @if(!$hasInBaku)--}}
+{{--                                            <div class="col-12 my-2">--}}
+{{--                                                @include('front.form.group', ['type' => 'select', 'key' => 'filial_id', 'label' => trans('auth.filial'), 'selects' => $filials, 'options' => ['id' => 'filial', 'class' => 'form__field']])--}}
+{{--                                            </div>--}}
 {{--                                            <div class="col-12 p-0 my-4" x-data="dataStorage"--}}
 {{--                                                 x-init="$watch('sent_to', value => showArea(value))">--}}
 {{--                                                <div class="col-12 orm-group mt-2">--}}
@@ -141,16 +152,16 @@
 {{--                                                    </div>--}}
 {{--                                                </div>--}}
 {{--                                            </div>--}}
-                                        @else
-                                            <div class="col-12 form-group">
-                                                <span class="form_span">@lang('auth.filial')</span>
-                                                <input
-                                                   class="form-control"
-                                                   type="text"
-                                                   readonly
-                                                   value="Diqqət hörmətli istifadəçi yolda olan bağlamanız əvvəlcədən seçdiyiniz ünvana göndəriləcək"
-                                                >
-                                            </div>
+{{--                                        @else--}}
+{{--                                            <div class="col-12 form-group">--}}
+{{--                                                <span class="form_span">@lang('auth.filial')</span>--}}
+{{--                                                <input--}}
+{{--                                                   class="form-control"--}}
+{{--                                                   type="text"--}}
+{{--                                                   readonly--}}
+{{--                                                   value="Diqqət hörmətli istifadəçi yolda olan bağlamanız əvvəlcədən seçdiyiniz ünvana göndəriləcək"--}}
+{{--                                                >--}}
+{{--                                            </div>--}}
 {{--                                            <span>--}}
 {{--                                                 Hazırda seçili olan:--}}
 {{--                                                 @if(is_numeric($item->branch_id))--}}
@@ -159,8 +170,8 @@
 {{--                                                    {{$item->filial->name}} (Filial)--}}
 {{--                                                @endif--}}
 {{--                                            </span>--}}
-                                        @endif
-                                    </div>
+{{--                                        @endif--}}
+{{--                                    </div>--}}
 
                                     <div class="col-lg-12 form-group mt-3">
                                         @include('front.form.group', ['type' => 'textarea', 'key' => 'address', 'label' => trans('front.address'), 'options' => ['class' => 'form__field', 'rows' => 4]])

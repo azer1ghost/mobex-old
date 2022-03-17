@@ -34,13 +34,13 @@ class CreateBranchesTable extends Migration
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
         });
 
-        Schema::table('users', function($table) {
-            $table->integer('branch_id')->nullable()->default(null);
-        });
-
-        Schema::table('packages', function($table) {
-            $table->integer('branch_id')->nullable()->default(null);
-        });
+//        Schema::table('users', function($table) {
+//            $table->integer('branch_id')->nullable()->default(null);
+//        });
+//
+//        Schema::table('packages', function($table) {
+//            $table->integer('branch_id')->nullable()->default(null);
+//        });
     }
 
     /**
@@ -52,12 +52,12 @@ class CreateBranchesTable extends Migration
     {
         Schema::dropIfExists('branches');
 
-        Schema::table('users', function($table) {
-            $table->dropColumn('branch_id');
-        });
-
-        Schema::table('packages', function($table) {
-            $table->dropColumn('branch_id');
-        });
+//        Schema::table('users', function($table) {
+//            $table->dropColumn('branch_id');
+//        });
+//
+//        Schema::table('packages', function($table) {
+//            $table->dropColumn('branch_id');
+//        });
     }
 }

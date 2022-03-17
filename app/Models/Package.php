@@ -203,10 +203,11 @@ class Package extends Model
      */
     protected $appends = ['full_size', 'weight_with_type', 'status_label', 'shipping_price', 'total_price'];
 
+
     /**
      * @var array
      */
-    public $with = ['type', 'warehouse', 'branch', 'user', 'country', 'manager'];
+    public $with = ['type', 'warehouse', 'user', 'country', 'manager'];
 
     /**
      * @var array
@@ -480,7 +481,14 @@ class Package extends Model
         if (! $price) {
             return null;
         }
-        $price = $price + $this->getDepoDeptAttribute() / getCurrencyRate(1);
+
+        $azerPoctFee = 0;
+
+        if ($this->zip_code){
+            $azerPoctFee = $this->azerpoct->fee;
+        }
+
+        $price = $price + $azerPoctFee + $this->getDepoDeptAttribute() / getCurrencyRate(1);
 
         return round($price, 2);
     }
@@ -692,7 +700,14 @@ class Package extends Model
                     if ($query->weight && ! request()->has('delivery_price') && request()->get('name') != 'delivery_price') {
                         $user = User::find($query->user_id);
                         $deliveryPrice = $warehouse->calculateDeliveryPrice($query->weight, $query->weight_type, $query->width, $query->height, $query->length, $query->length_type, false, $user, $query->has_liquid);
-                        $query->delivery_price = $deliveryPrice;
+
+                        $azerPoctFee = 0;
+
+                        if ($this->zip_code){
+                            $azerPoctFee = $this->azerpoct->fee;
+                        }
+
+                        $query->delivery_price = $deliveryPrice + $azerPoctFee;
                     }
                 }
             }
@@ -1033,9 +1048,14 @@ class Package extends Model
         return 'data:image/png;base64,' . $base64Barcode;
     }
 
-    public function branch()
+//    public function branch()
+//    {
+//        return $this->belongsTo(Branch::class)->withDefault();
+//    }
+
+    public function azerpoct()
     {
-        return $this->belongsTo(Branch::class)->withDefault();
+        return $this->belongsTo(AzerpoctBranch::class, 'zip_code','zip_code')->withDefault();
     }
 
     public function setWebsiteNameAttribute($value)
