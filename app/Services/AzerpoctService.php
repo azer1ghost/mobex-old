@@ -33,9 +33,9 @@ class AzerpoctService
         $this->package = $package;
 
         $this->client = new Client([
-            'base_uri'      => $this->baseUrl,
-            'Authorization' => 'Bearer ' . $this->api_key,
-            'Accept'        => 'application/json',
+            'base_uri'  => $this->baseUrl,
+            'x-api-key' => $this->api_key,
+            'Accept'    => 'application/json',
         ]);
 
         return $this;
