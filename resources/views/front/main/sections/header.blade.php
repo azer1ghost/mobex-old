@@ -34,10 +34,10 @@
                                                href="{{ route('my-trendyol') }}"><i class="fas fa-check"></i>Trendyol kodu
                                                 <span class="badge badge-pill" style="background-color: green">Yeni</span></a>
                                         </li>
-                                        <li>
-                                            <a {!! classActiveRoute('filials', 'current') !!}
-                                               href="{{ route('filials') }}"><i class="fas fa-map"></i>{{ __('front.menu.filials') }}</a>
-                                        </li>
+{{--                                        <li>--}}
+{{--                                            <a {!! classActiveRoute('filials', 'current') !!}--}}
+{{--                                               href="{{ route('filials') }}"><i class="fas fa-map"></i>{{ __('front.menu.filials') }}</a>--}}
+{{--                                        </li>--}}
 
                                         <li>
                                             <a {!! classActiveRoute('declaration.create', 'current') !!}
@@ -133,8 +133,8 @@
                                     </li>
                                     <li {{ classActiveRoute('news', 'current') }}><a href="{{ route('news') }}">{{ __('front.menu.news') }}</a>
                                     </li>
-                                    <li {{ classActiveRoute('filials', 'current') }}><a href="{{ route('filials') }}">{{ __('front.menu.filials') }}</a>
-                                    </li>
+{{--                                    <li {{ classActiveRoute('filials', 'current') }}><a href="{{ route('filials') }}">{{ __('front.menu.filials') }}</a>--}}
+{{--                                    </li>--}}
                                     <li {{ classActiveRoute('faq', 'current') }}><a href="{{ route('faq') }}">{{ __('front.menu.faq') }}</a>
                                     </li>
                                     <li {{ classActiveRoute('contact', 'current') }}><a href="{{ route('contact') }}">{{ __('front.menu.contact_us') }}</a>
