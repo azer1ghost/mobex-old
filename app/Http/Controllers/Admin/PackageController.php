@@ -154,6 +154,16 @@ class PackageController extends Controller
             ],
             [
                 'type'              => 'select2',
+                'name'              => 'zip_code',
+                'attribute'         => 'zip_code',
+                'model'             => 'App\Models\AzerpoctBranch',
+                'wrapperAttributes' => [
+                    'class' => 'col-lg-2',
+                ],
+                'allowNull'         => 'All Azerpoct',
+            ],
+            [
+                'type'              => 'select2',
                 'name'              => 'promo_id',
                 'attribute'         => 'title',
                 'model'             => 'App\Models\Promo',

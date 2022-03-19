@@ -75,7 +75,7 @@ Route::group([
     });
 
     Route::group([
-        'prefix'     => 'referral',
+        'prefix'=> 'referral',
     ], function () {
 
         Route::any('ping', [
@@ -88,7 +88,7 @@ Route::group([
     });
 
     Route::group([
-        'prefix'     => 'trendyol',
+        'prefix'=> 'trendyol',
     ], function () {
 
         Route::any('ping', [
@@ -97,6 +97,14 @@ Route::group([
 
         Route::any('save', [
             'uses' => 'TrendyolCodesController@save',
+        ]);
+    });
+
+    Route::group([
+        'prefix'=> 'azerpoct',
+    ], function () {
+        Route::post('orders/update', [
+            'uses' => 'AzerpoctController@update',
         ]);
     });
 

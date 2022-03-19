@@ -44,6 +44,7 @@ return [
             'R' => 6,
 
             'LN' => 1,
+            'POCT' => 1,
         ],
 
         'main_cells' => [
@@ -139,12 +140,26 @@ return [
                 4 => 'In customs',
                 5 => 'Refunded',
                 7 => 'In courier',
+                8 => 'On way Azerpoct',
+                9 => 'In Azerpoct',
+            ],
+            'status_az'               => [
+                6 => 'Erkən Bəyan',
+                0 => 'Xarici anbarda',
+                1 => 'Göndərilib',
+                2 => 'Filialda',
+                3 => 'Təhvil verilib',
+                4 => 'Saxlancda',
+                5 => 'Geri qaytarılıb',
+                7 => 'Kuryerdə',
+                8 => 'Yolda Azerpoct',
+                9 => 'Azerpoctda'
             ],
             'status_for_warehouse' => [
                 0 => 'In Warehouse',
                 6 => 'Early Declaration',
             ],
-            'statusWithLabel'      => '[{value: 0, text: "In Warehouse"}, {value: 1, text: "Sent"}, {value: 2, text: "In Filial"}, {value: 3, text: "Done"}, {value: 4, text: "In customs"}, {value: 5, text: "Refunded"}, {value: 6, text: "Early Declaration"}]',
+            'statusWithLabel'      => '[{value: 0, text: "In Warehouse"}, {value: 1, text: "Sent"}, {value: 2, text: "In Filial"}, {value: 3, text: "Done"}, {value: 4, text: "In customs"}, {value: 5, text: "Refunded"}, {value: 6, text: "Early Declaration"}, {value: 8, text: "On Way Azerpoct"}, {value: 9, text: "in Azerpoct"} ]',
             'paidWithLabel'        => '[{value: 0, text: "No"}, {value: 1, text: "Yes"}, {value: 2, text: "By POST_TERMINAL"}, {value: 3, text: "By GIFT_CARD"}, {value: 4, text: "By BONUS"}, {value: 5, text: "By Card to Card"}, {value: 6, text: "By Package Balance"}]',
         ],
         'delivery'           => [

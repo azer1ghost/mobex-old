@@ -1167,8 +1167,19 @@ class MainController extends Controller
                 }
             }
 
+
             $item = Package::find($itemId);
             //$this->detectCell($item);
+
+            if (!is_numeric($item->country_id)) {
+                $item->setAttribute('country_id',  $this->me()->country_id);
+            }
+
+            if ($item->user_id && $item->user->sent_by_post){
+                $item->setAttribute('zip_code', $item->user->zip_code);
+            }
+
+            $item->save();
 
             /* Send Notification */
             if ($item->status == 6) {

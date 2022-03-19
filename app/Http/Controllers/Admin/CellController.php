@@ -8,16 +8,28 @@ use App\Models\PackageLog;
 use App\Models\Parcel;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Services\AzerpoctService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\View\View;
 
 class CellController extends Controller
 {
     protected $modelName = 'Package';
 
     protected $user = null;
+
+    protected $extraButtons = [
+        [
+            'key'   => 'send',
+            'route' => 'cells.sent',
+            'label' => 'Send to AzerPoct',
+            'icon'  => 'car',
+            'color' => 'info',
+            'condition' => false,
+        ],
+    ];
+
 
     protected $view = [
         'checklist'   => [
@@ -48,6 +60,18 @@ class CellController extends Controller
                     'class' => 'col-lg-3',
                 ],
                 'allowNull'         => 'All warehouses',
+            ],
+            [
+                'name'              => 'cell',
+                'type'              => 'select_from_array',
+                'options'           => [
+                    'in_filial' => 'In Fillial',
+                    'in_post_box' => 'In Post Box'
+                ],
+                'wrapperAttributes' => [
+                    'class' => 'col-lg-2',
+                ],
+                'allowNull'         => 'Where',
             ],
             [
                 'name'              => 'requested',
@@ -149,6 +173,12 @@ class CellController extends Controller
         $this->list['cell']['editable']['source'] = generateCells();
         $this->fields[1]['options'] = generateCells(false);
 
+        if (\request()->get('cell') == 'in_post_box') {
+            $this->extraButtons[0]['condition'] = null;
+        } else {
+            $this->extraButtons[0]['condition'] = false;
+        }
+
         if (\request()->route() != null && \request()->route()->getName() == 'cells.edit') {
             $cellsView = null;
 
@@ -221,6 +251,15 @@ class CellController extends Controller
 
         $items = Package::where('status', 2)->orderBy('requested_at', 'desc')->orderBy('cell', 'asc');
 
+        switch (request('cell')){
+            case 'in_post_box':
+                $items->where('cell', 'LIKE','%POCT%');
+                break;
+            case 'in_filial':
+                $items->where('cell', 'NOT LIKE','%POCT%');
+                break;
+        }
+
         /* Filter filials */
         $filials = auth()->guard('admin')->user()->filials->pluck('id')->all();
         if ($filials) {
@@ -274,18 +313,25 @@ class CellController extends Controller
 
     public function ajax(Request $request, $id)
     {
-        $used = Package::find($id);
+        $package = Package::find($id);
 
         if ($request->get('name') == 'cell') {
-            if (! $used->cell) {
+            if (! $package->cell) {
 
-                Notification::sendPackage($used->id, '2', env('IN_BAKU_HOUR', 1));
+                if ($package->status == 2) {
+                    if ($package->user->sent_by_post == true) {
+                        // posta gonderilmeli paket bakiya catanda sms gondermek ucun kod burda yazilacaq
+                    }
+                    else {
+                        Notification::sendPackage($package->id, '2');
+                    }
+                }
 
                 // Auto Pay
-                if ($used->user && $used->user->auto_charge && $used->user->packageBalance() >= $used->delivery_manat_price) {
-                    Transaction::addPackage($used->id, 'PACKAGE_BALANCE');
-                    $used->paid = true;
-                    $used->save();
+                if ($package->user && $package->user->auto_charge && $package->user->packageBalance() >= $package->delivery_manat_price) {
+                    Transaction::addPackage($package->id, 'PACKAGE_BALANCE');
+                    $package->paid = true;
+                    $package->save();
                 }
             }
         }
@@ -294,9 +340,9 @@ class CellController extends Controller
 
             $data = [];
 
-            if (trim($used->status) != trim($request->get('value'))) {
+            if (trim($package->status) != trim($request->get('value'))) {
                 $data['status'] = [
-                    'before' => trim($used->status),
+                    'before' => trim($package->status),
                     'after'  => trim($request->get('value')),
                 ];
             }
@@ -351,12 +397,12 @@ class CellController extends Controller
             if ($status < 2) {
                 $package->status = 2;
                 if (! $package->scanned_at) {
-                    $package->scanned_at = Carbon::now();
+                    $package->scanned_at = now();
                 }
                 $package->save();
             }
 
-            return redirect()->route('cells.edit', $package->id);
+            return redirect()->route('cells.edit', ['id' => $package->id, 'sent_to_post' => !is_null($package->zip_code)]);
         } else {
             return redirect()->back();
         }
@@ -371,7 +417,15 @@ class CellController extends Controller
                 $package->scanned_at = Carbon::now();
                 $package->save();
             }
-            Notification::sendPackage($package->id, '2', env('IN_BAKU_HOUR', 1));
+
+            if ($package->status == 2) {
+                if ($package->user->sent_by_post == true) {
+
+                }
+                else {
+                    Notification::sendPackage($package->id, '2');
+                }
+            }
 
             // Auto Pay
             if ($package->user && $package->user->auto_charge && $package->user->packageBalance() >= $package->delivery_manat_price) {
@@ -399,7 +453,6 @@ class CellController extends Controller
         if ($count) {
             $key = $request->get('key');
             foreach ($items as $item) {
-
                 $item->{$key} = $request->get('value');
                 $item->save();
             }
@@ -408,5 +461,31 @@ class CellController extends Controller
         } else {
             return \Response::json(['message' => "There isn't any data to update!"], 400);
         }
+    }
+
+    public function sentToAzerpoct()
+    {
+//        $package = Package::find(68154);
+//
+//        return (new AzerpoctService($package))->create();
+
+        $packages = Package::whereStatus(2)->where('cell', 'LIKE','%POCT%')->get();
+
+        foreach ($packages as $package){
+
+            $response = (new AzerpoctService($package))->create();
+
+            if ($response->getStatusCode() == 200) {
+                $package->setAttribute('status', 8);
+            } else {
+                $package->setAttribute('azerpoct_response_log', $response->message);
+            }
+
+            $package->save();
+        }
+
+        \Alert::success('Baglamalar Azerpocta gonderildi');
+
+        return redirect()->back();
     }
 }

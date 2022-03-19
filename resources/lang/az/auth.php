@@ -18,7 +18,7 @@ return [
     'agree_rules2'                            => 'ilə tanış oldum və razıyam.',
     'agree_rules'                             => 'Qaydalar ilə tanış oldum və razıyam.',
     'filial'                                  => 'Filial',
-    'gender'                                  => 'Gender',
+    'gender'                                  => 'Cins',
     'empty'                                   => '-',
     'prefer_not_to_say'                       => 'Demək istəmirəm',
     'male'                                    => 'Kişi',

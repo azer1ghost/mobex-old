@@ -654,4 +654,9 @@ class User extends Authenticatable implements CanVerifyEmailContract
     {
         return $this->hasMany(Order::class);
     }
+
+    public function azerpoctBranch()
+    {
+        return $this->belongsTo(AzerpoctBranch::class, 'zip_code')->withDefault();
+    }
 }

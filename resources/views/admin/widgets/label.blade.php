@@ -305,11 +305,23 @@
                         <div class="dot">:</div>
                         <div class="value">Azerbaijan</div>
                     </div>
-                    <div class="item">
-                        <div class="key">Filial</div>
-                        <div class="dot">:</div>
-                        <div class="value">{{ $item->user->filial_name }}</div>
-                    </div>
+                    @if($item->zip_code)
+                        <div class="item" style="padding-top: 10px!important;">
+                            <div class="key">Azerpoct index</div>
+                            <div class="dot">:</div>
+                            <div class="value">
+                                <b style="letter-spacing: 1px; font-size: 20px">
+                                    {{ $item->zip_code }}
+                                </b>
+                            </div>
+                        </div>
+                    @else
+                        <div class="item">
+                            <div class="key">Filial</div>
+                            <div class="dot">:</div>
+                            <div class="value">{{ $item->user->filial_name }}</div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Front;
 
 use App\Mail\OrderRequest;
 use App\Models\Activity;
+use App\Models\AzerpoctBranch;
+use App\Models\Branch;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Delivery;
@@ -62,7 +64,7 @@ class UserController extends MainController
             $this->generalShare();
         }
 
-        $filials = Filial::orderBy('id', 'asc')->limit(1)->get();
+        $filials = Filial::orderBy('id', 'asc')->get();
         $breadTitle = $title = trans('front.menu.filials');
 
         return view('front.user.filials', compact('filials', 'title', 'breadTitle'));
@@ -453,7 +455,7 @@ class UserController extends MainController
         $fee = round($price * 0.05, 2);
         $total = round($price * 1.05, 2);
 
-//         1-14 fevral 0 faiz kompaniyasi   8 - 10 mart
+        // 1-14 fevral 0 faiz kompaniyasi
 //        $fee = 0;
 //        $total = round($price, 2);
 
@@ -855,7 +857,7 @@ class UserController extends MainController
             $users[] = $sUser->id;
         }
 
-        $hasInBaku = Package::whereIn('user_id', $users)->whereIn('status', [2, 7])->count();
+//        $hasInBaku = Package::whereIn('user_id', $users)->whereIn('status', [2, 7])->count();
 
         foreach ($citiesObj as $city) {
             $cities[$city->id] = $city->translateOrDefault(app()->getLocale())->name;
@@ -865,13 +867,29 @@ class UserController extends MainController
             $districts[$district->id] = $district->translateOrDefault(app()->getLocale())->name;
         }
 
-        $filials = [];
+//        $filials = [];
+//
+//        foreach (Filial::orderBy('id', 'asc')->get() as $filial) {
+//            $filials[$filial->id] = $filial->translateOrDefault(app()->getLocale())->name . " -- " . $filial->translateOrDefault(app()->getLocale())->address;
+//        }
 
-        foreach (Filial::orderBy('id', 'asc')->limit(1)->get() as $filial) {
-            $filials[$filial->id] = $filial->translateOrDefault(app()->getLocale())->name . " :: " . $filial->translateOrDefault(app()->getLocale())->address;
+//        $branches = [
+//            'Seçilməyib'
+//        ];
+
+//        foreach (Branch::orderBy('id', 'asc')->get() as $branch) {
+//            $branches[$branch->id] = $branch->translateOrDefault(app()->getLocale())->name . " -- " . $branch->translateOrDefault(app()->getLocale())->address;
+//        }
+
+        $azerpoct_branches = [
+            'Seçilməyib'
+        ];
+
+        foreach (AzerpoctBranch::orderBy('id')->get() as $branch) {
+            $azerpoct_branches[$branch->zip_code] = "$branch->postalDescription ($branch->home)";
         }
 
-        return view('front.user.edit', compact('item', 'breadTitle', 'cities', 'districts', 'nulled', 'filials', 'hasInBaku'));
+        return view('front.user.edit', compact('item', 'breadTitle', 'cities', 'districts', 'nulled', 'azerpoct_branches'));
     }
 
     /**
@@ -896,20 +914,21 @@ class UserController extends MainController
             'birthday'               => 'nullable|date',
             'address'                => 'required|string|min:10',
             'city_id'                => 'nullable|integer',
-            'filial_id'              => 'nullable|integer',
+            'gender'                 => 'nullable|integer',
+//            'filial_id'              => 'nullable|integer',
             'district_id'            => 'nullable|integer',
             'zip_code'               => 'nullable|string|min:3',
             'campaign_notifications' => 'nullable|integer',
             'auto_charge'            => 'nullable|integer',
+            'sent_by_post'           => 'nullable|boolean',
         ]);
 
-        $user = User::find(\Auth::user()->id);
+        $user = auth()->user();
         $user->name = $request->get('name');
         $user->surname = $request->get('surname');
         //$user->email = $request->get('email');
 
         // Refresh Customs packages
-
         if (($request->get('fin') != null && $user->fin != $request->get('fin')) || ($request->get('phone') != null && $user->phone != $request->get('phone'))) {
             $user->refresh_customs = true;
         }
@@ -920,19 +939,24 @@ class UserController extends MainController
         }
         $user->phone = $request->get('phone');
         $user->passport = $request->get('passport');
+        $user->gender = $request->get('gender', 1);
         $user->fin = $request->get('fin');
         $user->company = $request->has('company') ? $request->get('company') : null;
         $user->birthday = $request->has('birthday') ? $request->get('birthday') : null;
         $user->address = $request->has('address') ? $request->get('address') : null;
         $user->city_id = $request->has('city_id') ? $request->get('city_id') : null;
-        if ($request->has('filial_id') && $request->get('filial_id') != null) {
-            $user->filial_id = $request->get('filial_id');
-        }
+//        $user->filial_id = $request->get('filial_id');
+
+//        if ($request->has('filial_id') && $request->get('sent_to') === 'filial' && $request->get('filial_id') != null) {
+//            $user->filial_id = $request->get('filial_id');
+//            $user->branch_id = null;
+//        }
 
         $user->district_id = $request->has('district_id') ? $request->get('district_id') : null;
         $user->zip_code = $request->has('zip_code') ? $request->get('zip_code') : null;
         $user->campaign_notifications = $request->has('campaign_notifications') ? 1 : 0;
         $user->auto_charge = $request->has('auto_charge') ? 1 : 0;
+        $user->sent_by_post = $request->has('sent_by_post') ? 1 : 0;
 
         if ($request->has('password') && $request->get('password') != null) {
             $user->password = $request->get('password');

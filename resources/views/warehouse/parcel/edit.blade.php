@@ -8,22 +8,22 @@
                 <div class="panel-heading" style="margin-bottom: 30px;">
                     <div class="row">
 
-                        @if(auth('worker')->user()->getAttribute('warehouse_id') == 1)
-                        <div class="col-12 m-5 p-5 text-white">
-                            <table>
-                                <tbody>
-                                <tr>
-                                    <td style="background-color: #5e95e8">
-                                        <p style="padding: 10px">Nizami</p>
-                                    </td>
-                                    <td style="background-color: #e0874e">
-                                        <p style="padding: 10px">Həzi</p>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        @endif
+{{--                        @if(auth('worker')->user()->getAttribute('warehouse_id') == 1)--}}
+{{--                        <div class="col-12 m-5 p-5 text-white">--}}
+{{--                            <table>--}}
+{{--                                <tbody>--}}
+{{--                                <tr>--}}
+{{--                                    <td style="background-color: #5e95e8">--}}
+{{--                                        <p style="padding: 10px">Nizami</p>--}}
+{{--                                    </td>--}}
+{{--                                    <td style="background-color: #e0874e">--}}
+{{--                                        <p style="padding: 10px">Həzi</p>--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                </tbody>--}}
+{{--                            </table>--}}
+{{--                        </div>--}}
+{{--                        @endif--}}
 
                         <div class="col-lg-4">
                             <div>
