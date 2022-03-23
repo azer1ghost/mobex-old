@@ -885,7 +885,7 @@ class UserController extends MainController
             'Seçilməyib'
         ];
 
-        foreach (AzerpoctBranch::orderBy('id')->get() as $branch) {
+        foreach (AzerpoctBranch::active()->orderBy('id')->get() as $branch) {
             $azerpoct_branches[$branch->zip_code] = "$branch->postalDescription ($branch->home)";
         }
 

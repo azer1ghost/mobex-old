@@ -53,7 +53,7 @@ class AzerpoctService
                 'json' => [
                     "vendor_id"          => $this->vendor_id,
                     "package_id"         => $this->package->getAttribute('custom_id'),
-                    "delivery_post_code" => "AZ{$this->package->getAttribute('zip_code')}",
+                    "delivery_post_code" => "AZ".$this->package->getAttribute('zip_code'),
                     "package_weight"     => $this->package->getAttribute('weight'),
                     "customer_address"   => $this->package->user->getAttribute('address'),
                     "first_name"         => $this->package->user->getAttribute('name'),
@@ -66,27 +66,27 @@ class AzerpoctService
                 ]
             ]);
         } catch (RequestException $exception) {
-            $this->response = $exception;
+            $this->response = $exception->getResponse();
         }
 
-        return $this->response->getResponse()->getBody(true);
+        return $this->response;
     }
 
     public function vp_status()
     {
         try {
-            $this->response = $this->client->post('vp-status', [
+            $this->response = $this->client->post('order/vp-status', [
                 'json' => [
                     "vendor_id"             => $this->vendor_id,
                     "package_id"            => $this->package->getAttribute('custom_id'),
-                    "vendor_payment_status" => $this->package->getAttribute('paid')
+                    "vendor_payment_status" => (int) $this->package->getAttribute('paid')
                 ]
             ]);
         } catch (RequestException $exception) {
-            $this->response = $exception;
+            $this->response = $exception->getResponse();
         }
 
-        return $this->response->getResponse()->getBody(true);
+        return $this->response;
     }
 
     public function view()
@@ -99,10 +99,10 @@ class AzerpoctService
                 ]
             ]);
         } catch (RequestException $exception) {
-            $this->response = $exception;
+            $this->response = $exception->getResponse();
         }
 
-        return $this->response->getResponse()->getBody(true);
+        return $this->response;
     }
 
     public function delete()
@@ -115,10 +115,10 @@ class AzerpoctService
                 ]
             ]);
         } catch (RequestException $exception) {
-            $this->response = $exception;
+            $this->response = $exception->getResponse();
         }
 
-        return $this->response->getResponse()->getBody(true);
+        return $this->response;
     }
 
 }

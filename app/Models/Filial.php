@@ -53,6 +53,8 @@ class Filial extends Model
     use Translatable;
     use SoftDeletes;
 
+    const DEFAULT_FILIAL_ID = 1;
+
     /**
      * @var array
      */

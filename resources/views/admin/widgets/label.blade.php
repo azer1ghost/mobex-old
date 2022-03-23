@@ -240,7 +240,7 @@
                     <div class="item">
                         <div class="key">Category</div>
                         <div class="dot">:</div>
-                        <div class="value"><?= str_limit(strtoupper(str_slug($item->detailed_type ?: 'Diger', " ")), 25) ?></div>
+                        <div class="value">{{ str_limit(strtoupper(str_slug($item->detailed_type ?: 'Diger', " ")), 25) }}</div>
                     </div>
                     <div class="item">
                         <div class="key">Items</div>
@@ -311,7 +311,7 @@
                             <div class="dot">:</div>
                             <div class="value">
                                 <b style="letter-spacing: 1px; font-size: 20px">
-                                    {{ $item->zip_code }}
+                                    AZ{{ $item->zip_code }}
                                 </b>
                             </div>
                         </div>

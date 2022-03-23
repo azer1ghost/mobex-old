@@ -465,9 +465,13 @@ class CellController extends Controller
 
     public function sentToAzerpoct()
     {
-//        $package = Package::find(68154);
-//
-//        return (new AzerpoctService($package))->create();
+        $package = Package::find(68158);
+
+        $response = (new AzerpoctService($package))->view();
+
+        dd(json_decode($response->getBody()->getContents()));
+
+        exit;
 
         $packages = Package::whereStatus(2)->where('cell', 'LIKE','%POCT%')->get();
 
@@ -476,9 +480,13 @@ class CellController extends Controller
             $response = (new AzerpoctService($package))->create();
 
             if ($response->getStatusCode() == 200) {
+
                 $package->setAttribute('status', 8);
+
+               // Notification::sendPackage($package->id, '2');
+
             } else {
-                $package->setAttribute('azerpoct_response_log', $response->message);
+                $package->setAttribute('azerpoct_response_log', $response->getBody()->getContents());
             }
 
             $package->save();

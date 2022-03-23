@@ -141,21 +141,8 @@
                                 @endif
                             </div>
 
-                            <div class="col-lg-12 form-group {{ $errors->has('filial') ? 'has-error' : '' }}">
-                                <span class="form_span">{!! __('auth.filial') !!}</span>
-                                <select title="filial" name="filial" id="filial" class="form__select">
-                                    @foreach($filials as $filial)
-                                        <option @if (old('filial') == $filial->id) selected
-                                                @endif value="{{ $filial->id }}">
-                                            {{ $filial->translateOrDefault($_lang)->name }}
-                                            :: {{ $filial->translateOrDefault($_lang)->address }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('filial'))
-                                    <label style="color: #a94442;" id="filial-error" class="validation-error-label"
-                                           for="filial">{{ $errors->first('filial') }}</label>
-                                @endif
+                            <div class="col-lg-12 form-group">
+                                @include('front.form.group', ['type' => 'select', 'key' => 'zip_code', 'label' => "Azər Poçt filialı", 'selects' => $azerpoct_branches, 'options' => ['id' => 'filial', 'class' => 'form__field']])
                             </div>
 
                             <div class="col-lg-12 form-group {{ $errors->has('address') ? 'has-error' : '' }}">

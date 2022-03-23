@@ -43,5 +43,6 @@ return [
         'vendor_id' => env('AZERPOST_VENDOR_ID'),
         'api_key' => env('AZERPOST_API_KEY'),
         'secret' => env('AZERPOST_SECRET'),
+        'default_fee' => 0.38, // USD
     ],
 ];

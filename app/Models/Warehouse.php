@@ -400,6 +400,12 @@ class Warehouse extends Authenticatable
             if ($user->{$mainDiscountKey} && $user->{$mainDiscountKey} > $discount) {
                 $discount = $user->{$mainDiscountKey};
             }
+
+            if ($user->sent_by_post && $user->zip_code) {
+                if ($user->azerpoctBranch) {
+                    $result += $user->azerpoctBranch->fee;
+                }
+            }
         }
 
         if ($discount) {

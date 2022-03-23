@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -12,13 +14,23 @@ class AzerpoctBranch extends Model
 {
     use SoftDeletes;
 
-    public function packages()
+    public function packages(): HasMany
     {
         return $this->hasMany(Package::class, 'zip_code');
     }
 
-    public function users()
+    public function users(): HasMany
     {
         return $this->hasMany(User::class, 'zip_code');
+    }
+
+    public function getFeeAttribute($value)
+    {
+        return $value ?? config('services.azerpost.default_fee');
+    }
+
+    public function scopeActive(Builder $builder)
+    {
+        $builder->where('status', '=', 'ACTIVE');
     }
 }

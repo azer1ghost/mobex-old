@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AzerpoctBranch;
 use App\Models\City;
 use App\Models\District;
 use App\Models\Filial;
@@ -88,6 +89,7 @@ class RegisterController extends Controller
             'gender'          => 'required|integer',
             'district'        => 'required',
             'city'            => 'required',
+            'zip_code'        => 'required|numeric',
             'filial'          => 'required|exists:filials,id',
             'fin'             => 'required|alpha_num|unique:users',
             'email'           => 'required|email|string|max:255|unique:users',
@@ -131,7 +133,8 @@ class RegisterController extends Controller
             'phone'           => $data['phone'],
             'customer_id'     => User::generateCode(),
             'city_id'         => $data['city'],
-            'filial_id'       => $data['filial'],
+            'filial_id'       => Filial::DEFAULT_FILIAL_ID,// $data['filial'],
+            'zip_code'        => $data['zip_code'],
             'district_id'     => $data['district'],
             'verified'        => ! env('EMAIL_VERIFY'),
             'promo_id'        => $promo ? $promo->id : null,
@@ -193,12 +196,21 @@ class RegisterController extends Controller
         $title = trans('front.menu.sign_up');
         $hideSideBar = $hideNavBar = true;
         $bodyClass = 'login-container login-cover  pace-done';
-        $cityRel = City::whereHas('districts')->orderBy('id', 'asc');
+        $cityRel = City::whereHas('districts')->limit(1)->orderBy('id', 'asc');
         $cities = $cityRel->get();
         $districts = District::where('city_id', $cityRel->first()->id)->get();
-        $filials = Filial::orderBy('id', 'asc')->limit(1)->get();
+//        $filials = Filial::orderBy('id', 'asc')->limit(1)->get();
 
-        return view('front.auth.register', compact('title', 'hideSideBar', 'hideNavBar', 'bodyClass', 'cities', 'districts', 'filials'));
+        $azerpoct_branches = [
+            'Seçilməyib'
+        ];
+
+        foreach (AzerpoctBranch::active()->orderBy('id')->get() as $branch) {
+            $azerpoct_branches[$branch->zip_code] = "$branch->postalDescription ($branch->home)";
+        }
+
+
+        return view('front.auth.register', compact('title', 'hideSideBar', 'hideNavBar', 'bodyClass', 'cities', 'districts', 'azerpoct_branches'));
     }
 
     /**
