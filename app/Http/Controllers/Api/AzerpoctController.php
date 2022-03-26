@@ -10,6 +10,8 @@ class AzerpoctController extends Controller
 {
     public function update(\Request $request)
     {
+        logger( $request->all() );
+
         if (
             $request->get('azerpost_shared_secret') == config('services.azerpost.secret') &&
             $request->get('vendor_id') == config('services.azerpost.vendor_id')

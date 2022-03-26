@@ -20,6 +20,9 @@ class CreateAzerpoctBranchesTable extends Migration
 
         Schema::table('packages', function($table) {
             $table->text('zip_code')->nullable()->default(null);
+            $table->text('azerpoct_response_log')->nullable()->default(null);
+            $table->unsignedInteger('azerpoct_status')->nullable()->default(null);
+            $table->bool('azerpoct_vendor_payment_status')->default(false);
         });
 
         Schema::table('users', function($table) {
@@ -37,6 +40,9 @@ class CreateAzerpoctBranchesTable extends Migration
         Schema::dropIfExists('azerpoct_branches');
         Schema::table('packages', function($table) {
             $table->dropColumn('zip_code');
+            $table->dropColumn('azerpoct_response_log');
+            $table->dropColumn('azerpoct_status');
+            $table->dropColumn('azerpoct_vendor_payment_status');
         });
         Schema::table('users', function($table) {
             $table->dropColumn('sent_by_post');

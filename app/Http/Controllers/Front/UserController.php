@@ -886,7 +886,7 @@ class UserController extends MainController
         ];
 
         foreach (AzerpoctBranch::active()->orderBy('id')->get() as $branch) {
-            $azerpoct_branches[$branch->zip_code] = "$branch->postalDescription ($branch->home)";
+            $azerpoct_branches[$branch->zip_code] = "$branch->postalDescription ($branch->home) - $branch->regionAZ";
         }
 
         return view('front.user.edit', compact('item', 'breadTitle', 'cities', 'districts', 'nulled', 'azerpoct_branches'));

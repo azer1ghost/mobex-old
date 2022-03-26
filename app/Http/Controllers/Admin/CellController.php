@@ -465,9 +465,9 @@ class CellController extends Controller
 
     public function sentToAzerpoct()
     {
-        $package = Package::find(68158);
+        $package = Package::find(68160);
 
-        $response = (new AzerpoctService($package))->view();
+        $response = (new AzerpoctService($package))->create();
 
         dd(json_decode($response->getBody()->getContents()));
 
