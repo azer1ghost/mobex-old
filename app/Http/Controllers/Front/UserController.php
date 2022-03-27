@@ -945,7 +945,7 @@ class UserController extends MainController
         $user->birthday = $request->has('birthday') ? $request->get('birthday') : null;
         $user->address = $request->has('address') ? $request->get('address') : null;
         $user->city_id = $request->has('city_id') ? $request->get('city_id') : null;
-//        $user->filial_id = $request->get('filial_id');
+        $user->filial_id = Filial::DEFAULT_FILIAL_ID;
 
 //        if ($request->has('filial_id') && $request->get('sent_to') === 'filial' && $request->get('filial_id') != null) {
 //            $user->filial_id = $request->get('filial_id');
