@@ -22,7 +22,7 @@ class CreateAzerpoctBranchesTable extends Migration
             $table->text('zip_code')->nullable()->default(null);
             $table->text('azerpoct_response_log')->nullable()->default(null);
             $table->unsignedInteger('azerpoct_status')->nullable()->default(null);
-            $table->bool('azerpoct_vendor_payment_status')->default(false);
+            $table->boolean('azerpoct_vendor_payment_status')->default(false);
         });
 
         Schema::table('users', function($table) {
