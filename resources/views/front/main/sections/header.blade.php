@@ -34,10 +34,10 @@
                                                href="{{ route('my-trendyol') }}"><i class="fas fa-check"></i>Trendyol kodu
                                                 <span class="badge badge-pill" style="background-color: green">Yeni</span></a>
                                         </li>
-{{--                                        <li>--}}
-{{--                                            <a {!! classActiveRoute('filials', 'current') !!}--}}
-{{--                                               href="{{ route('filials') }}"><i class="fas fa-map"></i>{{ __('front.menu.filials') }}</a>--}}
-{{--                                        </li>--}}
+                                        <li>
+                                            <a {!! classActiveRoute('filials', 'current') !!}
+                                               href="{{ route('filials') }}"><i class="fas fa-map"></i>{{ __('front.menu.filials') }}</a>
+                                        </li>
 
                                         <li>
                                             <a {!! classActiveRoute('declaration.create', 'current') !!}
