@@ -190,7 +190,7 @@
                                                    class="material-control-input">
                                             <span class="material-control-indicator"></span>
                                             <span class="description">Azər Poçta göndər</span>
-                                            <span class="help-block"> ( Əlavə ödəniş )</span>
+{{--                                            <span class="help-block"> ( Əlavə ödəniş )</span>--}}
                                         </label>
                                         <label class="custom-control material-checkbox ">
                                             <input value="1"

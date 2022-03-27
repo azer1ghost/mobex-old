@@ -401,11 +401,11 @@ class Warehouse extends Authenticatable
                 $discount = $user->{$mainDiscountKey};
             }
 
-            if ($user->sent_by_post && $user->zip_code) {
-                if ($user->azerpoctBranch) {
-                    $result += $user->azerpoctBranch->getAttribute('fee');
-                }
-            }
+//            if ($user->sent_by_post && $user->zip_code) {
+//                if ($user->azerpoctBranch) {
+//                    $result += $user->azerpoctBranch->getAttribute('fee');
+//                }
+//            }
         }
 
         if ($discount) {
