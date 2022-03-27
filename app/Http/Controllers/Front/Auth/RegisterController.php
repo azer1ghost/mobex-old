@@ -206,7 +206,7 @@ class RegisterController extends Controller
         ];
 
         foreach (AzerpoctBranch::active()->orderBy('id')->get() as $branch) {
-            $azerpoct_branches[$branch->zip_code] = "$branch->postalDescription ($branch->home)";
+            $azerpoct_branches[$branch->zip_code] = "$branch->postalDescription ($branch->home) - $branch->regionAZ";
         }
 
 
