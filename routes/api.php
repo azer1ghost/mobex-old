@@ -103,6 +103,9 @@ Route::group([
     Route::group([
         'prefix'=> 'azerpoct',
     ], function () {
+        Route::get('ping', [
+            'uses' => 'AzerpoctController@ping',
+        ]);
         Route::post('orders/update', [
             'uses' => 'AzerpoctController@update',
         ]);

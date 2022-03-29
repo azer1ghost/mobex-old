@@ -8,6 +8,11 @@ use App\Services\AzerpoctService;
 
 class AzerpoctController extends Controller
 {
+    public function ping()
+    {
+        return "pong";
+    }
+
     public function update(\Request $request)
     {
         logger( $request->all() );
