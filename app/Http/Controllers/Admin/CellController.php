@@ -465,14 +465,6 @@ class CellController extends Controller
 
     public function sentToAzerpoct()
     {
-        $package = Package::find(68160);
-
-        $response = (new AzerpoctService($package))->create();
-
-        dd(json_decode($response->getBody()->getContents()));
-
-        exit;
-
         $packages = Package::whereStatus(2)->where('cell', 'LIKE','%POCT%')->get();
 
         foreach ($packages as $package){
