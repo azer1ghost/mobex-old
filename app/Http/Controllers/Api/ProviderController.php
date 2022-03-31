@@ -29,6 +29,8 @@ class ProviderController extends Controller
     {
         $provider = explode("/", request()->path())[1];
         $this->provider = strtoupper($provider);
+
+        logger(request()->all());
     }
 
     /**

@@ -13,8 +13,10 @@ class AzerpoctController extends Controller
         return "pong";
     }
 
-    public function update(\Request $request)
+    public function update()
     {
+        $request = request();
+
         logger( $request->all() );
 
         if (
@@ -26,6 +28,8 @@ class AzerpoctController extends Controller
             $scan_post_code = $request->get('scan_post_code');
 
             $packages = $request->get('packages', []);
+
+            logger('Login success');
 
             foreach ($packages as $package)
             {
