@@ -82,8 +82,7 @@
                                                 <i class="fas fa-times"></i></a>
                                             <a type="submit"
                                                class="theme-btn-one add_new_order_button add_beyan add_order">{{ __('front.user_orders.create_order_form.new_link') }}
-                                                <i
-                                                        class="fas fa-plus"></i></a>
+                                                <i class="fas fa-plus"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -102,10 +101,10 @@
                                                             <li>{{ __('front.user_orders.create_order_form.total') }}
                                                                 <span id="calc_order_price">0.00 TL</span>
                                                             </li>
-{{--                                                            <li>Komissiya: 0% (6 - 10 mart)</li>--}}
-                                                            <li>{{ __('front.user_orders.create_order_form.service_fee') }}
-                                                                <span id="cargo_fee_value">0.00 TL</span>
-                                                            </li>
+                                                            <li>Komissiya: 0% (Ramazan)</li>
+{{--                                                            <li>{{ __('front.user_orders.create_order_form.service_fee') }}--}}
+{{--                                                                <span id="cargo_fee_value">0.00 TL</span>--}}
+{{--                                                            </li>--}}
                                                             <li>
                                                                 {{ __('front.user_orders.create_order_form.overall') }}
                                                                 <span id="overall_fee"><strong></strong>0.00 TL</span>
