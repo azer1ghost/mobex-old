@@ -49,7 +49,7 @@ class AzerpoctController extends Controller
                 }
             }
 
-            return response('1', 200);
+            return response(sizeof($packages). " Packages status updated", 200);
         }
 
         abort('403','Unauthorized request');
