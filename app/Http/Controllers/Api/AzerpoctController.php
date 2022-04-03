@@ -6,6 +6,7 @@ use App\Models\Extra\Notification;
 use App\Models\Package;
 use App\Services\AzerpoctService;
 use Illuminate\Http\Request;
+use Validator;
 
 class AzerpoctController extends Controller
 {
@@ -20,12 +21,16 @@ class AzerpoctController extends Controller
 
         if ($request->header('x-api-key') === config('services.azerpost.secret'))
         {
-            $this->validate($request, [
+            $validator = Validator::make($request->all(), [
                 'status_id'  => 'required',
                 'scan_post_code' => 'required|string|max:10',
                 'packages' => 'required|array',
                 'vendor_id' => 'required|in:'.config('services.azerpost.vendor_id'),
             ]);
+
+            if ($validator->fails()) {
+                return response()->withErrors($validator);
+            }
 
             $status_id = $request->get('status_id');
 
