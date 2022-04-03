@@ -40,26 +40,29 @@ class AzerpoctController extends Controller
 
             logger('Login success');
 
-            if ($packages)
+            $updatedCount = 0;
+
+            foreach ($packages as $package)
             {
-                foreach ($packages as $package)
+                $package = Package::whereCustomAwb($package)->first();
+
+                if ($package)
                 {
-                    $package = Package::whereCustomAwb($package)->first();
+                    $package->setAttribute('azerpoct_status', $status_id);
+                    $package->setAttribute('azerpoct_response_log', $scan_post_code);
 
-                    if ($package) {
-                        $package->setAttribute('azerpoct_status', $status_id);
-                        $package->setAttribute('azerpoct_response_log', $scan_post_code);
+                    if ($package->save()){
+                        $updatedCount++;
+                    }
 
-                        $package->save();
-
-                        if ($status_id == AzerpoctService::STATUS_AVAILABLE_FOR_PICKUP) {
-                            Notification::sendPackage($package->getAttribute('id'), '9');
-                        }
+                    if ($status_id == AzerpoctService::STATUS_AVAILABLE_FOR_PICKUP) {
+                        Notification::sendPackage($package->getAttribute('id'), '9');
                     }
                 }
             }
 
-            return response(sizeof($packages). " Packages status updated", 200);
+
+            return response($updatedCount. " Packages status updated", 200);
         }
 
         abort('403','Unauthorized request');
