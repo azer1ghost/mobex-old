@@ -34,22 +34,16 @@ class AzerpoctController extends Controller
 
             $status_id = $request->get('status_id');
 
-            $scan_post_code = $request->get('scan_post_code');
-
-            $packages = $request->get('packages', []);
-
-            logger('Login success');
-
             $updatedCount = 0;
 
-            foreach ($packages as $package)
+            foreach ($request->get('packages', []) as $package)
             {
-                $package = Package::whereCustomAwb($package)->first();
+                $package = Package::whereCustomId($package)->first();
 
                 if ($package)
                 {
                     $package->setAttribute('azerpoct_status', $status_id);
-                    $package->setAttribute('azerpoct_response_log', $scan_post_code);
+                    $package->setAttribute('azerpoct_response_log', $request->get('scan_post_code'));
 
                     if ($package->save()){
                         $updatedCount++;
