@@ -22,7 +22,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-
         Blade::directive('checking', function ($expression) {
 
             if (auth()->guard('admin')->check()) {
@@ -44,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->alias('bugsnag.logger', \Illuminate\Contracts\Logging\Log::class);
-        $this->app->alias('bugsnag.logger', \Psr\Log\LoggerInterface::class);
+//        $this->app->alias('bugsnag.logger', \Illuminate\Contracts\Logging\Log::class);
+//        $this->app->alias('bugsnag.logger', \Psr\Log\LoggerInterface::class);
     }
 }
