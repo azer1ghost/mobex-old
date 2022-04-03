@@ -47,10 +47,10 @@ class AzerpoctController extends Controller
                     $package = Package::whereCustomAwb($package)->first();
 
                     if ($package) {
-                        $package->update([
-                            'azerpoct_status' => $status_id,
-                            'azerpoct_response_log' => $scan_post_code,
-                        ]);
+                        $package->setAttribute('azerpoct_status', $status_id);
+                        $package->setAttribute('azerpoct_response_log', $scan_post_code);
+
+                        $package->save();
 
                         if ($status_id == AzerpoctService::STATUS_AVAILABLE_FOR_PICKUP) {
                             Notification::sendPackage($package->getAttribute('id'), '9');
