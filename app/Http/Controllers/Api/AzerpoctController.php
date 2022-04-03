@@ -55,7 +55,6 @@ class AzerpoctController extends Controller
                 }
             }
 
-
             return response($updatedCount. " Packages status updated", 200);
         }
 

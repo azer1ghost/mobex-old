@@ -28,7 +28,7 @@ class AzerpoctService
 
     public object $response;
 
-    public function __construct(Package $package)
+    public function __construct($package)
     {
         $this->vendor_id = config('services.azerpost.vendor_id');
         $this->api_key = config('services.azerpost.api_key');

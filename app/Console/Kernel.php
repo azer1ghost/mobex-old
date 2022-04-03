@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\AzerpostPaidStatus;
 use App\Console\Commands\Campaign;
 use App\Console\Commands\Cashback;
 use App\Console\Commands\CustomSystem;
@@ -18,6 +19,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        AzerpostPaidStatus::class,
         SendNotification::class,
         Daily::class,
         Campaign::class,

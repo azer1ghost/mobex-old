@@ -39,24 +39,20 @@ class AzerpostPaidStatus extends Command
      */
     public function handle()
     {
-        $packages = Package::query()
+        Package::query()
             ->where('status', '>=', config('ase.attributes.package.status.8'))
             ->where('azerpoct_vendor_payment_status', false)
-            ->where('paid', true)
-            ->get();
-
-        foreach ($packages as $package){
-
-            $response = (new AzerpoctService($package))->vp_status();
-
-            if ($response->getStatusCode() == 200) {
-                $package->setAttribute('azerpoct_vendor_payment_status', true);
-            } else {
-                $package->setAttribute('azerpoct_response_log', $response->getBody()->getContents());
-            }
-
-            $package->save();
-        }
-
+            ->whereNotNull('zip_code')
+            ->whereNotNull('paid')
+            ->get()
+            ->each(function ($package) {
+                $response = (new AzerpoctService($package))->vp_status();
+                if ($response->getStatusCode() == 200) {
+                    $package->setAttribute('azerpoct_vendor_payment_status', true);
+                } else {
+                    $package->setAttribute('azerpoct_response_log', $response->getBody()->getContents());
+                }
+                $package->save();
+            });
     }
 }
