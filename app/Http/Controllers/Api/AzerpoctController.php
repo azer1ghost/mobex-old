@@ -29,7 +29,7 @@ class AzerpoctController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return response()->withErrors($validator);
+                return response($validator->errors());
             }
 
             $status_id = $request->get('status_id');
