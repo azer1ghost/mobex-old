@@ -11,6 +11,7 @@ use App\Models\PackageLog;
 use App\Models\PackageType;
 use App\Models\Parcel;
 use App\Models\Transaction;
+use App\Services\AzerpoctService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -201,9 +202,19 @@ class PackageController extends Controller
             'color'  => 'default',
             'target' => '_blank',
         ],
+        [
+            'route'  => 'packages.azerpoctLogs',
+            'key'    => 'zip_code',
+            'label'  => 'Azerpoct Logs',
+            'icon'   => 'list',
+            'color'  => 'info',
+            'target' => '_blank',
+        ],
     ];
 
     protected $list = [
+        'id',
+        'zip_code',
         'scanned_at'             => [
             'label' => 'DeliveredAt',
             'type'  => 'date',
@@ -337,7 +348,7 @@ class PackageController extends Controller
         'worker'                 => [
             'label' => 'Worker',
         ],
-        'id',
+
         'created_at'             => [
             'label' => 'CreatedAt',
             'type'  => 'date',
@@ -620,7 +631,7 @@ class PackageController extends Controller
         ]*/
     ];
 
-    protected $with = ['type', 'warehouse', 'user', 'logs'];
+    protected $with = ['type', 'warehouse', 'user'];
 
     public function __construct()
     {
@@ -664,6 +675,11 @@ class PackageController extends Controller
         }
 
         return view('admin.widgets.logs', compact('logs', 'id'));
+    }
+
+    public function azerpoctLogs(Package $package)
+    {
+        return (new AzerpoctService($package))->view()->getBody();
     }
 
     /**

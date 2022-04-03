@@ -58,6 +58,7 @@ Route::group([
             'package'   => [
                 ['name' => 'request', 'method' => 'get'],
                 ['name' => 'logs', 'method' => 'get'],
+                ['name' => 'azerpoctLogs', 'method' => 'get'],
                 ['name' => 'label', 'method' => 'get'],
                 ['name' => 'ajax', 'method' => 'post'],
             ],
