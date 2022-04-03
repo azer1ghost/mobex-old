@@ -49,6 +49,7 @@ class AzerpostPaidStatus extends Command
                 $response = (new AzerpoctService($package))->vp_status();
                 if ($response->getStatusCode() == 200) {
                     $package->setAttribute('azerpoct_vendor_payment_status', true);
+                    $package->setAttribute('azerpoct_response_log', $response->getBody()->getContents());
                 } else {
                     $package->setAttribute('azerpoct_response_log', $response->getBody()->getContents());
                 }
