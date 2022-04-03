@@ -677,9 +677,9 @@ class PackageController extends Controller
         return view('admin.widgets.logs', compact('logs', 'id'));
     }
 
-    public function azerpoctLogs(Package $package)
+    public function azerpoctLogs($id)
     {
-        return (new AzerpoctService($package))->view()->getBody();
+        return (new AzerpoctService(Package::query()->findOrFail($id)))->view()->getBody();
     }
 
     /**

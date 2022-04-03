@@ -43,7 +43,7 @@ class AzerpostPaidStatus extends Command
             ->where('status', '>=', config('ase.attributes.package.status.8'))
             ->where('azerpoct_vendor_payment_status', false)
             ->whereNotNull('zip_code')
-            ->whereNotNull('paid')
+            ->where('paid', '>', 0)
             ->get()
             ->each(function ($package) {
                 $response = (new AzerpoctService($package))->vp_status();
