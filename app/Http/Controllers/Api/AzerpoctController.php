@@ -42,8 +42,10 @@ class AzerpoctController extends Controller
 
                 if ($package)
                 {
-                    $package->setAttribute('azerpoct_status', $status_id);
-                    $package->setAttribute('azerpoct_response_log', $request->get('scan_post_code'));
+                    $package->setRawAttributes([
+                        'azerpoct_status' => $status_id,
+                        'azerpoct_response_log' => $request->get('scan_post_code')
+                    ]);
 
                     if ($package->save()){
                         $updatedCount++;
