@@ -35,7 +35,7 @@ class AzerpoctController extends Controller
 
             logger('Login success');
 
-            if (!empty($packages))
+            if ($packages)
             {
                 foreach ($packages as $package)
                 {
