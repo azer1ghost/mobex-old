@@ -18,10 +18,15 @@ class AzerpoctController extends Controller
     {
         logger( $request->all() );
 
-        if (
-            $request->header('x-api-key') === config('services.azerpost.secret') &&
-            $request->get('vendor_id') == config('services.azerpost.vendor_id')
-        ) {
+        if ($request->header('x-api-key') === config('services.azerpost.secret'))
+        {
+            $this->validate($request, [
+                'status_id'  => 'required|integer|max:9',
+                'scan_post_code' => 'required|string|max:10',
+                'packages' => 'required|array',
+                'vendor_id' => 'required|in:'.config('services.azerpost.vendor_id'),
+            ]);
+
             $status_id = $request->get('status_id');
 
             $scan_post_code = $request->get('scan_post_code');
