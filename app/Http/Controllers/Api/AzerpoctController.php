@@ -51,10 +51,10 @@ class AzerpoctController extends Controller
                             'azerpoct_status' => $status_id,
                             'azerpoct_response_log' => $scan_post_code,
                         ]);
-                    }
 
-                    if ($status_id == AzerpoctService::STATUS_AVAILABLE_FOR_PICKUP) {
-                        Notification::sendPackage($package->getAttribute('id'), '9');
+                        if ($status_id == AzerpoctService::STATUS_AVAILABLE_FOR_PICKUP) {
+                            Notification::sendPackage($package->getAttribute('id'), '9');
+                        }
                     }
                 }
             }
