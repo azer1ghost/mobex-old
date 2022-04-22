@@ -123,6 +123,7 @@ class Custom
                     "invoys_price"      => isset(config('ase.attributes.customs_currencies')[$package->shipping_amount_cur]) ? ($package->shipping_amount ?: 0) : ($package->shipping_converted_price ?: 0),
                     "currency_type"     => isset(config('ase.attributes.customs_currencies')[$package->shipping_amount_cur]) ? config('ase.attributes.customs_currencies')[$package->shipping_amount_cur] : '840',
                     "quantity_of_goods" => $package->number_items,
+                    'document_type'     => 'PinCode',
                     "fin"               => $package->user ? $package->user->fin : '-',
                     "idxaL_NAME"        => $package->user ? str_limit($package->user->full_name, 190) : '-',
                     "idxal_adress"      => $package->user ? str_limit($package->user->address, 190) : '-',
