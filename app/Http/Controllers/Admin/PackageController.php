@@ -1045,6 +1045,21 @@ class PackageController extends Controller
                     'redirect' => route('cells.edit', $package->id),
                 ]);
             } else {
+
+                if(strpos($package->cell, "POCT") !== false)
+                {
+                    if ($package->status >= 8){
+                        $response = (new AzerpoctService($package))->delete();
+                        $package->setAttribute('azerpoct_response_log', $response->getBody()->getContents());
+                        $package->status = 2;
+                        $package->save();
+                    }
+
+                    return response()->json([
+                        'redirect' => route('cells.edit', $package->id),
+                    ]);
+                }
+
                 return response()->json([
                     'success' => $notification ? 'Notification was sent' : 'You have already scanned this package :-)',
                 ]);
