@@ -383,7 +383,6 @@ class CellController extends Controller
 
     public function find()
     {
-
         $code = \request()->get('cwb');
         if (! $code) {
             return redirect()->back();
@@ -391,10 +390,19 @@ class CellController extends Controller
         $package = Package::whereIn('status', [1, 2])->whereTrackingCode($code)->orWhere('custom_id', $code)->first();
 
         if ($package) {
-            $status = $package->status;
+
+            if(strpos($package->cell, "POCT") !== false)
+            {
+                if ($package->status >= 8){
+                    $response = (new AzerpoctService($package))->delete();
+                    $package->setAttribute('azerpoct_response_log', $response->getBody()->getContents());
+                    $package->status = 2;
+                    $package->save();
+                }
+            }
 
             /* Send Notification */
-            if ($status < 2) {
+            if ($package->status < 2) {
                 $package->status = 2;
                 if (! $package->scanned_at) {
                     $package->scanned_at = now();
@@ -431,6 +439,16 @@ class CellController extends Controller
             if ($package->user && $package->user->auto_charge && $package->user->packageBalance() >= $package->delivery_manat_price) {
                 Transaction::addPackage($package->id, 'PACKAGE_BALANCE');
                 $package->paid = true;
+                $package->save();
+            }
+        }
+
+        if(strpos($package->cell, "POCT") !== false)
+        {
+            if ($package->status >= 8){
+                $response = (new AzerpoctService($package))->delete();
+                $package->setAttribute('azerpoct_response_log', $response->getBody()->getContents());
+                $package->status = 2;
                 $package->save();
             }
         }
