@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\Admin\PackagesExport;
 use App\Exports\Warehouse\ManifestExport;
 use App\Models\Activity;
+use App\Models\AzerpoctBranch;
 use App\Models\Extra\Notification;
 use App\Models\Package;
 use App\Models\PackageLog;
@@ -560,6 +561,16 @@ class PackageController extends Controller
             ],
             'validation'        => 'nullable|mimes:jpeg,jpg,png,gif,svg,pdf,doc,docx,csv,xls',
         ],
+        [
+            'name'              => 'zip_code',
+            'label'             => 'Zip code',
+            'type'              => 'text',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3',
+            ],
+            'validation'        => 'nullable|integer',
+        ],
+
         /*[
             'type' => 'html',
             'html' => '<div class="form-group mt-10 col-lg-12"><h3 class="text-center">Manual inputs for Smart Customs</h3></div>',
@@ -714,6 +725,14 @@ class PackageController extends Controller
 
         if (\request()->get('dec') != 3) {
             $items = $items->where('status', '!=', 3);
+        }
+
+
+        if (request()->has('zip_code')){
+
+            $zipcode = optional(AzerpoctBranch::find(request('zip_code')))->getAttribute('zip_code');
+
+            $items = $items->where('zip_code', '=', $zipcode);
         }
 
         /* Filter filials */

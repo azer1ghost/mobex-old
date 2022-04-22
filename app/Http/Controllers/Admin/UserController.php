@@ -235,7 +235,7 @@ class UserController extends Controller
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3',
             ],
-            'validation'        => 'nullable|string',
+            'validation'        => 'nullable|integer',
         ],
         [
             'name'              => 'gender',
