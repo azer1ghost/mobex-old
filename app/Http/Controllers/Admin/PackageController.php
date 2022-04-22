@@ -732,7 +732,8 @@ class PackageController extends Controller
 
             $zipcode = optional(AzerpoctBranch::find(request('zip_code')))->getAttribute('zip_code');
 
-            $items = $items->where('zip_code', '=', $zipcode);
+            if (!is_null($zipcode))
+                $items = $items->where('zip_code', '=', $zipcode);
         }
 
         /* Filter filials */
