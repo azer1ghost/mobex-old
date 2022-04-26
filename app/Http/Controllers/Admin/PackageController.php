@@ -165,6 +165,23 @@ class PackageController extends Controller
                 'allowNull'         => 'All Azerpoct',
             ],
             [
+                'name'              => 'azerpoct_status',
+                'type'              => 'select_from_array',
+                'options'           => [
+                    'Order Placed',
+                    'Order Accepted',
+                    'Picked Up',
+                    'In Transit',
+                    'Available for Pickup',
+                    'Delivered',
+                    'Cancelled',
+                ],
+                'wrapperAttributes' => [
+                    'class' => 'col-lg-3',
+                ],
+                'allowNull'         => 'AzerPoct Status',
+            ],
+            [
                 'type'              => 'select2',
                 'name'              => 'promo_id',
                 'attribute'         => 'title',
