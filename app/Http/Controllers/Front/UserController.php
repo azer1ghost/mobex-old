@@ -548,10 +548,14 @@ class UserController extends MainController
 
         $breadTitle = $title = trans('front.user.packages');
 
-        $packages = auth()->user()->packages()->where('status', $id);
+        $packages = auth()->user()->packages();
 
         if ($id == 2){
-            $packages->orWhere('status', '=',8);
+            $packages->where(function($q){
+                $q->where('status', 2)->orWhere('status', 8);
+            });
+        } else {
+            $packages->where('status', $id);
         }
 
         if (\Request::has('last_30_days')) {
