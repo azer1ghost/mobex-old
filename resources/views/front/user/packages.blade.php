@@ -111,6 +111,7 @@
                                                             @php
                                                                 $isEarlyDeclared = $package->status === 6;
                                                                 $isInFilial = $package->status === 2;
+                                                                $isInAzerpoct = $package->status === 8;
                                                                 $isCreatedByOperator = !is_null($package->links);
                                                                 $isInWarehouse = $package->status === 0;
                                                                 $inCustoms = $package->custom_status === 0;
@@ -160,7 +161,7 @@
                                                                             @endif
                                                                         @endif
 
-                                                                        @if($isInFilial)
+                                                                        @if($isInAzerpoct)
                                                                             <span class="badge badge-success">Azerpoctda</span>
                                                                         @endif
 
