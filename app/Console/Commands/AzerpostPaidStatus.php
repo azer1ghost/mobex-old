@@ -42,9 +42,10 @@ class AzerpostPaidStatus extends Command
         //config('ase.attributes.package.status');
 
         Package::query()
-            ->whereIn('status',  [8, 9])
+            ->where('status',  8)
             ->where('paid', '>', 0)
             ->where('azerpoct_vendor_payment_status', false)
+            ->whereNotNull('azerpoct_status')
             ->whereNotNull('zip_code')
             ->get()
             ->each(function ($package) {
