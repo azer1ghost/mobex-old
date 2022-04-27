@@ -295,7 +295,7 @@ class UserController extends MainController
         foreach (auth()->user()->children as $user) {
             $users[] = $user->id;
         }
-        $packages = Package::whereIn('user_id', $users)->where('status', 2)->get();
+        $packages = Package::query()->whereIn('user_id', $users)->whereStatus(2)->where('cell', 'NOT LIKE','%POCT%')->get();
 
         if (\request()->isMethod('post')) {
 
