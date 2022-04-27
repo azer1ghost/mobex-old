@@ -58,9 +58,7 @@
                                         <li @if(in_array($id, [2, 8])) class="active-btn" @endif>
                                             <a href="{{ route('my-packages', ['id' => 2]) }}">
                                                 {{ ucfirst(strtolower(__('front.in_baku'))) }}
-                                                @if(isset($counts[2]))
-                                                    <b class="c-label">{{ $counts[2] or null }}</b>
-                                                @endif
+                                                <b class="c-label">{{ ($counts[2] ?? 0) + ($counts[8] ?? 0) or null }}</b>
                                             </a>
                                         </li>
                                         <li @if($id == 7) class="active-btn" @endif>
