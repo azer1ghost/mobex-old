@@ -55,7 +55,7 @@
                                                 @endif
                                             </a>
                                         </li>
-                                        <li @if($id == 2) class="active-btn" @endif>
+                                        <li @if(in_array($id, [2, 8])) class="active-btn" @endif>
                                             <a href="{{ route('my-packages', ['id' => 2]) }}">
                                                 {{ ucfirst(strtolower(__('front.in_baku'))) }}
                                                 @if(isset($counts[2]))
@@ -110,6 +110,7 @@
 
                                                             @php
                                                                 $isEarlyDeclared = $package->status === 6;
+                                                                $isInFilial = $package->status === 2;
                                                                 $isCreatedByOperator = !is_null($package->links);
                                                                 $isInWarehouse = $package->status === 0;
                                                                 $inCustoms = $package->custom_status === 0;
@@ -157,6 +158,10 @@
                                                                                     @endif
                                                                                 @endif
                                                                             @endif
+                                                                        @endif
+
+                                                                        @if($isInFilial)
+                                                                            <span class="badge badge-success">Azerpoctda</span>
                                                                         @endif
 
                                                                         @if($isCreatedByOperator && $isEarlyDeclared)

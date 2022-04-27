@@ -545,8 +545,15 @@ class UserController extends MainController
     public function packages($id = 0)
     {
         $this->generalShare();
+
         $breadTitle = $title = trans('front.user.packages');
-        $packages = Package::whereUserId(\Auth::user()->id)->whereStatus($id);
+
+        $packages = auth()->user()->packages()->where('status', $id);
+
+        if ($id == 2){
+            $packages->orWhere('status', '=',8);
+        }
+
         if (\Request::has('last_30_days')) {
             $startForExists = Carbon::now()->subDays(30)->format('Y-m-d h:i:s');
             $packages = $packages->where('created_at', '>=', $startForExists);
