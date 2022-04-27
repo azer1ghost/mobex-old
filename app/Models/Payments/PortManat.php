@@ -78,7 +78,7 @@ class PortManat
             return null;
         }
 
-        if ($package &&  in_array($package->status, [2, 8])) {
+        if ($package && !in_array($package->status, [2, 8]) ) {
             return null;
         }
 
