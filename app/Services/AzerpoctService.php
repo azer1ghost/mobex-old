@@ -79,7 +79,7 @@ class AzerpoctService
                 'json' => [
                     "vendor_id"             => $this->vendor_id,
                     "package_id"            => $this->package->getAttribute('custom_id'),
-                    "vendor_payment_status" => (int) $this->package->getAttribute('paid')
+                    "vendor_payment_status" => boolval($this->package->getAttribute('paid'))
                 ]
             ]);
         } catch (RequestException $exception) {
