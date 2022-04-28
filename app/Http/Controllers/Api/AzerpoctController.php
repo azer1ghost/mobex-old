@@ -45,12 +45,16 @@ class AzerpoctController extends Controller
                     $package->setAttribute('azerpoct_status', $status_id);
                     $package->setAttribute('azerpoct_response_log', $request->get('scan_post_code'));
 
-                    if ($package->save()){
-                        $updatedCount++;
-                    }
-
                     if ($status_id == AzerpoctService::STATUS_AVAILABLE_FOR_PICKUP) {
                         Notification::sendPackage($package->getAttribute('id'), '9');
+                    }
+
+                    if ($status_id == AzerpoctService::STATUS_DELIVERED) {
+                        $package->setAttribute('status', 3);
+                    }
+
+                    if ($package->save()){
+                        $updatedCount++;
                     }
                 }
             }
