@@ -40,6 +40,7 @@ class AzerpostPaidStatus extends Command
     public function handle()
     {
         //config('ase.attributes.package.status');
+        $this->info("Bağlamaların odenislerinin azerpocta bildirilməsi başlandı.. ");
 
         Package::query()
             ->where('status',  8)
@@ -53,6 +54,7 @@ class AzerpostPaidStatus extends Command
                 if ($response->getStatusCode() == 200) {
                     $package->setAttribute('azerpoct_vendor_payment_status', true);
                     $package->setAttribute('azerpoct_response_log', $response->getBody()->getContents());
+                    sendTGMessage("🆘 #Azerpoct odenis statusu gonderildi " .  $package->custom_id . " " . $response->getBody()->getContents());
                 } else {
                     $package->setAttribute('azerpoct_response_log', $response->getBody()->getContents());
                 }
