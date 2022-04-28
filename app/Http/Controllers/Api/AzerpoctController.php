@@ -59,6 +59,8 @@ class AzerpoctController extends Controller
                 }
             }
 
+            sendTGMessage("🆘 #Azerpoct $updatedCount ədəd bağlamas azerpoçt filiallarında müştərilərə təhvil verildi");
+
             return response($updatedCount. " Packages status updated", 200);
         }
 
