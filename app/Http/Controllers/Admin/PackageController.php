@@ -1063,7 +1063,7 @@ class PackageController extends Controller
 
             if (app('laratrust')->can('update-cells') && ! $package->cell) {
                 return response()->json([
-                    'redirect' => route('cells.edit', $package->id),
+                    'redirect' => route('cells.edit', ['id' => $package->id, 'sent_to_post' => $package->zip_code]),
                 ]);
             } else {
 
