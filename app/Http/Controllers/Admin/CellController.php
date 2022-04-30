@@ -410,7 +410,7 @@ class CellController extends Controller
                 $package->save();
             }
 
-            return redirect()->route('cells.edit', ['id' => $package->id, 'sent_to_post' => boolval($package->zip_code)]);
+            return redirect()->route('cells.edit', ['id' => $package->id, 'sent_to_post' => $package->zip_code]);
         } else {
             return redirect()->back();
         }
