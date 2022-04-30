@@ -487,16 +487,24 @@ class CellController extends Controller
 
         foreach ($packages as $package){
 
-            $response = (new AzerpoctService($package))->create();
+            $res = (new AzerpoctService($package))->create();
 
-            if ($response->getStatusCode() == 200) {
+            $responseAsString = $res->getBody()->getContents();
+
+            if ($res->getStatusCode() == 200) {
 
                 $package->setAttribute('status', 8);
+
+                $package->setAttribute('azerpoct_response_log', $responseAsString);
+
+                $responseObject = json_decode($responseAsString);
+
+                $package->setAttribute('azerpost_delivery_charge', $responseObject->delivery_charge);
 
                // Notification::sendPackage($package->id, '2');
 
             } else {
-                $package->setAttribute('azerpoct_response_log', $response->getBody()->getContents());
+                $package->setAttribute('azerpoct_response_log', $responseAsString);
             }
 
             $package->save();

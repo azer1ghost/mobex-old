@@ -39,7 +39,8 @@
         "tightenco/quicksand": "^0.2.1",
         "tymon/jwt-auth": "0.5.*",
         "uxweb/sweet-alert": "~1.4",
-        "watson/rememberable": "^2.0"
+        "watson/rememberable": "^2.0",
+      "ext-json": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
