@@ -499,7 +499,11 @@ class CellController extends Controller
 
                 $responseObject = json_decode($responseAsString);
 
-                $package->setAttribute('azerpost_delivery_charge', $responseObject->delivery_charge);
+                if (!isset($responseObject->message))
+                {
+                    if (isset($responseObject->data->charge))
+                        $package->setAttribute('azerpost_delivery_charge', $responseObject->data->charge);
+                }
 
                // Notification::sendPackage($package->id, '2');
 

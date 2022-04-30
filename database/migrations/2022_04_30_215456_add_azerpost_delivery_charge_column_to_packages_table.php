@@ -9,7 +9,7 @@ class AddAzerpostDeliveryChargeColumnToPackagesTable extends Migration
     public function up()
     {
         Schema::table('packages', function($table) {
-            $table->string('azerpost_delivery_charge')->nullable()->default(0);
+            $table->string('azerpost_delivery_charge', 10)->nullable()->default(0);
         });
     }
 
