@@ -20,7 +20,7 @@
     $cells = $cells->pluck('total', 'cell')->all();
 
     ?>
-    @if(request()->has('sent_to_post'))
+    @if(request()->has('sent_to_post') || request()->get('sent_to_post') == 1)
         <div class="mt-5 col-6 alert alert-success">
             <h3>Diqqət!!! Bağlama Azerpocta göndərilməlidir</h3>
         </div>
