@@ -585,7 +585,7 @@ class PackageController extends Controller
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3',
             ],
-            'validation'        => 'nullable|integer',
+            'validation'        => 'nullable|numeric',
         ],
 
         /*[
