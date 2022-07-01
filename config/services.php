@@ -43,7 +43,9 @@ return [
         'vendor_id' => env('AZERPOST_VENDOR_ID'),
         'api_key' => env('AZERPOST_API_KEY'),
         'secret' => env('AZERPOST_SECRET'),
-        'in_baku_fee' => 0.32, // USD
-        'out_baku_fee' => 0.38, // USD
+        'in_baku_fee' => 0, // USD
+        'in_baku_fee_per_kq' => 0, // USD
+        'out_baku_fee' => 1.18, // USD
+        'out_baku_fee_per_kq' => 0.59, // USD
     ],
 ];
