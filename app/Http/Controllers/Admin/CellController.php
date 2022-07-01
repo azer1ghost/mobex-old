@@ -493,20 +493,22 @@ class CellController extends Controller
 
             if ($res->getStatusCode() == 200) {
 
-                $package->setAttribute('status', 8);
-
-                $package->setAttribute('azerpoct_response_log', $responseAsString);
-
                 $responseObject = json_decode($responseAsString);
 
-                if (!isset($responseObject->message))
+                if ($responseObject->status == 200)
                 {
-                    if (isset($responseObject->data->charge))
-                        $package->setAttribute('azerpost_delivery_charge', $responseObject->data->charge);
+                    $package->setAttribute('status', 8);
+
+                    $package->setAttribute('azerpoct_response_log', $responseAsString);
+
+                    if (!isset($responseObject->message))
+                    {
+                        if (isset($responseObject->data->charge))
+                            $package->setAttribute('azerpost_delivery_charge', $responseObject->data->charge);
+                    }
+
+                    // Notification::sendPackage($package->id, '2');
                 }
-
-               // Notification::sendPackage($package->id, '2');
-
             } else {
                 $package->setAttribute('azerpoct_response_log', $responseAsString);
             }
