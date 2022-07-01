@@ -403,8 +403,12 @@ class Warehouse extends Authenticatable
 
             if ($user->sent_by_post && $user->zip_code) {
                 if ($user->azerpoctBranch) {
-                    $azerpoctFee = $user->azerpoctBranch->getFee($kq);
-                    $result += $azerpoctFee;
+
+                    $result += $user->azerpoctBranch->fee;
+
+                    if ($kq > 1) {
+                        $result += $kq * $user->azerpoctBranch->fee_per_kq;
+                    }
                 }
             }
         }
