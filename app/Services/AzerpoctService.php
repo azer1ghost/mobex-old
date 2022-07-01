@@ -60,7 +60,7 @@ class AzerpoctService
                     "email"              => $this->package->user->getAttribute('email'),
                     "phone_no"           => $this->package->user->getAttribute('phone'),
                     "user_passport"      => $this->package->user->getAttribute('passport'),
-                    "delivery_type"      => 0,
+                    "delivery_type"      => "0",
                     "vendor_payment"     => $this->package->getAttribute('delivery_manat_price')
                 ]
             ]);

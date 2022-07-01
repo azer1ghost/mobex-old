@@ -176,7 +176,7 @@
                                     <div class="col-lg-12 form-group mt-3">
                                         @include('front.form.group', ['type' => 'textarea', 'key' => 'address', 'label' => trans('front.address'), 'options' => ['class' => 'form__field', 'rows' => 4]])
                                     </div>
-                                    <div class="col-sm-6 form-group">
+                                    <div class="col-sm-12 form-group">
                                         @include('front.form.group', ['type' => 'select', 'key' => 'zip_code', 'label' => "Azər Poçt filialı", 'selects' => $azerpoct_branches, 'options' => ['id' => 'filial', 'class' => 'form__field']])
                                         {{--                                        @include('front.form.group', ['key' => 'zip_code', 'label' => trans('front.zip_code'), 'options' => ['class' => 'form__field']])--}}
                                     </div>

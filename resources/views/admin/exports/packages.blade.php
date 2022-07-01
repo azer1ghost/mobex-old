@@ -5,7 +5,7 @@
         <th><b>Receiver</b></th>
         <th><b>Phone</b></th>
         <th><b>Email</b></th>
-        <th><b>Filial</b></th>
+        <th><b>Post Index</b></th>
         <th><b>CWB</b></th>
         <th><b>Reg Number</b></th>
         <th><b>QTY</b></th>
@@ -24,7 +24,7 @@
             <td>{{ $package->user ? $package->user->full_name : '-' }}</td>
             <td>{{ $package->user ? $package->user->cleared_phone : '-' }}</td>
             <td>{{ $package->user ? $package->user->email : '-' }}</td>
-            <td>{{ $package->user ? $package->user->filial_name : '-' }}</td>
+            <td>{{ $package->user ? $package->zip_code : '-' }}</td>
             {{--<td>{{ $package->user ? ($package->user->phone ? \App\Models\Extra\SMS::clearNumber($package->user->phone) : '-' ) : '-' }}</td>--}}
             <td>{{ $package->custom_id }}</td>
             <td>{{ $package->reg_number }}</td>
