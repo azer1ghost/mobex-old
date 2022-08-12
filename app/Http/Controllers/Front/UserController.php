@@ -455,7 +455,7 @@ class UserController extends MainController
         $fee = round($price * 0.05, 2);
         $total = round($price * 1.05, 2);
 
-//         Ramazan 0 faiz kompaniyasi
+//      Ramazan 0 faiz kompaniyasi
 //        $fee = 0;
 //        $total = round($price, 2);
 
