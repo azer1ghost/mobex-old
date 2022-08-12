@@ -17,7 +17,7 @@ class AzerpoctController extends Controller
 
     public function update(Request $request)
     {
-        logger( $request->all() );
+//        logger( $request->all() );
 
         if ($request->header('x-api-key') === config('services.azerpost.secret'))
         {
