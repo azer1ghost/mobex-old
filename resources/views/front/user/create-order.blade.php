@@ -111,7 +111,7 @@
                                                             </li>
 
                                                             <li class="form-group custom-check-box mss mss_in_total mb-3">
-                                                                <label class="custom-control material-checkbox">
+                                                                <label class="custom-control">
                                                                     <input type="checkbox" class="form-control-input" required>
                                                                     <span class="material-control-indicator"></span>
                                                                     <a href="{{ route('pages.show','terms') }}" class="description"> {{ __('front.user_orders.create_order_form.agree') }}</a>
