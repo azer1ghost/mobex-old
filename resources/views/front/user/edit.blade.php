@@ -182,7 +182,7 @@
                                         }
                                     </style>
                                     <div class="col-sm-12 form-group">
-                                        @include('front.form.group', ['type' => 'select', 'key' => 'zip_code', 'label' => "Azərpoçt filialı", 'selects' => $azerpoct_branches, 'options' => ['id' => 'filial', 'class' => 'form__field']])
+                                        @include('front.form.group', ['type' => 'select', 'key' => 'zip_code', 'label' => "Azərpoçt filialı və ya şöbəsi seçin", 'selects' => $azerpoct_branches, 'options' => ['id' => 'filial', 'class' => 'form__field']])
                                         {{--                                        @include('front.form.group', ['key' => 'zip_code', 'label' => trans('front.zip_code'), 'options' => ['class' => 'form__field']])--}}
                                     </div>
 
