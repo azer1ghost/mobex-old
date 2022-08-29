@@ -182,7 +182,7 @@
                                         }
                                     </style>
                                     <div class="col-sm-12 form-group">
-                                        @include('front.form.group', ['type' => 'select', 'key' => 'zip_code', 'label' => "Azər Poçt filialı", 'selects' => $azerpoct_branches, 'options' => ['id' => 'filial', 'class' => 'form__field']])
+                                        @include('front.form.group', ['type' => 'select', 'key' => 'zip_code', 'label' => "Azərpoçt filialı", 'selects' => $azerpoct_branches, 'options' => ['id' => 'filial', 'class' => 'form__field']])
                                         {{--                                        @include('front.form.group', ['key' => 'zip_code', 'label' => trans('front.zip_code'), 'options' => ['class' => 'form__field']])--}}
                                     </div>
 
@@ -194,7 +194,7 @@
                                                    name="sent_by_post"
                                                    class="material-control-input">
                                             <span class="material-control-indicator"></span>
-                                            <span class="description">Azər Poçta göndər</span>
+                                            <span class="description">Azərpoçta göndər</span>
 {{--                                            <span class="help-block"> ( Əlavə ödəniş )</span>--}}
                                         </label>
                                         <label class="custom-control material-checkbox ">
