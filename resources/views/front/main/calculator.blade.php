@@ -37,21 +37,21 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                    <input id="weight" name="weight" class="form__field" type="text"
+                                    <input id="weight" name="weight" class="form__field" type="number"
                                            placeholder="{!! __('front.calculator.weight') !!}"/>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                    <input id="height" name="height" type="text"
+                                    <input id="height" name="height" type="number"
                                            placeholder="{!! __('front.calculator.height') !!}"
                                            class="form__field"/>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-4 col-xs-4 form-group">
-                                    <input id="Lenght" name="length" type="text"
+                                    <input id="Lenght" name="length" type="number"
                                            placeholder="{!! __('front.calculator.length') !!} "
                                            class="form__field"/>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-4 col-xs-4 form-group">
-                                    <input id="width" name="width" type="text"
+                                    <input id="width" name="width" type="number"
                                            placeholder="{!! __('front.calculator.width') !!} " class="form__field"/>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-4 col-xs-4 form-group">
