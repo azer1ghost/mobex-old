@@ -37,5 +37,12 @@
             <td>{{ $package->transaction ? $package->transaction->paid_by : '-' }}</td>
         </tr>
     @endforeach
+
+    <tr>
+        <td colspan="11"></td>
+    </tr>
+    <tr>
+        <td colspan="3">Alan Ad soyad İmza</td>
+    </tr>
     </tbody>
 </table>
