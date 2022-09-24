@@ -40,9 +40,8 @@
 
     <tr>
         <td colspan="11"></td>
+        <td colspan="3"><b>Alan Ad soyad İmza</b></td>
     </tr>
-    <tr>
-        <td colspan="3">Alan Ad soyad İmza</td>
-    </tr>
+
     </tbody>
 </table>
