@@ -102,8 +102,9 @@
                                                                                                     class="icon-Arrow-down-4"></i></a>
                                                                                     </div>
                                                                                 @endif
-
-                                                                                {!! (new App\Models\Payments\PortManat())->generateFormForCourier($delivery) !!}
+{{--                                                                                    @if( $delivery->fee !== 0)--}}
+                                                                                        {!! (new App\Models\Payments\PortManat())->generateFormForCourier($delivery) !!}
+{{--                                                                                    @endif--}}
                                                                             </div>
                                                                         </div>
                                                                     @endforeach

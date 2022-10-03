@@ -15,6 +15,7 @@
         <th><b>Delivery Price [USD]</b></th>
         <th><b>Value</b></th>
         <th><b>Paid By</b></th>
+        <th><b>Address</b></th>
     </tr>
     </thead>
     <tbody>
@@ -35,13 +36,29 @@
             <td>{{ $package->delivery_price }}</td>
             <td>{{ $package->total_price_with_label }}</td>
             <td>{{ $package->transaction ? $package->transaction->paid_by : '-' }}</td>
+            <td>{{ $package->user ? $package->user->address : '-' }}</td>
         </tr>
     @endforeach
 
     <tr>
-        <td colspan="11"></td>
-        <td colspan="3"><b>Alan Ad soyad İmza</b></td>
+        <td colspan="10">{{ str_repeat("      .      .", 41) }}</td>
     </tr>
 
+    <tr>
+        <td colspan="10">{{ str_repeat("      .      .", 41) }}</td>
+    </tr>
+    <tr>
+        <td colspan="5"></td>
+        <td>Date</td>
+        <td>{{ Carbon\Carbon::today()->format("Y.m.d") }}</td>
+    </tr>
+    <tr>
+        <td>AD Soyad</td>
+        <td>{{ str_repeat("_", 12) }}</td>
+    </tr>
+    <tr>
+        <td>İmza</td>
+        <td>{{ str_repeat("_", 12) }}</td>
+    </tr>
     </tbody>
 </table>
