@@ -39,26 +39,26 @@
             <td>{{ $package->user ? $package->user->address : '-' }}</td>
         </tr>
     @endforeach
-
     <tr>
-        <td colspan="10">{{ str_repeat("      .      .", 41) }}</td>
+        <td colspan="15"></td>
     </tr>
-
     <tr>
-        <td colspan="10">{{ str_repeat("      .      .", 41) }}</td>
+        <td colspan="15"></td>
     </tr>
     <tr>
         <td colspan="5"></td>
-        <td>Date</td>
+        <td>Tarix</td>
         <td>{{ Carbon\Carbon::today()->format("Y.m.d") }}</td>
     </tr>
     <tr>
-        <td>AD Soyad</td>
-        <td>{{ str_repeat("_", 12) }}</td>
+
+        <td colspan="13">AD Soyad</td>
+        <td colspan="13">{{ str_repeat("_", 12) }}</td>
     </tr>
     <tr>
-        <td>İmza</td>
-        <td>{{ str_repeat("_", 12) }}</td>
+        <td colspan="13">İmza</td>
+        <td colspan="13">{{ str_repeat("_", 12) }}</td>
     </tr>
+
     </tbody>
 </table>
