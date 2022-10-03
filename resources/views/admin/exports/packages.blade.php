@@ -43,21 +43,16 @@
         <td colspan="15"></td>
     </tr>
     <tr>
-        <td colspan="15"></td>
-    </tr>
-    <tr>
-        <td colspan="5"></td>
         <td>Tarix</td>
+        <td colspan="12"></td>
+        <td>AD Soyad</td>
+        <td>{{ str_repeat("_", 12) }}</td>
+    </tr>
+    <tr>
         <td>{{ Carbon\Carbon::today()->format("Y.m.d") }}</td>
-    </tr>
-    <tr>
-
-        <td colspan="13">AD Soyad</td>
-        <td colspan="13">{{ str_repeat("_", 12) }}</td>
-    </tr>
-    <tr>
-        <td colspan="13">İmza</td>
-        <td colspan="13">{{ str_repeat("_", 12) }}</td>
+        <td colspan="12"></td>
+        <td>İmza</td>
+        <td>{{ str_repeat("_", 12) }}</td>
     </tr>
 
     </tbody>
