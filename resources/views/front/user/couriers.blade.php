@@ -102,9 +102,9 @@
                                                                                                     class="icon-Arrow-down-4"></i></a>
                                                                                     </div>
                                                                                 @endif
-{{--                                                                                    @if( $delivery->fee !== 0)--}}
+                                                                                    @if(  $delivery->total_price >= 0 )
                                                                                         {!! (new App\Models\Payments\PortManat())->generateFormForCourier($delivery) !!}
-{{--                                                                                    @endif--}}
+                                                                                    @endif
                                                                             </div>
                                                                         </div>
                                                                     @endforeach
