@@ -205,7 +205,7 @@
                     <div class="item">
                         <div class="key">Items</div>
                         <div class="dot">:</div>
-                        <div class="value">{{ $item->number_items or '-' }}</div>
+                        <div class="value">1</div>
                     </div>
                     <div class="item">
                         <div class="key">Weight</div>
@@ -269,6 +269,11 @@
                         <div class="key">Filial</div>
                         <div class="dot">:</div>
                         <div class="value">{{ str_slug($item->user->filial_name, " ") }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="key">Date</div>
+                        <div class="dot">:</div>
+                        <div class="value">{{ $item->sent_at ? $item->sent_at->format('Y-m-d h:i') : (Carbon\Carbon::now()->format('Y-m-d h:i')) }}</div>
                     </div>
                 </div>
             </div>
