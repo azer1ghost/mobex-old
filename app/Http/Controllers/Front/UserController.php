@@ -321,7 +321,7 @@ class UserController extends MainController
 
             foreach (\request()->get('packages') as $package => $enabled) {
                 //dump($package);
-                $myPackage = Package::whereIn('user_id', $users)->where('id', $package)->where('status', 2)->first();
+                $myPackage = Package::whereIn('user_id', $users)->where('id', $package)->whereIn('status',[1,2])->first();
                 if ($myPackage) {
                     if (! $myPackage->paid) {
                         $totalPrice += floatval($myPackage->delivery_manat_price);
