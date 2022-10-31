@@ -12,7 +12,9 @@
                         <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
                             <div class="footer-widget logo-widget">
                                 <figure class="footer-logo"><a href="{{ route('home') }}"><img
-                                                src="{{ asset('assets/images/footer-logo.png') }}" alt=""></a></figure>
+                                                src="{{ $setting->footer_logo ? asset('uploads/setting/' . $setting->footer_logo) : asset('assets/images/footer-logo.png') }}"
+{{--                                                src="{{ asset('assets/images/footer-logo.png') }}" --}}
+                                alt=""></a></figure>
                                 <div class="text">
                                  {{--   <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and
                                         publishing .</p>--}}
