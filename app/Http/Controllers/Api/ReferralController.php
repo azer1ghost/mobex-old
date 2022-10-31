@@ -55,13 +55,13 @@ class ReferralController extends Controller
                 $referralUsersCount++;
             }
 
-            $realPackages->when($lastRequestDate, function ($query) use ($lastRequestDate) {
-                $query->whereDate('created_at', '>', $lastRequestDate);
-            });
+//            $realPackages->when($lastRequestDate, function ($query) use ($lastRequestDate) {
+//                $query->whereDate($lastRequestDate, '>','created_at' );
+//            });
 
             $total_packages += $realPackages->count();
 
-            $totalDeliveryPrice += $realPackages->sum('delivery_price');
+            $totalDeliveryPrice = $realPackages->sum('delivery_price');
         }
 
         $referrals->update(['request_time' => now()]);
