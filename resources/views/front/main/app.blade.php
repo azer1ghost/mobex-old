@@ -11,7 +11,7 @@
                 <div class="image-box wow fadeInUp animated animated animated" data-wow-delay="00ms"
                      data-wow-duration="1500ms"
                      style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
-                    <figure class="image"><img src="{{ asset('assets/images/mobile-app.png') }}" alt=""></figure>
+                    <figure class="image"><img src="{{ asset('assets/images/mobile-app1.png') }}" alt=""></figure>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 content-column">
