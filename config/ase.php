@@ -68,7 +68,7 @@ return [
         ],
         'pagination'         => [25 => 25, 50 => 50, 75 => 75, 100 => 100, 250 => 250],
         'currencies'         => [3 => 'TRY', 0 => 'USD', 1 => 'AZN', 2 => 'EUR', 4 => 'RUB', 5 => 'GBP', 6 => 'KZT'],
-        'customs_currencies' => [3 => 949, 0 => 840, 1 => 932, 2 => 'EUR', 4 => 978, 5 => 826, 6 => 398],
+        'customs_currencies' => [3 => 949, 0 => 840, 1 => 932, 2 => 978, 4 => 643, 5 => 826, 6 => 398],
         'currenciesWithKey'  => [
             'TRY' => 'TRY',
             'USD' => 'USD',
