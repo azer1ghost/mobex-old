@@ -45,21 +45,21 @@
                                                     <p class="ba_name">{{ __('front.panel_header.package_balance') }}</p>
                                                     <p class="ba_balance">{{ auth()->user()->packageBalance(true) }}</p>
                                                 </li>
-                                                <li>
-                                                    <p class="ba_name">Promo</p>
-                                                    <p class="ba_balance">&nbsp;</p>
-                                                    <div class="ba_button">
-                                                        {!! Form::open(['method' => 'post']) !!}
-                                                        <div class="form-group" style="width: 160px">
-                                                            <input placeholder="Promo kod" name="promo"
-                                                                   class="form__field" type="text">
-                                                        </div>
-                                                        <button type="submit"
-                                                                class="theme-btn-one">İstifadə et<i
-                                                                    class="icon-Arrow-Right"></i></button>
-                                                        {!! Form::close() !!}
-                                                    </div>
-                                                </li>
+{{--                                                <li>--}}
+{{--                                                    <p class="ba_name">Promo</p>--}}
+{{--                                                    <p class="ba_balance">&nbsp;</p>--}}
+{{--                                                    <div class="ba_button">--}}
+{{--                                                        {!! Form::open(['method' => 'post']) !!}--}}
+{{--                                                        <div class="form-group" style="width: 160px">--}}
+{{--                                                            <input placeholder="Promo kod" name="promo"--}}
+{{--                                                                   class="form__field" type="text">--}}
+{{--                                                        </div>--}}
+{{--                                                        <button type="submit"--}}
+{{--                                                                class="theme-btn-one">İstifadə et<i--}}
+{{--                                                                    class="icon-Arrow-Right"></i></button>--}}
+{{--                                                        {!! Form::close() !!}--}}
+{{--                                                    </div>--}}
+{{--                                                </li>--}}
                                             </ul>
                                             <p class="ba_note">{{ __('front.balance.note') }}</p>
                                         </div>
