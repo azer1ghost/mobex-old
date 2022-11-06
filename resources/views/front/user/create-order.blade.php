@@ -101,14 +101,14 @@
                                                             <li>{{ __('front.user_orders.create_order_form.total') }}
                                                                 <span id="calc_order_price">0.00 TL</span>
                                                             </li>
-                                                            <li>Komissiya: 0% (Kompaniya)</li>
+                                                            <li>Komissiya: 0% (Komissiyasız)</li>
 {{--                                                            <li>{{ __('front.user_orders.create_order_form.service_fee') }}--}}
 {{--                                                                <span id="cargo_fee_value">0.00 TL</span>--}}
 {{--                                                            </li>--}}
-                                                            <li>
-                                                                {{ __('front.user_orders.create_order_form.overall') }}
-                                                                <span id="overall_fee"><strong></strong>0.00 TL</span>
-                                                            </li>
+{{--                                                            <li>--}}
+{{--                                                                {{ __('front.user_orders.create_order_form.overall') }}--}}
+{{--                                                                <span id="overall_fee"><strong></strong>0.00 TL</span>--}}
+{{--                                                            </li>--}}
 
                                                             <li class="form-group custom-check-box mss mss_in_total mb-3">
                                                                 <label class="custom-control">
