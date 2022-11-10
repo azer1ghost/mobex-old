@@ -56,7 +56,7 @@ class ReferralController extends Controller
             }
 
             $realPackages->when($lastRequestDate, function ($query) use ($lastRequestDate) {
-                $query->whereDate('created_at', '>', $lastRequestDate );
+                $query->whereDate('done_at', '>', $lastRequestDate );
             });
 
             $total_packages += $realPackages->count();
