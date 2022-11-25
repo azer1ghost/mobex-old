@@ -253,7 +253,7 @@ QEYD: Gətirdiyiniz bağlamanın tərəflərinin cəmi 100sm olmasa da həcimsə
     'invoice'                       => 'Faktura',
     'in_baku'                       => 'Filialda',
     'in_store'                      => 'Xarici Anbarda',
-    'done_packages'                 => 'Keçmİş Sİfarİşlər',
+    'done_packages'                 => 'Keçmiş Sifarişlər',
     'about_country_address'         => ':country anbarının ünvan məlumatları',
     'name'                          => 'Ad (ingilis hərfləri ilə)*',
     'no_any_package'                => 'Heç bir bağlamanız yoxdur.',
