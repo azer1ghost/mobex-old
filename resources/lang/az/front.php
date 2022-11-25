@@ -121,7 +121,7 @@ return [
     ],
     'tariff'                        => [
         'title'                 => 'TARIFLƏR',
-        'sub_title'             => 'Ölkələr Üzrə <span class="color--green">Daşınma</span> Haqqları',
+        'sub_title'             => '<span class="color--green">Daşınma</span> Haqqları',
         'description'           => 'Açıqlama',
         'weight'                => 'Çəki',
         'partners'              => 'Beynəlxalq Logistika Partnyorlarımız:',
