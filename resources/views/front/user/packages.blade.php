@@ -1,4 +1,4 @@
-  @extends('front.layout')
+@extends('front.layout')
 
 @section('content')
     <!--page-title-two-->
@@ -33,7 +33,7 @@
                                     <ul class="tab-btns tab-buttons clearfix">
                                         <li @if($id == 6) class="active-btn" @endif>
                                             <a href="{{ route('my-packages', ['id' => 6]) }}">
-                                                {{ ucfirst(strtolower(__('front.early_declaration'))) }}
+                                                {{ __('front.early_declaration') }}
                                                 @if(isset($counts[6]))
                                                     <b class="c-label">{{ $counts[6] or null }}</b>
                                                 @endif
@@ -41,7 +41,7 @@
                                         </li>
                                         <li @if($id == 0) class="active-btn" @endif>
                                             <a href="{{ route('my-packages') }}">
-                                                {{ ucfirst(strtolower(__('front.in_store'))) }}
+                                                {{ __('front.in_store') }}
                                                 @if(isset($counts[0]))
                                                     <b class="c-label">{{ $counts[0] or null }}</b>
                                                 @endif
@@ -49,7 +49,7 @@
                                         </li>
                                         <li @if($id == 1) class="active-btn" @endif>
                                             <a href="{{ route('my-packages', ['id' => 1]) }}">
-                                                {{ ucfirst(strtolower(__('front.was_sent'))) }}
+                                                {{ __('front.was_sent') }}
                                                 @if(isset($counts[1]))
                                                     <b class="c-label">{{ $counts[1] or null }}</b>
                                                 @endif
@@ -57,13 +57,13 @@
                                         </li>
                                         <li @if(in_array($id, [2, 8])) class="active-btn" @endif>
                                             <a href="{{ route('my-packages', ['id' => 2]) }}">
-                                                {{ ucfirst(strtolower(__('front.in_baku'))) }}
+                                                {{ __('front.in_baku') }}
                                                 <b class="c-label">{{ ($counts[2] ?? 0) + ($counts[8] ?? 0) or null }}</b>
                                             </a>
                                         </li>
                                         <li @if($id == 7) class="active-btn" @endif>
                                             <a href="{{ route('my-packages', ['id' => 7]) }}">
-                                                {{ ucfirst(strtolower(__('front.courier_packages'))) }}
+                                                {{ __('front.courier_packages') }}
                                                 @if(isset($counts[7]))
                                                     <b class="c-label">{{ $counts[7] or null }}</b>
                                                 @endif
@@ -71,7 +71,7 @@
                                         </li>
                                         <li @if($id == 3) class="active-btn" @endif>
                                             <a href="{{ route('my-packages', ['id' => 3]) }}">
-                                                {{ ucfirst(strtolower(__('front.done_packages'))) }}
+                                                {{ __('front.done_packages') }}
                                                 @if(isset($counts[3]))
                                                     <b class="c-label">{{ $counts[3] or null }}</b>
                                                 @endif
@@ -138,7 +138,7 @@
                                                                         @endif
                                                                         {{ $package->website_name  }}
                                                                         @if($package->country)
-                                                                                ({{ $package->country->translateOrDefault($_lang)->name }})
+                                                                            ({{ $package->country->translateOrDefault($_lang)->name }})
                                                                         @endif
                                                                         -  № {{  $package->custom_id  }}
 
@@ -213,11 +213,11 @@
                                                                                     {{ $package->delivery_price ? $package->delivery_price_with_label: '-' }}
                                                                                 </li>
                                                                             @endif
-                                                                           {{-- <li class="list__item"><strong>
-                                                                                    {{ __('front.user_packages.status') }}
-                                                                                </strong>
-                                                                                {{ $package->getStatusWithLabelAttribute() }}
-                                                                            </li>--}}
+                                                                            {{-- <li class="list__item"><strong>
+                                                                                     {{ __('front.user_packages.status') }}
+                                                                                 </strong>
+                                                                                 {{ $package->getStatusWithLabelAttribute() }}
+                                                                             </li>--}}
 
                                                                             <li class="list__item">
                                                                                 <strong>
@@ -349,10 +349,10 @@
                                                         @endforeach
                                                     </ul>
                                                 @else
-                                                        @if (! session('success'))
-                                                            <div class="alert alert-warning"
-                                                                 role="alert">{{ __('front.no_any_package') }}</div>
-                                                        @endif
+                                                    @if (! session('success'))
+                                                        <div class="alert alert-warning"
+                                                             role="alert">{{ __('front.no_any_package') }}</div>
+                                                    @endif
                                                 @endif
                                             </div>
                                         </div>

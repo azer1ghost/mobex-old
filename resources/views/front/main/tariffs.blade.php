@@ -144,7 +144,7 @@
                                                                             style="text-decoration: line-through;">@endif{{ $country->warehouse->per_kg }} {{ $country->warehouse->currency_with_label }}@if($country->warehouse->discount_user)</span>@endif
                                                                     @if($country->warehouse->discount_user) {{ round((1 - $country->warehouse->discount_user/100) * ($country->warehouse->per_kg), 2) }} {{ $country->warehouse->currency_with_label }} @endif
                                                                 </h3>
-                                                                <small style="display: inline"> (her kg üçün)</small>
+                                                                <small style="display: inline"> (hər kg üçün)</small>
                                                             </div>
                                                             <div class="table-content">
                                                                 <ul class="list clearfix">
@@ -187,7 +187,7 @@
                                                                             style="text-decoration: line-through;">@endif{{ $country->warehouse->from_5kq_to_10kq }} {{ $country->warehouse->currency_with_label }}@if($country->warehouse->discount_user)</span>@endif
                                                                     @if($country->warehouse->discount_user) {{ round((1 - $country->warehouse->discount_user/100) * ($country->warehouse->from_5kq_to_10kq), 2) }} {{ $country->warehouse->currency_with_label }} @endif
                                                                 </h3>
-                                                                <small style="display: inline"> (her kg üçün)</small>
+                                                                <small style="display: inline"> (hər kg üçün)</small>
                                                             </div>
                                                             <div class="table-content">
                                                                 <ul class="list clearfix">
@@ -209,12 +209,11 @@
                                                                             style="text-decoration: line-through;">@endif{{ $country->warehouse->up_10_kg }} {{ $country->warehouse->currency_with_label }}@if($country->warehouse->discount_user)</span>@endif
                                                                     @if($country->warehouse->discount_user) {{ round((1 - $country->warehouse->discount_user/100) * ($country->warehouse->up_10_kg), 2) }} {{ $country->warehouse->currency_with_label }} @endif
                                                                 </h3>
-                                                                <small style="display: inline"> (her kg üçün)</small>
+                                                                <small style="display: inline"> (hər kg üçün)</small>
                                                             </div>
                                                             <div class="table-content">
                                                                 <ul class="list clearfix">
                                                                     <li>{!! __('front.tariff.per_10_kg') !!} </li>
-
                                                                 </ul>
                                                             </div>
                                                         </div>
