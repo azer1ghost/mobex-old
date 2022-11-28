@@ -295,7 +295,7 @@ class UserController extends MainController
         foreach (auth()->user()->children as $user) {
             $users[] = $user->id;
         }
-        $packages = Package::query()->whereIn('user_id', $users)->where('status',1)->where('zip_code', '=',null)->get();
+        $packages = Package::query()->whereIn('user_id', $users)->where('status',1)->where('custom_status', 2)->where('zip_code', '=',null)->get();
 //        ->where('cell', 'NOT LIKE','%POCT%')
 
         if (\request()->isMethod('post')) {
@@ -322,7 +322,7 @@ class UserController extends MainController
 
             foreach (\request()->get('packages') as $package => $enabled) {
                 //dump($package);
-                $myPackage = Package::whereIn('user_id', $users)->where('id', $package)->where('status', 1)->first();
+                $myPackage = Package::whereIn('user_id', $users)->where('id', $package)->where('status', 1)->where('custom_status', 2)->first();
                 if ($myPackage) {
                     if (! $myPackage->paid) {
                         $totalPrice += floatval($myPackage->delivery_manat_price);
