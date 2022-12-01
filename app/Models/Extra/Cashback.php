@@ -12,7 +12,8 @@ class Cashback
     /**
      * @var string
      */
-    protected static $url = 'https://bon.az/api/';
+//    protected static $url = 'https://bon.az/api/';
+    protected static $url = 'https://mobex.link/api/';
 
     /**
      * @return mixed
