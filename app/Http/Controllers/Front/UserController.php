@@ -244,7 +244,7 @@ class UserController extends MainController
         }
         /* Back to  */
         foreach ($delivery->packages as $package) {
-            $package->status = 2;
+            $package->status = 1;
             $package->save();
         }
 
