@@ -18,6 +18,8 @@ class CreateSlidersTable extends Migration
             $table->string('name')->nullable();
             $table->string('image')->nullable();
             $table->string('url')->nullable();
+            $table->tinyInteger('active')->default(1)->nullable();
+            $table->tinyInteger('alert')->default(1)->nullable();
             $table->boolean('target_black')->default(true);
             $table->timestamps();
         });
